@@ -1,0 +1,289 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* galvanization_report
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-11-17 11:16+0000\n"
+"PO-Revision-Date: 2021-11-17 11:16+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: galvanization_report
+#: model_terms:ir.ui.view,arch_db:galvanization_report.galvanization_report_view
+msgid "/رقم التسجيل الضريبي"
+msgstr ""
+
+#. module: galvanization_report
+#: model_terms:ir.ui.view,arch_db:galvanization_report.galvanization_report_view
+msgid "<b>:تاريخ الفاتورة</b>"
+msgstr ""
+
+#. module: galvanization_report
+#: model_terms:ir.ui.view,arch_db:galvanization_report.galvanization_report_view
+msgid "<b>:رقم الفاتورة</b>"
+msgstr ""
+
+#. module: galvanization_report
+#: model_terms:ir.ui.view,arch_db:galvanization_report.galvanization_report_view
+msgid "<b>:رقم المرجع</b>"
+msgstr ""
+
+#. module: galvanization_report
+#: model_terms:ir.ui.view,arch_db:galvanization_report.galvanization_report_view
+msgid "<b>:رقم طلب الشراء</b>"
+msgstr ""
+
+#. module: galvanization_report
+#: model_terms:ir.ui.view,arch_db:galvanization_report.galvanization_report_view
+msgid "<b>:رقم مذكرة التسليم</b>"
+msgstr ""
+
+#. module: galvanization_report
+#: model_terms:ir.ui.view,arch_db:galvanization_report.galvanization_report_view
+msgid "<b>Amount SAR<br/>المبلغ</b>"
+msgstr ""
+
+#. module: galvanization_report
+#: model_terms:ir.ui.view,arch_db:galvanization_report.galvanization_report_view
+msgid "<b>Amount in Words<br/> المبلغ بالكلمات</b>"
+msgstr ""
+
+#. module: galvanization_report
+#: model_terms:ir.ui.view,arch_db:galvanization_report.galvanization_format_layout
+msgid "<b>Approved By:<br/>تمت الموافقة عليه من قبل</b>"
+msgstr ""
+
+#. module: galvanization_report
+#: model_terms:ir.ui.view,arch_db:galvanization_report.galvanization_report_view
+msgid "<b>CREDIT:</b>"
+msgstr ""
+
+#. module: galvanization_report
+#: model_terms:ir.ui.view,arch_db:galvanization_report.galvanization_report_view
+msgid "<b>Customer Details/تفاصيل العميل</b>"
+msgstr ""
+
+#. module: galvanization_report
+#: model_terms:ir.ui.view,arch_db:galvanization_report.galvanization_report_view
+msgid "<b>Date of Delivery<br/>تاريخ التسليم</b>"
+msgstr ""
+
+#. module: galvanization_report
+#: model_terms:ir.ui.view,arch_db:galvanization_report.galvanization_report_view
+msgid "<b>Delivery Note No:</b>"
+msgstr ""
+
+#. module: galvanization_report
+#: model_terms:ir.ui.view,arch_db:galvanization_report.galvanization_report_view
+msgid "<b>Discount:</b>"
+msgstr ""
+
+#. module: galvanization_report
+#: model_terms:ir.ui.view,arch_db:galvanization_report.galvanization_report_view
+msgid "<b>Due Date:</b>"
+msgstr ""
+
+#. module: galvanization_report
+#: model_terms:ir.ui.view,arch_db:galvanization_report.galvanization_report_view
+msgid "<b>Invoice Date:</b>"
+msgstr ""
+
+#. module: galvanization_report
+#: model_terms:ir.ui.view,arch_db:galvanization_report.galvanization_report_view
+msgid "<b>Invoice No:</b>"
+msgstr ""
+
+#. module: galvanization_report
+#: model_terms:ir.ui.view,arch_db:galvanization_report.galvanization_report_view
+msgid "<b>Item Description<br/>وصف السلعة</b>"
+msgstr ""
+
+#. module: galvanization_report
+#: model_terms:ir.ui.view,arch_db:galvanization_report.galvanization_report_view
+msgid "<b>Kind Attn:</b>"
+msgstr ""
+
+#. module: galvanization_report
+#: model_terms:ir.ui.view,arch_db:galvanization_report.galvanization_report_view
+msgid "<b>Lot/Job No.<br/>رقم اللوت / الوظيفة</b>"
+msgstr ""
+
+#. module: galvanization_report
+#: model_terms:ir.ui.view,arch_db:galvanization_report.galvanization_report_view
+msgid "<b>No<br/>عدد</b>"
+msgstr ""
+
+#. module: galvanization_report
+#: model_terms:ir.ui.view,arch_db:galvanization_report.galvanization_report_view
+msgid "<b>P.O Date:</b>"
+msgstr ""
+
+#. module: galvanization_report
+#: model_terms:ir.ui.view,arch_db:galvanization_report.galvanization_report_view
+msgid "<b>P.O No:</b>"
+msgstr ""
+
+#. module: galvanization_report
+#: model_terms:ir.ui.view,arch_db:galvanization_report.galvanization_format_layout
+msgid "<b>Prepared and Checked By:<br/>من إعداد ومراجعة بواسطة</b>"
+msgstr ""
+
+#. module: galvanization_report
+#: model_terms:ir.ui.view,arch_db:galvanization_report.galvanization_report_view
+msgid "<b>Ref No:</b>"
+msgstr ""
+
+#. module: galvanization_report
+#: model_terms:ir.ui.view,arch_db:galvanization_report.galvanization_report_view
+msgid "<b>TAX INVOICE / فاتورة ضريبية</b>"
+msgstr ""
+
+#. module: galvanization_report
+#: model_terms:ir.ui.view,arch_db:galvanization_report.galvanization_report_view
+msgid "<b>Total Excluding VAT:</b>"
+msgstr ""
+
+#. module: galvanization_report
+#: model_terms:ir.ui.view,arch_db:galvanization_report.galvanization_report_view
+msgid "<b>Total Including VAT:</b>"
+msgstr ""
+
+#. module: galvanization_report
+#: model_terms:ir.ui.view,arch_db:galvanization_report.galvanization_report_view
+msgid "<b>UM<br/>وحدة القياس</b>"
+msgstr ""
+
+#. module: galvanization_report
+#: model_terms:ir.ui.view,arch_db:galvanization_report.galvanization_report_view
+msgid "<b>Unit Price SAR<br/>سعر الوحدة</b>"
+msgstr ""
+
+#. module: galvanization_report
+#: model_terms:ir.ui.view,arch_db:galvanization_report.galvanization_report_view
+msgid "<b>VAT 15 %:</b>"
+msgstr ""
+
+#. module: galvanization_report
+#: model_terms:ir.ui.view,arch_db:galvanization_report.galvanization_report_view
+msgid "<b>Weight<br/>وزن</b>"
+msgstr ""
+
+#. module: galvanization_report
+#: model_terms:ir.ui.view,arch_db:galvanization_report.galvanization_report_view
+msgid "<b>تاريخ أمر الشراء:</b>"
+msgstr ""
+
+#. module: galvanization_report
+#: model_terms:ir.ui.view,arch_db:galvanization_report.galvanization_format_layout
+msgid "<span style=\"color:gray;\"> Powered by Enzapps</span>"
+msgstr ""
+
+#. module: galvanization_report
+#: model_terms:ir.ui.view,arch_db:galvanization_report.galvanization_report_view
+msgid "AGC VAT REGI.NO:"
+msgstr ""
+
+#. module: galvanization_report
+#: model:ir.model.fields,field_description:galvanization_report.field_account_bank_statement_line__datetime_field
+#: model:ir.model.fields,field_description:galvanization_report.field_account_move__datetime_field
+#: model:ir.model.fields,field_description:galvanization_report.field_account_payment__datetime_field
+msgid "Create Date"
+msgstr ""
+
+#. module: galvanization_report
+#: model:ir.model.fields,field_description:galvanization_report.field_account_bank_statement_line__decoded_data
+#: model:ir.model.fields,field_description:galvanization_report.field_account_move__decoded_data
+#: model:ir.model.fields,field_description:galvanization_report.field_account_payment__decoded_data
+msgid "Decoded Data"
+msgstr ""
+
+#. module: galvanization_report
+#: model:ir.model.fields,field_description:galvanization_report.field_account_move__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: galvanization_report
+#: model:ir.actions.report,name:galvanization_report.galvanization_invoice_report
+msgid "Galvanization Invoice"
+msgstr ""
+
+#. module: galvanization_report
+#: model:ir.model.fields,field_description:galvanization_report.field_account_move__id
+msgid "ID"
+msgstr ""
+
+#. module: galvanization_report
+#: model:ir.model,name:galvanization_report.model_account_move
+msgid "Journal Entry"
+msgstr ""
+
+#. module: galvanization_report
+#: model:ir.model.fields,field_description:galvanization_report.field_account_move____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: galvanization_report
+#: model_terms:ir.ui.view,arch_db:galvanization_report.galvanization_format_layout
+msgid "Logo"
+msgstr ""
+
+#. module: galvanization_report
+#: model_terms:ir.ui.view,arch_db:galvanization_report.galvanization_report_view
+msgid "NET TOTAL"
+msgstr ""
+
+#. module: galvanization_report
+#: model_terms:ir.ui.view,arch_db:galvanization_report.galvanization_format_layout
+msgid ""
+"Page:\n"
+"                <span class=\"page\"/>\n"
+"                         /\n"
+"                 <span class=\"topage\"/>"
+msgstr ""
+
+#. module: galvanization_report
+#: model_terms:ir.ui.view,arch_db:galvanization_report.account_invoice_inherit
+msgid "Print Invoice"
+msgstr ""
+
+#. module: galvanization_report
+#: model_terms:ir.ui.view,arch_db:galvanization_report.galvanization_report_view
+msgid "Tel:"
+msgstr ""
+
+#. module: galvanization_report
+#: model_terms:ir.ui.view,arch_db:galvanization_report.galvanization_report_view
+msgid "Vat No:"
+msgstr ""
+
+#. module: galvanization_report
+#: model_terms:ir.ui.view,arch_db:galvanization_report.galvanization_format_layout
+msgid "galvanization_format_layout"
+msgstr ""
+
+#. module: galvanization_report
+#: model_terms:ir.ui.view,arch_db:galvanization_report.galvanization_report_view
+msgid "الإجمالي باستثناء ضريبة القيمة المضافة"
+msgstr ""
+
+#. module: galvanization_report
+#: model_terms:ir.ui.view,arch_db:galvanization_report.galvanization_report_view
+msgid "الإجمالي شاملاً ضريبة القيمة المضافة"
+msgstr ""
+
+#. module: galvanization_report
+#: model_terms:ir.ui.view,arch_db:galvanization_report.galvanization_report_view
+msgid "الخصومات"
+msgstr ""
+
+#. module: galvanization_report
+#: model_terms:ir.ui.view,arch_db:galvanization_report.galvanization_report_view
+msgid "ضريبة القيمة المضافة 15٪"
+msgstr ""

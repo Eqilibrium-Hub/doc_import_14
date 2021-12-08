@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="partner_ledger_customer_search" model="ir.ui.view">
+        <field name="name">partner.ledger.customer.search</field>
+        <field name="model">partner.ledger.customer</field>
+        <field name="arch" type="xml">
+            <search string="Partner_led">
+                <field name="date"/>
+                <field name="partner_id"/>
+                <field name="company_id"/>
+                <field name="description"/>
+                <field name="invoice_id"/>
+                <field name="account"/>
+                <field name="account_journal"/>
+                <field name="product_id"/>
+                <field name="date"/>
+                <field name="paid_date"/>
+                <separator/>
+                <filter string='Invoice Date' name="date" domain="[]" context="{'group_by': 'date'}"/>
+                <filter string='Partner' name="partner_id" domain="[]" context="{'group_by': 'partner_id'}"/>
+                <filter string='Account' name="invoice_id" domain="[]" context="{'group_by': 'account'}"/>
+                <filter string='Account Journal' name="account_journal" domain="[]"
+                        context="{'group_by': 'account_journal'}"/>
+                <filter string='Invoice' name="invoice_id" domain="[]" context="{'group_by': 'invoice_id'}"/>
+                <filter string='Company' name="company_id" domain="[]" context="{'group_by': 'company_id'}"/>
+                <filter string='Product' name="product_id" domain="[]" context="{'group_by': 'product_id'}"/>
+            </search>
+        </field>
+    </record>
+
+
+    <record id="partner_ledger_tree" model="ir.ui.view">
+        <field name="name">partner.ledger.customer.tree</field>
+        <field name="model">partner.ledger.customer</field>
+        <field name="arch" type="xml">
+            <tree create="0" editable="top">
+                <field name="id" invisible="1"/>
+                <field name="date" readonly="1"/>
+                <field name="month"/>
+                <field name="partner_id"/>
+                <field name="sale_id"/>
+                <field name="description" readonly="1"/>
+                <field name="invoice_id"/>
+                <field name="address" invisible="1"/>
+                <field name="account_journal"/>
+                <field name="account_move" invisible="1"/>
+                <field name="paid_date" readonly="1"/>
+                <field name="company_id" readonly="1" invisible="1"/>
+                <field name="product_id" readonly="1"/>
+                <field name="price_units" sum="Unit" readonly="1"/>
+                <field name="uom" readonly="1"/>
+                <field name="rate" sum="Rate" readonly="1"/>
+                <field name="account"/>
+                <field name="account_journal" invisible="1"/>
+                <field name="debit" sum="Debit" readonly="1"/>
+                <field name="credit" sum="Credit" readonly="1"/>
+                <field name="balance" readonly="1"/>
+
+            </tree>
+        </field>
+    </record>
+    <record id="actions_partner_ledger" model="ir.actions.act_window">
+        <field name="name">Partner Ledger</field>
+        <field name="res_model">partner.ledger.customer</field>
+        <field name="view_mode">tree</field>
+        <field name="search_view_id" ref="partner_ledger_customer_search"/>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+
+<!--        <field name="context">{'group_by':'company_id'}</field>-->
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create a new .
+            </p>
+        </field>
+    </record>
+
+
+
+    <record id="partner_ledger_report_form" model="ir.ui.view">
+        <field name="name">partner.ledger.report.form</field>
+        <field name="model">partner.ledger.report</field>
+        <field name="arch" type="xml">
+            <form string="Today Collection">
+                <header>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="from_date" />
+                            <field name="to_date" />
+                            <field name="partner_id"/>
+                            <field name="company_id" invisible="1"/>
+                        </group>
+
+
+                    </group>
+                      <footer>
+                        <button name="print_report" string="Ledger Tree"  type="object" class="btn-primary"/>
+                        <button name="print_reports" string="Ledger Print"  type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel" />
+                    </footer>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="action_partner_ledger_report" model="ir.actions.act_window">
+        <field name="name">Partner Ledger Report</field>
+        <field name="res_model">partner.ledger.report</field>
+
+        <field name="view_mode">form</field>
+        <field name="context">{}</field>
+        <field name="target">new</field>
+
+    </record>
+
+
+</odoo>

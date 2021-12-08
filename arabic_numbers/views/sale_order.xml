@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+        <record id="sale_order_change" model="ir.ui.view">
+        <field name="name">Sale Order Arabic</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page/field[@name='order_line']/tree//field[@name='price_subtotal']"
+                   position="after">
+                <field name="ar_price_subtotal" invisible="1"/>
+            </xpath>
+            <xpath expr="//notebook/page/field[@name='order_line']/tree//field[@name='product_uom_qty']"
+                   position="after">
+                <field name="ar_qty" invisible="1"/>
+            </xpath>
+            <xpath expr="//notebook/page/field[@name='order_line']/tree//field[@name='qty_invoiced']" position="after">
+                <field name="ar_qty_invoiced" decoration-info="(not display_type and invoice_status == 'to invoice')" decoration-bf="(not display_type and invoice_status == 'to invoice')" string="Ar Invoiced" attrs="{'column_invisible': [('parent.state', 'not in', ['sale', 'done'])]}" optional="show" invisible="1"/>
+            </xpath>
+            <xpath expr="//notebook/page/field[@name='order_line']/tree//field[@name='price_unit']" position="after">
+                <field name="ar_price" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='amount_untaxed']" position="after">
+                <field name="ar_amount_untaxed"/>
+            </xpath>
+            <xpath expr="//field[@name='amount_total']" position="after">
+                <field name="ar_amount_total"/>
+            </xpath>
+            <xpath expr="//field[@name='amount_tax']" position="after">
+                <field name="ar_amount_tax"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

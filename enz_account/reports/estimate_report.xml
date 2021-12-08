@@ -1,0 +1,1575 @@
+<odoo>
+    <template id="account_layout_1">
+        <t t-call="web.html_container">
+            <t t-if="not o" t-set="o" t-value="doc"/>
+            <t t-if="not company">
+                <!--   Multicompany   -->
+                <t t-if="company_id">
+                    <t t-set="company" t-value="company_id"/>
+                </t>
+                <t t-elif="o and 'company_id' in o">
+                    <t t-set="company" t-value="o.company_id.sudo()"/>
+                </t>
+                <t t-else="else">
+                    <t t-set="company" t-value="res_company"/>
+                </t>
+            </t>
+            <div class="header" t-att-style="report_header_style">
+                <!--             <div class="row"> -->
+                <!-- <div class="col-6"> -->
+                <!--     <h6>حكومة المملكة العربية السعودية<br/>GOVERNMENT OF SAUDI ARABIA</h6> -->
+                <!--     </div> -->
+                <!--         <div class="col-6" style="text-align:right;"> -->
+                <!--                    <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height:100px;align=left;" alt="Logo"/> -->
+                <!--             <h6>دائرة الاراضي<br/>Land Department</h6> -->
+                <!--         </div> -->
+                <!--  -->
+                <!--     </div> -->
+                <div class="row">
+                    <div class="col-6">
+                        <img t-if="company.logo" t-att-src="image_data_uri(company.logo)"
+                             style="max-height:100px;align:left;width:50%" alt="Logo"/>
+                    </div>
+                    <div class="col-6" style="text-align:right;">
+                        <h6>
+                            <t t-esc="company.partner_id.name"/>
+                        </h6>
+                        <h6>
+                            <t t-esc="company.street"/>
+                        </h6>
+                        <h6>
+                            <t t-esc="company.street2"/>
+                        </h6>
+                        <h6>
+                            <t t-esc="company.city"/>
+                        </h6>
+                        <h6>
+                            <t t-esc="company.state_id.name"/>
+                        </h6>
+                        <h6>
+                            <t t-esc="company.zip"/>
+                        </h6>
+                        <h6>
+                            <t t-esc="company.phone"/>
+                        </h6>
+                        <h6>
+                            <t t-esc="company.email"/>
+                        </h6>
+                    </div>
+                    <!--  -->
+                </div>
+            </div>
+            <div class="col-9 text-right" style="margin-top:22px;" t-field="company.report_header" name="moto">
+                <div t-field="company.partner_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'/>
+            </div>
+            <div class="article" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id"
+                 t-att-data-oe-lang="o and o.env.context.get('lang')">
+                <t t-raw="0"/>
+            </div>
+            <div class="footer o_background_footer">
+                <div>
+                    <div t-field="company.report_footer"/>
+                    <div t-if="report_type == 'pdf'" class="text-muted">
+                        <div class="row">
+                            <div class="col-6" style="text-align:right;">
+                                Page:
+                                <span class="page"/>
+                                /
+                                <span class="topage"/>
+                            </div>
+                            <div class="col-6" style="text-align:right;">
+                                <span style="color:gray;">Powered by Enzapps</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+    <template id="account_view">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="enz_account.account_layout_1">
+
+                    <div style="text-align:center;margin-top:0.5%">
+                        <h2>Reports</h2>
+                    </div>
+
+                    <br/>
+                    <br/>
+                    <table style="width:100%">
+                        <tr >
+                            <td colspan="1">From date
+                            </td>
+
+
+                            <td >
+                                <t t-esc="doc.from_date"/>
+                            </td>
+                             <td colspan="1">
+                                To Account Type
+                            </td>
+                            <!--                         <td colspan="1" >:</td> -->
+                            <td colspan="1">
+                                <t t-esc="doc.account_type.name"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="1">
+                                to date
+                            </td>
+                            <!--                         <td colspan="1" >:</td> -->
+                            <td colspan="1">
+                                <t t-esc="doc.to_date"/>
+                            </td>
+                            <td colspan="1">
+                                All
+                            </td>
+                            <!--                         <td colspan="1" >:</td> -->
+                            <td colspan="1">
+                                <t t-esc="doc.all"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="1">
+                                Expense
+                            </td>
+                            <!--                         <td colspan="1" >:</td> -->
+                            <td colspan="1">
+                                <t t-esc="doc.type"/>
+                            </td>
+                            <td colspan="1">
+                            </td>
+                            <!--                         <td colspan="1" >:</td> -->
+                            <td colspan="1">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="1">
+                                From Account Type
+                            </td>
+                            <!--                         <td colspan="1" >:</td> -->
+                            <td colspan="1">
+                                <t t-esc="doc.from_account_type.name"/>
+                            </td>
+                            <td colspan="1">
+                            </td>
+                            <!--                         <td colspan="1" >:</td> -->
+                            <td colspan="1">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="1">
+                                All
+                            </td>
+                            <!--                         <td colspan="1" >:</td> -->
+                            <td colspan="1">
+                                <t t-esc="doc.all_from"/>
+                            </td>
+                            <td colspan="1">
+                            </td>
+                            <!--                         <td colspan="1" >:</td> -->
+                            <td colspan="1">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="1">
+                                From Account
+                            </td>
+                            <!--                         <td colspan="1" >:</td> -->
+                            <td colspan="1">
+                                <t t-esc="doc.from_account.name"/>
+                            </td>
+                            <td colspan="1">
+                            </td>
+                            <!--                         <td colspan="1" >:</td> -->
+                            <td colspan="1">
+                            </td>
+                        </tr>
+<!--                        <tr>-->
+<!--                            <td colspan="1"-->
+<!--                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">-->
+<!--                                passport type-->
+<!--                            </td>-->
+<!--                            &lt;!&ndash;                         <td colspan="1" >:</td> &ndash;&gt;-->
+<!--                            <td colspan="1" style="border: 1px solid black;border-collapse: collapse;">-->
+<!--                                <t t-esc="doc.type"/>-->
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                        </tr>-->
+                    </table>
+                    <br/>
+                    <br/>
+
+<!--                    <tr style="border: 1px solid black;border-collapse: collapse;">-->
+
+<!--                            <td colspan="1"-->
+<!--                                style="border: 1px solid black;border-collapse: collapse;background-color:#A9A9A9">passport details-->
+<!--                            </td>-->
+<!--                    </tr>-->
+
+                    <table style="width:100%">
+
+
+                        <t t-foreach="doc.rec_id" t-as="docs">
+                            <tr style="border: 1px solid black;border-collapse: collapse;">
+
+                             <td colspan="6"
+                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">
+                                Reference
+                             </td>
+<!--                            </tr>-->
+<!--                            <tr style="border: 1px solid black;border-collapse: collapse;">-->
+
+                            <td colspan="6"
+                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">
+                                Journal
+                            </td>
+                                <td colspan="6"
+                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">
+                                Account
+                            </td>
+<!--                            </tr>-->
+<!--                            <tr style="border: 1px solid black;border-collapse: collapse;">-->
+
+                            <td colspan="6"
+                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">
+                                Partner
+                            </td>
+                                <td colspan="6"
+                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">
+                                Label
+                            </td>
+<!--                            </tr>-->
+<!--                            <tr style="border: 1px solid black;border-collapse: collapse;">-->
+
+                            <td colspan="6"
+                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">
+                                Debit
+                            </td>
+                                <td colspan="6"
+                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">
+                                Credit
+                            </td>
+<!--                            </tr>-->
+<!--                            <tr style="border: 1px solid black;border-collapse: collapse;">-->
+
+<!--                            <td colspan="6"-->
+<!--                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">-->
+<!--                                Journal-->
+<!--                            </td>-->
+                            </tr>
+
+                            <tr style="border: 1px solid black;border-collapse: collapse;">
+
+                                <td colspan="6" style="border: 1px solid black;border-collapse: collapse;">
+                                    <t t-esc="docs.reference"/>
+                                </td>
+                                <td colspan="6" style="border: 1px solid black;border-collapse: collapse;font-size:">
+                                    <t t-esc="docs.journal.name"/>
+                                </td>
+                                <td colspan="6" style="border: 1px solid black;border-collapse: collapse;">
+                                    <t t-esc="docs.account.name"/>
+                                </td>
+                                <td colspan="6" style="border: 1px solid black;border-collapse: collapse;font-size:">
+                                    <t t-esc="docs.partner.name"/>
+                                </td><td colspan="6" style="border: 1px solid black;border-collapse: collapse;">
+                                    <t t-esc="docs.label"/>
+                                </td>
+                                <td colspan="6" style="border: 1px solid black;border-collapse: collapse;font-size:">
+                                    <t t-esc="docs.debit"/>
+                                </td><td colspan="6" style="border: 1px solid black;border-collapse: collapse;">
+                                    <t t-esc="docs.credit"/>
+                                </td>
+<!--                                <td colspan="6" style="border: 1px solid black;border-collapse: collapse;font-size:">-->
+<!--                                    <t t-esc="docs.currency_id .name"/>-->
+<!--                                </td>-->
+<!--                                <td colspan="3" style="border: 1px solid black;border-collapse: collapse;">-->
+<!--                                    <t t-esc="docs.up_image"/>-->
+<!--                                </td>-->
+                            </tr>
+                        </t>
+                    </table>
+
+
+<!--                        </t>-->
+<!--                    </table>-->
+
+                </t>
+            </t>
+        </t>
+
+    </template>
+
+
+
+
+
+<!--    </template>-->
+
+<!--<template id="estimate_layout_2">-->
+<!--        <t t-call="web.html_container">-->
+<!--            <t t-if="not o" t-set="o" t-value="doc"/>-->
+<!--            <t t-if="not company">-->
+<!--                &lt;!&ndash;  Multicompany  &ndash;&gt;-->
+<!--                <t t-if="company_id">-->
+<!--                    <t t-set="company" t-value="company_id"/>-->
+<!--                </t>-->
+<!--                <t t-elif="o and 'company_id' in o">-->
+<!--                    <t t-set="company" t-value="o.company_id.sudo()"/>-->
+<!--                </t>-->
+<!--                <t t-else="else">-->
+<!--                    <t t-set="company" t-value="res_company"/>-->
+<!--                </t>-->
+<!--            </t>-->
+<!--            <div class="header" t-att-style="report_header_style">-->
+<!--                &lt;!&ndash;            <div class="row">&ndash;&gt;-->
+<!--                &lt;!&ndash;<div class="col-6">&ndash;&gt;-->
+<!--                &lt;!&ndash;    <h6>حكومة المملكة العربية السعودية<br/>GOVERNMENT OF SAUDI ARABIA</h6>&ndash;&gt;-->
+<!--                &lt;!&ndash;    </div>&ndash;&gt;-->
+
+
+<!--                &lt;!&ndash;        <div class="col-6" style="text-align:right;">&ndash;&gt;-->
+<!--                &lt;!&ndash;                   <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height:100px;align=left;" alt="Logo"/>&ndash;&gt;-->
+
+<!--                &lt;!&ndash;            <h6>دائرة الاراضي<br/>Land Department</h6>&ndash;&gt;-->
+
+
+<!--                &lt;!&ndash;        </div>&ndash;&gt;-->
+<!--                &lt;!&ndash;&ndash;&gt;-->
+<!--                &lt;!&ndash;    </div>&ndash;&gt;-->
+
+<!--                <div class="row">-->
+<!--                    <div class="col-6">-->
+<!--                        <img t-if="company.logo" t-att-src="image_data_uri(company.logo)"-->
+<!--                             style="max-height:100px;align:left;width:50%" alt="Logo"/>-->
+<!--                    </div>-->
+
+
+<!--                    <div class="col-6" style="text-align:right;">-->
+<!--                        <h6>-->
+<!--                            <t t-esc="company.partner_id.name"/>-->
+<!--                        </h6>-->
+<!--                        <h6>-->
+<!--                            <t t-esc="company.street"/>-->
+<!--                        </h6>-->
+<!--                        <h6>-->
+<!--                            <t t-esc="company.street2"/>-->
+<!--                        </h6>-->
+<!--                        <h6>-->
+<!--                            <t t-esc="company.city"/>-->
+<!--                        </h6>-->
+<!--                        <h6>-->
+<!--                            <t t-esc="company.state_id.name"/>-->
+<!--                        </h6>-->
+<!--                        <h6>-->
+<!--                            <t t-esc="company.zip"/>-->
+<!--                        </h6>-->
+<!--                        <h6>-->
+<!--                            <t t-esc="company.phone"/>-->
+<!--                        </h6>-->
+<!--                        <h6>-->
+<!--                            <t t-esc="company.email"/>-->
+<!--                        </h6>-->
+
+
+<!--                    </div>-->
+<!--                    &lt;!&ndash;&ndash;&gt;-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-9 text-right" style="margin-top:22px;" t-field="company.report_header" name="moto">-->
+<!--                <div t-field="company.partner_id"-->
+<!--                     t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'/>-->
+<!--            </div>-->
+<!--            <div class="article" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id"-->
+<!--                 t-att-data-oe-lang="o and o.env.context.get('lang')">-->
+<!--                <t t-raw="0"/>-->
+<!--            </div>-->
+<!--            <div class="footer o_background_footer">-->
+<!--                <div>-->
+<!--                    <div t-field="company.report_footer"/>-->
+<!--                    <div t-if="report_type == 'pdf'" class="text-muted">-->
+
+
+<!--                        <div class="row">-->
+
+<!--                            <div class="col-6" style="text-align:right;">-->
+<!--                                Page:-->
+<!--                                <span class="page"/>-->
+<!--                                /-->
+<!--                                <span class="topage"/>-->
+<!--                            </div>-->
+<!--                            <div class="col-6" style="text-align:right;">-->
+<!--                                <span style="color:gray;">Powered by Mrkbah</span>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--        </t>-->
+<!--    </template>-->
+
+<!--    <template id="sale_estimate_view">-->
+<!--        <t t-call="web.html_container">-->
+
+<!--            <t t-foreach="docs" t-as="doc">-->
+<!--                <t t-call="travel_report.estimate_layout_2">-->
+
+
+<!--                    <div style="text-align:center;margin-top:0.5%">-->
+<!--                        <h2>booking</h2>-->
+<!--                    </div>-->
+<!--                    <br/>-->
+<!--                    <br/>-->
+
+<!--                    <br/>-->
+<!--                    <br/>-->
+
+
+<!--                    <table style="width:100%">-->
+<!--                        <tr style="border: 1px solid black;border-collapse: collapse;">-->
+
+<!--                            <td colspan="1"-->
+<!--                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">-->
+<!--                                customer name-->
+<!--                            </td>-->
+
+<!--                            <td colspan="2" style="border: 1px solid black;border-collapse: collapse;">-->
+<!--                                                    <t t-esc="doc.customer.name"/>-->
+
+<!--                            </td>-->
+<!--                            <td colspan="1"-->
+<!--                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">-->
+<!--                                agent-->
+<!--                            </td>-->
+<!--                            &lt;!&ndash;                        <td colspan="1">:</td>&ndash;&gt;-->
+<!--                            <td colspan="2" style="border: 1px solid black;border-collapse: collapse;">-->
+<!--                                <t t-esc="doc.agent.name"/>-->
+<!--                            </td>-->
+
+
+<!--                        </tr>-->
+<!--                        <tr style="border: 1px solid black;border-collapse: collapse;">-->
+
+<!--                            <td colspan="1"-->
+<!--                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">-->
+<!--                                type-->
+<!--                            </td>-->
+<!--                            &lt;!&ndash;                        <td colspan="1" >:</td>&ndash;&gt;-->
+<!--                            <td colspan="2" style="border: 1px solid black;border-collapse: collapse;">-->
+<!--                                <t t-esc="doc.type"/>-->
+<!--                            </td>-->
+
+
+<!--                        </tr>-->
+<!--                        <tr style="border: 1px solid black;border-collapse: collapse;">-->
+<!--                            <td colspan="1"-->
+<!--                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">-->
+<!--                                mobile-->
+<!--                            </td>-->
+<!--                            &lt;!&ndash;                        <td colspan="1">:</td>&ndash;&gt;-->
+<!--                            <td colspan="2" style="border: 1px solid black;border-collapse: collapse;">-->
+<!--                                <t t-esc="doc.mob"/>-->
+<!--                            </td>-->
+<!--                            <td colspan="1"-->
+<!--                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">-->
+<!--                                email-->
+<!--                            </td>-->
+<!--                            &lt;!&ndash;                        <td colspan="1">:</td>&ndash;&gt;-->
+<!--                            <td colspan="2" style="border: 1px solid black;border-collapse: collapse;">-->
+<!--                                <t t-esc="doc.email"/>-->
+<!--                            </td>-->
+
+
+<!--                        </tr>-->
+<!--                        <tr style="border: 1px solid black;border-collapse: collapse;">-->
+<!--                            <td colspan="1"-->
+<!--                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">-->
+<!--                                no of passengers-->
+<!--                            </td>-->
+<!--                            &lt;!&ndash;                        <td colspan="1">:</td>&ndash;&gt;-->
+<!--                            <td colspan="2"  style="border: 1px solid black;border-collapse: collapse;">-->
+<!--                                <t t-esc="doc.no_of_person"/>-->
+<!--                            </td>-->
+<!--                             <td colspan="1"-->
+<!--                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">-->
+<!--                                additional features-->
+<!--                            </td>-->
+<!--                            &lt;!&ndash;                        <td colspan="1">:</td>&ndash;&gt;-->
+<!--                            <td colspan="2" style="border: 1px solid black;border-collapse: collapse;">-->
+<!--                                <t t-esc="doc.additional_feature"/>-->
+<!--                            </td>-->
+
+
+
+<!--                        </tr>-->
+
+<!--                        <tr style="border: 1px solid black;border-collapse: collapse;">-->
+<!--                            <td colspan="1"-->
+<!--                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">-->
+<!--                                insurance-->
+<!--                            </td>-->
+<!--                            &lt;!&ndash;                        <td colspan="1">:</td>&ndash;&gt;-->
+<!--                            <td colspan="2" style="border: 1px solid black;border-collapse: collapse;">-->
+<!--                                <t t-esc="doc.insurance"/>-->
+<!--                            </td>-->
+<!--                             <td colspan="1"-->
+<!--                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">-->
+<!--                                food-->
+<!--                            </td>-->
+<!--                            &lt;!&ndash;                        <td colspan="1" style="border: 1px solid black;border-collapse: collapse;">:</td>&ndash;&gt;-->
+<!--                            <td colspan="2"  style="border: 1px solid black;border-collapse: collapse;">-->
+<!--                                <t t-esc="doc.food"/>-->
+<!--                            </td>-->
+
+
+
+<!--                        </tr>-->
+<!--                        <tr style="border: 1px solid black;border-collapse: collapse;">-->
+<!--                            <td colspan="1"-->
+<!--                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">-->
+<!--                                luggage-->
+<!--                            </td>-->
+<!--                            &lt;!&ndash;                        <td colspan="1">:</td>&ndash;&gt;-->
+<!--                            <td colspan="2" style="border: 1px solid black;border-collapse: collapse;">-->
+<!--                                <t t-esc="doc.luggage"/>-->
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                    </table>-->
+
+<!--        <br/>-->
+<!--                    <br/>-->
+<!--                    <br/>-->
+<!--                    <br/>-->
+<!--                    <tr>-->
+
+<!--                               <td colspan="1"-->
+<!--                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">-->
+<!--                                passenger details-->
+<!--                            </td>-->
+<!--                    </tr>-->
+<!--                    <table style="width:100%">-->
+
+<!--                        <t t-foreach="doc.passenger_id" t-as="docs">-->
+<!--                            <tr style="border: 1px solid black;border-collapse: collapse;">-->
+
+<!--                            <td colspan="1"-->
+<!--                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">-->
+<!--                                passenger-->
+<!--                            </td>-->
+<!--&lt;!&ndash;                            </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+
+<!--                            <td colspan="1"-->
+<!--                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">-->
+<!--                                agent-->
+<!--                            </td>-->
+<!--                                 <td colspan="1"-->
+<!--                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">-->
+<!--                                travel date-->
+<!--                            </td>-->
+<!--                            &lt;!&ndash;                        <td colspan="1" >:</td>&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+
+<!--                            <td colspan="1"-->
+<!--                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">-->
+<!--                                departure-->
+<!--                            </td>-->
+<!--&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+
+<!--                            <td colspan="1"-->
+<!--                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">-->
+<!--                                arrival-->
+<!--                            </td>-->
+<!--&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+
+<!--                            <td colspan="1"-->
+<!--                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">-->
+<!--                                age-->
+<!--                            </td>-->
+<!--&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+
+<!--                            <td colspan="1"-->
+<!--                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">-->
+<!--                                passport no-->
+<!--                            </td>-->
+<!--&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+
+<!--                            <td colspan="1"-->
+<!--                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">-->
+<!--                                mobile-->
+<!--                            </td>-->
+<!--&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+
+<!--                            <td colspan="1"-->
+<!--                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">-->
+<!--                                type-->
+<!--                            </td>-->
+<!--&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+
+<!--                            <td colspan="1"-->
+<!--                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">-->
+<!--                                insurance-->
+<!--                            </td>-->
+<!--&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+
+<!--                            <td colspan="1"-->
+<!--                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">-->
+<!--                                food-->
+<!--                            </td>-->
+<!--&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+
+<!--                            <td colspan="1"-->
+<!--                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">-->
+<!--                                luggage-->
+<!--                            </td>-->
+<!--&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <td colspan="1"&ndash;&gt;-->
+<!--&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;-->
+<!--&lt;!&ndash;                                dfg&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <td colspan="1"&ndash;&gt;-->
+<!--&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;-->
+<!--&lt;!&ndash;                                dfg&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--                            </tr>-->
+<!--                            <tr style="border: 1px solid black;border-collapse: collapse;">-->
+<!--                                <td colspan="1" style="border: 1px solid black;border-collapse: collapse;">-->
+<!--                                    <t t-esc="docs.person.name"/>-->
+<!--                                </td>-->
+<!--                                <td colspan="1" style="border: 1px solid black;border-collapse: collapse;">-->
+<!--                                    <t t-esc="docs.agent.name"/>-->
+<!--                                </td>-->
+<!--                                <td colspan="2">-->
+<!--                                <t t-esc="docs.travel_date"/>-->
+<!--                            </td>-->
+<!--                                <td colspan="1" style="border: 1px solid black;border-collapse: collapse;">-->
+<!--                                    <t t-esc="docs.departure"/>-->
+<!--                                </td>-->
+<!--                                <td colspan="1" style="border: 1px solid black;border-collapse: collapse;">-->
+<!--                                    <t t-esc="docs.arrival"/>-->
+<!--                                </td>-->
+<!--                                <td colspan="1" style="border: 1px solid black;border-collapse: collapse;">-->
+<!--                                    <t t-esc="docs.age"/>-->
+<!--                                </td>-->
+<!--                                <td colspan="1" style="border: 1px solid black;border-collapse: collapse;">-->
+<!--                                    <t t-esc="docs.passport"/>-->
+<!--                                </td>-->
+
+<!--                                <td colspan="1" style="border: 1px solid black;border-collapse: collapse;">-->
+<!--                                    <t t-esc="docs.mobile"/>-->
+<!--                                </td>-->
+<!--                                <td colspan="1" style="border: 1px solid black;border-collapse: collapse;">-->
+<!--                                    <t t-esc="docs.type"/>-->
+<!--                                </td>-->
+<!--                                <td colspan="1" style="border: 1px solid black;border-collapse: collapse;">-->
+<!--                                    <t t-esc="docs.insurance.name"/>-->
+<!--                                </td><td colspan="1" style="border: 1px solid black;border-collapse: collapse;">-->
+<!--                                    <t t-esc="docs.food.product"/>-->
+<!--                                </td><td colspan="1" style="border: 1px solid black;border-collapse: collapse;">-->
+<!--                                    <t t-esc="docs.luggage.product_luggage"/>-->
+<!--                                </td>-->
+
+
+
+<!--                            </tr>-->
+<!--                        </t>-->
+<!--                    </table>-->
+
+<!--                    <br/>-->
+<!--                    <br/>-->
+<!--                    <br/>-->
+<!--                    <br/>-->
+<!--                    <tr>-->
+
+<!--                               <td colspan="1"-->
+<!--                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">-->
+<!--                                price details-->
+<!--                            </td>-->
+<!--                    </tr>-->
+<!--                    <table style="width:100%">-->
+
+<!--                        <t t-foreach="doc.product_id" t-as="do">-->
+<!--                            <tr style="border: 1px solid black;border-collapse: collapse;">-->
+
+<!--                            <td colspan="1"-->
+<!--                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">-->
+<!--                                product-->
+<!--                            </td>-->
+<!--&lt;!&ndash;                            </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+
+<!--                            <td colspan="1"-->
+<!--                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">-->
+<!--                                name-->
+<!--                            </td>-->
+<!--&lt;!&ndash;                            </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+
+<!--                            <td colspan="1"-->
+<!--                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">-->
+<!--                                additional cost-->
+<!--                            </td>-->
+<!--&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+
+<!--                            <td colspan="1"-->
+<!--                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">-->
+<!--                                pnr-->
+<!--                            </td>-->
+<!--&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+
+<!--                            <td colspan="1"-->
+<!--                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">-->
+<!--                                price-->
+<!--                            </td>-->
+<!--&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <td colspan="1"&ndash;&gt;-->
+<!--&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;-->
+<!--&lt;!&ndash;                                passport no&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+
+<!--                            <td colspan="1"-->
+<!--                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">-->
+<!--                                selling price-->
+<!--                            </td>-->
+<!--&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <td colspan="1"&ndash;&gt;-->
+<!--&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;-->
+<!--&lt;!&ndash;                                type&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <td colspan="1"&ndash;&gt;-->
+<!--&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;-->
+<!--&lt;!&ndash;                                insurance&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <td colspan="1"&ndash;&gt;-->
+<!--&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;-->
+<!--&lt;!&ndash;                                food&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <td colspan="1"&ndash;&gt;-->
+<!--&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;-->
+<!--&lt;!&ndash;                                luggage&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <td colspan="1"&ndash;&gt;-->
+<!--&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;-->
+<!--&lt;!&ndash;                                dfg&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <td colspan="1"&ndash;&gt;-->
+<!--&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;-->
+<!--&lt;!&ndash;                                dfg&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--                            </tr>-->
+<!--                            <tr style="border: 1px solid black;border-collapse: collapse;">-->
+<!--                                <td colspan="1" style="border: 1px solid black;border-collapse: collapse;">-->
+<!--                                    <t t-esc="do.product_ids.name"/>-->
+<!--                                </td>-->
+<!--                                <td colspan="1" style="border: 1px solid black;border-collapse: collapse;">-->
+<!--                                    <t t-esc="do.name"/>-->
+<!--                                </td>-->
+<!--                                <td colspan="1" style="border: 1px solid black;border-collapse: collapse;">-->
+<!--                                    <t t-esc="do.add_cost"/>-->
+<!--                                </td>-->
+<!--                                <td colspan="1" style="border: 1px solid black;border-collapse: collapse;">-->
+<!--                                    <t t-esc="do.pnr"/>-->
+<!--                                </td>-->
+<!--                                <td colspan="1" style="border: 1px solid black;border-collapse: collapse;">-->
+<!--                                    <t t-esc="do.bying_price"/>-->
+<!--                                </td>-->
+<!--                                <td colspan="1" style="border: 1px solid black;border-collapse: collapse;">-->
+<!--                                    <t t-esc="do.giving_price"/>-->
+<!--                                </td>-->
+
+<!--&lt;!&ndash;                              &ndash;&gt;-->
+
+
+
+<!--                            </tr>-->
+<!--                        </t>-->
+<!--                    </table>-->
+<!--                     <br/>-->
+<!--                    <br/>-->
+<!--                    <br/>-->
+<!--                    <br/>-->
+<!--                    <tr>-->
+
+<!--                               <td colspan="1"-->
+<!--                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">-->
+<!--                                passport details-->
+<!--                            </td>-->
+<!--                    </tr>-->
+<!--                    <table style="width:100%">-->
+
+<!--                        <t t-foreach="doc.passport_id" t-as="o">-->
+<!--                            <tr style="border: 1px solid black;border-collapse: collapse;">-->
+
+<!--                            <td colspan="1"-->
+<!--                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">-->
+<!--                                name-->
+<!--                            </td>-->
+<!--&lt;!&ndash;                            </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+
+<!--                            <td colspan="1"-->
+<!--                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">-->
+<!--                                service-->
+<!--                            </td>-->
+<!--&lt;!&ndash;                            </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+
+<!--                            <td colspan="1"-->
+<!--                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">-->
+<!--                                passport-->
+<!--                            </td>-->
+<!--&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+
+<!--                            <td colspan="1"-->
+<!--                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">-->
+<!--                                image-->
+<!--                            </td>-->
+<!--&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+
+<!--                            <td colspan="1"-->
+<!--                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">-->
+<!--                                passport status-->
+<!--                            </td>-->
+<!--&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <td colspan="1"&ndash;&gt;-->
+<!--&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;-->
+<!--&lt;!&ndash;                                passport no&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <td colspan="1"&ndash;&gt;-->
+<!--&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;-->
+<!--&lt;!&ndash;                                selling price&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <td colspan="1"&ndash;&gt;-->
+<!--&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;-->
+<!--&lt;!&ndash;                                type&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <td colspan="1"&ndash;&gt;-->
+<!--&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;-->
+<!--&lt;!&ndash;                                insurance&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <td colspan="1"&ndash;&gt;-->
+<!--&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;-->
+<!--&lt;!&ndash;                                food&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <td colspan="1"&ndash;&gt;-->
+<!--&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;-->
+<!--&lt;!&ndash;                                luggage&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <td colspan="1"&ndash;&gt;-->
+<!--&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;-->
+<!--&lt;!&ndash;                                dfg&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <td colspan="1"&ndash;&gt;-->
+<!--&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;-->
+<!--&lt;!&ndash;                                dfg&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--                            </tr>-->
+<!--                            <tr style="border: 1px solid black;border-collapse: collapse;">-->
+<!--                                <td colspan="1" style="border: 1px solid black;border-collapse: collapse;">-->
+<!--                                    <t t-esc="o.name"/>-->
+<!--                                </td>-->
+<!--                                <td colspan="1" style="border: 1px solid black;border-collapse: collapse;">-->
+<!--                                    <t t-esc="o.service.name"/>-->
+<!--                                </td>-->
+<!--&lt;!&ndash;                                <td colspan="1" style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <t t-esc="o.add_cost"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                </td>&ndash;&gt;-->
+<!--                                <td colspan="1" style="border: 1px solid black;border-collapse: collapse;">-->
+<!--                                    <t t-esc="o.pass_no"/>-->
+<!--                                </td>-->
+<!--                                <td colspan="1" style="border: 1px solid black;border-collapse: collapse;">-->
+<!--                                    <t t-esc="o.up_image"/>-->
+<!--                                </td>-->
+<!--                                <td colspan="1" style="border: 1px solid black;border-collapse: collapse;">-->
+<!--                                    <t t-esc="o.service_state"/>-->
+<!--                                </td>-->
+
+<!--&lt;!&ndash;                              &ndash;&gt;-->
+
+
+
+<!--                            </tr>-->
+<!--                        </t>-->
+<!--                    </table>-->
+
+
+
+<!--                </t>-->
+<!--            </t>-->
+<!--        </t>-->
+
+<!--    </template>-->
+<!--<template id="estimate_layout_3">-->
+<!--        <t t-call="web.html_container">-->
+<!--            <t t-if="not o" t-set="o" t-value="doc"/>-->
+<!--            <t t-if="not company">-->
+<!--                &lt;!&ndash;  Multicompany  &ndash;&gt;-->
+<!--                <t t-if="company_id">-->
+<!--                    <t t-set="company" t-value="company_id"/>-->
+<!--                </t>-->
+<!--                <t t-elif="o and 'company_id' in o">-->
+<!--                    <t t-set="company" t-value="o.company_id.sudo()"/>-->
+<!--                </t>-->
+<!--                <t t-else="else">-->
+<!--                    <t t-set="company" t-value="res_company"/>-->
+<!--                </t>-->
+<!--            </t>-->
+<!--            <div class="header" t-att-style="report_header_style">-->
+<!--                &lt;!&ndash;            <div class="row">&ndash;&gt;-->
+<!--                &lt;!&ndash;<div class="col-6">&ndash;&gt;-->
+<!--                &lt;!&ndash;    <h6>حكومة المملكة العربية السعودية<br/>GOVERNMENT OF SAUDI ARABIA</h6>&ndash;&gt;-->
+<!--                &lt;!&ndash;    </div>&ndash;&gt;-->
+
+
+<!--                &lt;!&ndash;        <div class="col-6" style="text-align:right;">&ndash;&gt;-->
+<!--                &lt;!&ndash;                   <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height:100px;align=left;" alt="Logo"/>&ndash;&gt;-->
+
+<!--                &lt;!&ndash;            <h6>دائرة الاراضي<br/>Land Department</h6>&ndash;&gt;-->
+
+
+<!--                &lt;!&ndash;        </div>&ndash;&gt;-->
+<!--                &lt;!&ndash;&ndash;&gt;-->
+<!--                &lt;!&ndash;    </div>&ndash;&gt;-->
+
+<!--                <div class="row">-->
+<!--                    <div class="col-6">-->
+<!--                        <img t-if="company.logo" t-att-src="image_data_uri(company.logo)"-->
+<!--                             style="max-height:100px;align:left;width:50%" alt="Logo"/>-->
+<!--                    </div>-->
+
+
+<!--                    <div class="col-6" style="text-align:right;">-->
+<!--                        <h6>-->
+<!--                            <t t-esc="company.partner_id.name"/>-->
+<!--                        </h6>-->
+<!--                        <h6>-->
+<!--                            <t t-esc="company.street"/>-->
+<!--                        </h6>-->
+<!--                        <h6>-->
+<!--                            <t t-esc="company.street2"/>-->
+<!--                        </h6>-->
+<!--                        <h6>-->
+<!--                            <t t-esc="company.city"/>-->
+<!--                        </h6>-->
+<!--                        <h6>-->
+<!--                            <t t-esc="company.state_id.name"/>-->
+<!--                        </h6>-->
+<!--                        <h6>-->
+<!--                            <t t-esc="company.zip"/>-->
+<!--                        </h6>-->
+<!--                        <h6>-->
+<!--                            <t t-esc="company.phone"/>-->
+<!--                        </h6>-->
+<!--                        <h6>-->
+<!--                            <t t-esc="company.email"/>-->
+<!--                        </h6>-->
+
+
+<!--                    </div>-->
+<!--                    &lt;!&ndash;&ndash;&gt;-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-9 text-right" style="margin-top:22px;" t-field="company.report_header" name="moto">-->
+<!--                <div t-field="company.partner_id"-->
+<!--                     t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'/>-->
+<!--            </div>-->
+<!--            <div class="article" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id"-->
+<!--                 t-att-data-oe-lang="o and o.env.context.get('lang')">-->
+<!--                <t t-raw="0"/>-->
+<!--            </div>-->
+<!--            <div class="footer o_background_footer">-->
+<!--                <div>-->
+<!--                    <div t-field="company.report_footer"/>-->
+<!--                    <div t-if="report_type == 'pdf'" class="text-muted">-->
+
+
+<!--                        <div class="row">-->
+
+<!--                            <div class="col-6" style="text-align:right;">-->
+<!--                                Page:-->
+<!--                                <span class="page"/>-->
+<!--                                /-->
+<!--                                <span class="topage"/>-->
+<!--                            </div>-->
+<!--                            <div class="col-6" style="text-align:right;">-->
+<!--                                <span style="color:gray;">Powered by Mrkbah</span>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--        </t>-->
+<!--    </template>-->
+
+<!--    <template id="sale_estimate_passport_view">-->
+<!--        <t t-call="web.html_container">-->
+
+<!--            <t t-foreach="docs" t-as="doc">-->
+<!--                <t t-call="travel_report.estimate_layout_3">-->
+
+
+<!--                    <div style="text-align:center;margin-top:0.5%;color:blue">-->
+<!--                        <h2>passport booking</h2>-->
+<!--                    </div>-->
+<!--                    <br/>-->
+<!--                    <br/>-->
+
+<!--                    <br/>-->
+<!--                    <br/>-->
+
+
+<!--                    <table style="width:100%">-->
+<!--                        <tr style="border: 1px solid black;border-collapse: collapse;">-->
+
+<!--                            <td colspan="1"-->
+<!--                                style="border: 1px solid black;border-collapse: collapse;background-color:white">-->
+<!--                                date-->
+<!--                            </td>-->
+
+<!--                            <td colspan="1" style="border: 1px solid black;border-collapse: collapse;">-->
+<!--                                                    <t t-esc="doc.date"/>-->
+
+<!--                            </td>-->
+<!--                            <td colspan="1"-->
+<!--                                style="border: 1px solid black;border-collapse: collapse;background-color:white">-->
+<!--                                service type-->
+<!--                            </td>-->
+<!--                            &lt;!&ndash;                        <td colspan="1">:</td>&ndash;&gt;-->
+<!--                            <td colspan="1" style="border: 1px solid black;border-collapse: collapse;">-->
+<!--                                <t t-esc="doc.service_type"/>-->
+<!--                            </td>-->
+
+
+<!--                        </tr>-->
+<!--                    </table>-->
+<!--&lt;!&ndash;                        <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <td colspan="1"&ndash;&gt;-->
+<!--&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;-->
+<!--&lt;!&ndash;                                type&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                            &lt;!&ndash;                        <td colspan="1" >:</td>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                            <td colspan="2" style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <t t-esc="doc.type"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+
+
+<!--&lt;!&ndash;                        </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <td colspan="1"&ndash;&gt;-->
+<!--&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;-->
+<!--&lt;!&ndash;                                mobile&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                            &lt;!&ndash;                        <td colspan="1">:</td>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                            <td colspan="2" style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <t t-esc="doc.mob"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <td colspan="1"&ndash;&gt;-->
+<!--&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;-->
+<!--&lt;!&ndash;                                email&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                            &lt;!&ndash;                        <td colspan="1">:</td>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                            <td colspan="2" style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <t t-esc="doc.email"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+
+
+<!--&lt;!&ndash;                        </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <td colspan="1"&ndash;&gt;-->
+<!--&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;-->
+<!--&lt;!&ndash;                                no of passengers&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                            &lt;!&ndash;                        <td colspan="1">:</td>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                            <td colspan="2"  style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <t t-esc="doc.no_of_person"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                             <td colspan="1"&ndash;&gt;-->
+<!--&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;-->
+<!--&lt;!&ndash;                                additional features&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                            &lt;!&ndash;                        <td colspan="1">:</td>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                            <td colspan="2" style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <t t-esc="doc.additional_feature"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+
+
+
+<!--&lt;!&ndash;                        </tr>&ndash;&gt;-->
+
+<!--&lt;!&ndash;                        <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <td colspan="1"&ndash;&gt;-->
+<!--&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;-->
+<!--&lt;!&ndash;                                insurance&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                            &lt;!&ndash;                        <td colspan="1">:</td>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                            <td colspan="2" style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <t t-esc="doc.insurance"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                             <td colspan="1"&ndash;&gt;-->
+<!--&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;-->
+<!--&lt;!&ndash;                                food&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                            &lt;!&ndash;                        <td colspan="1" style="border: 1px solid black;border-collapse: collapse;">:</td>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                            <td colspan="2"  style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <t t-esc="doc.food"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+
+
+
+<!--&lt;!&ndash;                        </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <td colspan="1"&ndash;&gt;-->
+<!--&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;-->
+<!--&lt;!&ndash;                                luggage&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                            &lt;!&ndash;                        <td colspan="1">:</td>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                            <td colspan="2" style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <t t-esc="doc.luggage"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </table>&ndash;&gt;-->
+
+<!--                    <br/>-->
+<!--                    <br/>-->
+<!--                    <br/>-->
+<!--                    <br/>-->
+<!--                    <tr>-->
+
+<!--                               <td colspan="1"-->
+<!--                                style="border: 1px solid black;border-collapse: collapse;background-color:white">-->
+<!--                                passport details-->
+<!--                            </td>-->
+<!--                    </tr>-->
+<!--                    <table style="width:100%">-->
+
+<!--                        <t t-foreach="doc.travel_passport_lines" t-as="docs">-->
+<!--                            <tr style="border: 1px solid black;border-collapse: collapse;">-->
+
+<!--                            <td colspan="1"-->
+<!--                                style="border: 1px solid black;border-collapse: collapse;background-color:white">-->
+<!--                                name-->
+<!--                            </td>-->
+<!--&lt;!&ndash;                            </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+
+<!--                            <td colspan="1"-->
+<!--                                style="border: 1px solid black;border-collapse: collapse;background-color:white">-->
+<!--                                passport-->
+<!--                            </td>-->
+<!--                                 <td colspan="1"-->
+<!--                                style="border: 1px solid black;border-collapse: collapse;background-color:white">-->
+<!--                                service-->
+<!--                            </td>-->
+<!--                            &lt;!&ndash;                        <td colspan="1" >:</td>&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+
+<!--                            <td colspan="1"-->
+<!--                                style="border: 1px solid black;border-collapse: collapse;background-color:white">-->
+<!--                                image-->
+<!--                            </td>-->
+<!--&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+
+<!--                            <td colspan="1"-->
+<!--                                style="border: 1px solid black;border-collapse: collapse;background-color:wte">-->
+<!--                                passport status-->
+<!--                            </td>-->
+<!--&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <td colspan="1"&ndash;&gt;-->
+<!--&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;-->
+<!--&lt;!&ndash;                                age&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <td colspan="1"&ndash;&gt;-->
+<!--&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;-->
+<!--&lt;!&ndash;                                passport no&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <td colspan="1"&ndash;&gt;-->
+<!--&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;-->
+<!--&lt;!&ndash;                                mobile&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <td colspan="1"&ndash;&gt;-->
+<!--&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;-->
+<!--&lt;!&ndash;                                type&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <td colspan="1"&ndash;&gt;-->
+<!--&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;-->
+<!--&lt;!&ndash;                                insurance&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <td colspan="1"&ndash;&gt;-->
+<!--&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;-->
+<!--&lt;!&ndash;                                food&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <td colspan="1"&ndash;&gt;-->
+<!--&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;-->
+<!--&lt;!&ndash;                                luggage&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <td colspan="1"&ndash;&gt;-->
+<!--&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;-->
+<!--&lt;!&ndash;                                dfg&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <td colspan="1"&ndash;&gt;-->
+<!--&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;-->
+<!--&lt;!&ndash;                                dfg&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--                            </tr>-->
+<!--                            <tr style="border: 1px solid black;border-collapse: collapse;">-->
+<!--                                <td colspan="1" style="border: 1px solid black;border-collapse: collapse;">-->
+<!--                                    <t t-esc="docs.name.name"/>-->
+<!--                                </td>-->
+<!--                                <td colspan="1" style="border: 1px solid black;border-collapse: collapse;">-->
+<!--                                    <t t-esc="docs.service.name"/>-->
+<!--                                </td>-->
+<!--                                <td colspan="1">-->
+<!--                                <t t-esc="docs.pass_no"/>-->
+<!--                            </td>-->
+<!--                                <td colspan="1" style="border: 1px solid black;border-collapse: collapse;">-->
+<!--                                    <t t-esc="docs.up_image"/>-->
+<!--                                </td>-->
+<!--                                <td colspan="1" style="border: 1px solid black;border-collapse: collapse;">-->
+<!--                                    <t t-esc="docs.service_state"/>-->
+<!--                                </td>-->
+<!--&lt;!&ndash;                                <td colspan="1" style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <t t-esc="docs.age"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <td colspan="1" style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <t t-esc="docs.passport"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                </td>&ndash;&gt;-->
+
+<!--&lt;!&ndash;                                <td colspan="1" style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <t t-esc="docs.mobile"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <td colspan="1" style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <t t-esc="docs.type"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <td colspan="1" style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <t t-esc="docs.insurance.name"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                </td><td colspan="1" style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <t t-esc="docs.food.product"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                </td><td colspan="1" style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <t t-esc="docs.luggage.product_luggage"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                </td>&ndash;&gt;-->
+
+
+
+<!--                            </tr>-->
+<!--                        </t>-->
+<!--                    </table>-->
+
+<!--                    <br/>-->
+<!--                    <br/>-->
+<!--                    <br/>-->
+<!--                    <br/>-->
+<!--                    <tr>-->
+
+<!--                               <td colspan="1"-->
+<!--                                style="border: 1px solid black;border-collapse: collapse;background-color:white">-->
+<!--                                document details-->
+<!--                            </td>-->
+<!--                    </tr>-->
+<!--                    <table style="width:100%">-->
+
+<!--                        <t t-foreach="doc.travel_documentpassport_lines" t-as="do">-->
+<!--                            <tr style="border: 1px solid black;border-collapse: collapse;">-->
+
+<!--                            <td colspan="1"-->
+<!--                                style="border: 1px solid black;border-collapse: collapse;background-color:white">-->
+<!--                                document-->
+<!--                            </td>-->
+<!--&lt;!&ndash;                            </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+
+<!--                            <td colspan="1"-->
+<!--                                style="border: 1px solid black;border-collapse: collapse;background-color:white">-->
+<!--                                upload-->
+<!--                            </td>-->
+<!--&lt;!&ndash;                            </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <td colspan="1"&ndash;&gt;-->
+<!--&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;-->
+<!--&lt;!&ndash;                                additional cost&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <td colspan="1"&ndash;&gt;-->
+<!--&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;-->
+<!--&lt;!&ndash;                                pnr&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <td colspan="1"&ndash;&gt;-->
+<!--&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;-->
+<!--&lt;!&ndash;                                price&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash;                            <td colspan="1"&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                                passport no&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            </td>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <td colspan="1"&ndash;&gt;-->
+<!--&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;-->
+<!--&lt;!&ndash;                                selling price&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash;                            <td colspan="1"&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                                type&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            </td>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash;                            <td colspan="1"&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                                insurance&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            </td>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash;                            <td colspan="1"&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                                food&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            </td>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash;                            <td colspan="1"&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                                luggage&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            </td>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash;                            <td colspan="1"&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                                dfg&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            </td>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash;                            <td colspan="1"&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                                dfg&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            </td>&ndash;&gt;&ndash;&gt;-->
+<!--                            </tr>-->
+<!--                            <tr style="border: 1px solid black;border-collapse: collapse;">-->
+<!--                                <td colspan="1" style="border: 1px solid black;border-collapse: collapse;">-->
+<!--                                    <t t-esc="do.name"/>-->
+<!--                                </td>-->
+<!--                                <td colspan="1" style="border: 1px solid black;border-collapse: collapse;">-->
+<!--                                    <t t-esc="do.image"/>-->
+<!--                                </td>-->
+<!--&lt;!&ndash;                                <td colspan="1" style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <t t-esc="do.add_cost"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <td colspan="1" style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <t t-esc="do.pnr"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <td colspan="1" style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <t t-esc="do.bying_price"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <td colspan="1" style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <t t-esc="do.giving_price"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                </td>&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash;                              &ndash;&gt;&ndash;&gt;-->
+
+
+
+<!--                            </tr>-->
+<!--                        </t>-->
+<!--                    </table>-->
+<!--                     <br/>-->
+<!--                    <br/>-->
+<!--                    <br/>-->
+<!--                    <br/>-->
+<!--&lt;!&ndash;                    <tr>&ndash;&gt;-->
+
+<!--&lt;!&ndash;                               <td colspan="1"&ndash;&gt;-->
+<!--&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;-->
+<!--&lt;!&ndash;                                passport details&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <table style="width:100%">&ndash;&gt;-->
+
+<!--&lt;!&ndash;                        <t t-foreach="doc.passport_id" t-as="o">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <td colspan="1"&ndash;&gt;-->
+<!--&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;-->
+<!--&lt;!&ndash;                                name&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            </tr>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <td colspan="1"&ndash;&gt;-->
+<!--&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;-->
+<!--&lt;!&ndash;                                service&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            </tr>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <td colspan="1"&ndash;&gt;-->
+<!--&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;-->
+<!--&lt;!&ndash;                                passport&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <td colspan="1"&ndash;&gt;-->
+<!--&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;-->
+<!--&lt;!&ndash;                                image&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            <td colspan="1"&ndash;&gt;-->
+<!--&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;-->
+<!--&lt;!&ndash;                                passport status&ndash;&gt;-->
+<!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash;                            <td colspan="1"&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                                passport no&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            </td>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash;                            <td colspan="1"&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                                selling price&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            </td>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash;                            <td colspan="1"&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                                type&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            </td>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash;                            <td colspan="1"&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                                insurance&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            </td>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash;                            <td colspan="1"&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                                food&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            </td>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash;                            <td colspan="1"&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                                luggage&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            </td>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash;                            <td colspan="1"&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                                dfg&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            </td>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            </tr> <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash;                            <td colspan="1"&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                                dfg&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                            </td>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                            </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <tr style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <td colspan="1" style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <t t-esc="o.name"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <td colspan="1" style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <t t-esc="o.service.name"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                </td>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                                <td colspan="1" style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                                    <t t-esc="o.add_cost"/>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                                </td>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                                <td colspan="1" style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <t t-esc="o.pass_no"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <td colspan="1" style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <t t-esc="o.up_image"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <td colspan="1" style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <t t-esc="o.service_state"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                </td>&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash;                              &ndash;&gt;&ndash;&gt;-->
+
+
+
+<!--&lt;!&ndash;                            </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </t>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </table>&ndash;&gt;-->
+
+
+
+<!--                </t>-->
+<!--            </t>-->
+<!--        </t>-->
+
+<!--    </template>-->
+
+
+
+
+
+
+</odoo>

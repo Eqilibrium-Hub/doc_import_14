@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <report id="common_day_book_report_2"
+      		model="common.day.book"
+      		string="تقرير الكتاب اليومي"
+      		report_type="qweb-pdf"
+      		name="advanced_common_day_book.common_day_book_view_2"
+      		file="advanced_common_day_book.common_day_book_view_2" menu="False"/>
+</odoo>

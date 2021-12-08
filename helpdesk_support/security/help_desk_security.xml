@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data noupdate="1">
+        <record model="ir.module.category" id="module_category_helpdesksupport">
+            <field name="name">Help Desk</field>
+            <field name="description">Category of Help Desk</field>
+            <field name="sequence">20</field>
+        </record>
+
+
+        <record id="group_helpdesksupport_user" model="res.groups">
+            <field name="name">User</field>
+            <field name="category_id" ref="module_category_helpdesksupport"/>
+            <field name="comment">The user will be able to join support channels.</field>
+        </record>
+        <record id="group_helpdesksupport_support" model="res.groups">
+            <field name="name">Support</field>
+            <field name="category_id" ref="module_category_helpdesksupport"/>
+            <field name="comment">The user will be able to join support channels.</field>
+        </record>
+        <record id="group_helpdesksupport_tech" model="res.groups">
+            <field name="name">Developer</field>
+            <field name="category_id" ref="module_category_helpdesksupport"/>
+            <field name="comment">The user will be able to join support channels.</field>
+        </record>
+        <record id="group_helpdesksupport_manager" model="res.groups">
+            <field name="name">Manager</field>
+            <field name="category_id" ref="module_category_helpdesksupport"/>
+            <field name="implied_ids"
+                   eval="[(4, ref('group_helpdesksupport_tech')), (4, ref('group_helpdesksupport_support'))]"/>
+            <field name="comment">The user will be able to join support channels.</field>
+        </record>
+    </data>
+</odoo>

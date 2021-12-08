@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="seq_tickethelp" model="ir.sequence">
+            <field name="name">TN</field>
+            <field name="code">help.code</field>
+            <field name="prefix">Ticket</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>

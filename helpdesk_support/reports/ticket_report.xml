@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <report id="help_desk_ticket_report"
+      		model="help.desk.ticket"
+      		string="Image Pdf"
+      		report_type="qweb-pdf"
+      		name="helpdesk_support.help_ticket_report_view"
+      		file="helpdesk_support.help_ticket_report_view"/>
+	<report id="help_desk_support_report"
+      		model="ticket.support"
+      		string="Image Pdf"
+      		report_type="qweb-pdf"
+      		name="helpdesk_support.help_support_report_view"
+      		file="helpdesk_support.help_support_report_view"/>
+</odoo>

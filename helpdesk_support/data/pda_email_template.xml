@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="1">
+        <!--Email template -->
+        <record id="email_template_pda" model="mail.template">
+            <field name="name">PDA: Send by email</field>
+            <field name="model_id" ref="port_managment.model_crm_lead"/>
+            <field name="email_from">${object.user_id.email_formatted |safe}</field>
+            <field name="partner_to">${object.partner_id.id}</field>
+            <field name="subject">${object.company_id.name} PDA (Ref ${object.name or 'n/a'})</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p>
+                        <center><h1>PDA</h1></center>
+                        <br/>
+                        Dear Funding Agency,<br/>
+                        we are glad to do buissness with you.we have attached our pda details with this mail,please  go through this and
+                        let us know the updates.
+
+                    </p>
+                </div>
+            </field>
+            <field name="report_template" ref="pda_customer_report"/>
+            <field name="report_name">
+                PDA_${(object.name or '').replace('/','_')}${object.state == 'draft' and '_draft' or ''}
+            </field>
+            <field name="lang">${object.partner_id.lang}</field>
+<!--            <field name="user_signature" eval="False"/>-->
+            <field name="auto_delete" eval="True"/>
+        </record>
+    </data>
+</odoo>

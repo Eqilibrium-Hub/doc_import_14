@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="enzhelpdesk_supporttree" model="ir.ui.view">
+        <field name="name">Support</field>
+        <field name="model">ticket.support</field>
+        <field name="arch" type="xml">
+            <tree string="Support">
+                <field name="name"/>
+                <field name="customer_id"/>
+                <field name="description"/>
+                <field name="status"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="enzhelpdesk_supportform" model="ir.ui.view">
+        <field name="name">Support</field>
+        <field name="model">ticket.support</field>
+        <field name="arch" type="xml">
+            <form string="Support">
+                <sheet>
+                    <header>
+                        <button name="seen_ticket" string="Seen" type="object" class="btn-success"
+                                attrs="{'invisible': [('status', '!=', 'draft')]}"/>
+                        <button name="assigntodeveloper" string="Assign" type="object" class="btn-success"
+                                attrs="{'invisible': ['|',('status', '!=', 'seen'),('status','=','forward to developer')]}"/>
+                        <!--                        <button name="testing" string="Testing" type="object" class="btn-success" attrs="{'invisible': ['|',('status', '!=', 'seen'),('status','!=','forward to developer')]}"/>-->
+                        <button name="testing" string="Testing" type="object" class="btn-success"
+                                attrs="{'invisible': ['|',('status', '=', 'draft'),('status','=','finished')]}"/>
+                        <!--                        <button name="finished" string="Finished" type="object" class="btn-success" attrs="{'invisible': [('status', '!=', 'testing')]}"/>-->
+                        <button name="finished" string="Finished" type="object" class="btn-success"
+                                attrs="{'invisible': [('status', '!=', 'testing')]}"/>
+                        <field name="status" widget="statusbar"/>
+                    </header>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Customer">
+                            <field name="customer_id" readonly="1"/>
+                            <field name="customer_mail" readonly="1"/>
+                            <field name="company_id" readonly="1"/>
+                            <field name="company_mail" readonly="1"/>
+                            <field name="module_name" readonly="1"/>
+                            <field name="your_username" readonly="1"/>
+                            <field name="your_password" readonly="1"/>
+                            <field name="description" readonly="1"/>
+                            <field name="image" readonly="1" widget="image" class="oe_avatar"/>
+                            <field name="dead_line" readonly="1"/>
+
+
+                        </group>
+                        <group string="Employee/Solution">
+                            <field name="assign_to"/>
+                            <field name="assign_mail"/>
+                            <field name="test_username"/>
+                            <field name="password"/>
+                            <field name="emp_duration"/>
+                            <field name="emp_deadline"/>
+                            <field name="start_time" readonly="1"/>
+                            <field name="stop_time" readonly="1"/>
+                            <field name="sloution_form_developer" readonly="1"/>
+
+                            <field name="ticket_id" invisible="1"/>
+                            <field name="user_id" invisible="1"/>
+                            <field name="admin_id" invisible="1"/>
+                            <field name="admin_mail" invisible="1"/>
+                        </group>
+                        <group string="Solution">
+                            <field name="solution" attrs="{'required': [('status', '=', 'testing')]}"/>
+                        </group>
+                        <group>
+
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Details">
+                            <group>
+                                <group>
+                                    <field name="planned_hours"/>
+
+                                    <!--                                <field name="subtask_effective_hours"/>-->
+
+                                </group>
+
+                                <group>
+                                    <field name="progress" widget="progressbar"/>
+                                </group>
+                            </group>
+                            <field name="effective_lines">
+                                <tree editable="bottom">
+                                    <field name="ticket_id" invisible="1"/>
+                                    <field name="date"/>
+                                    <field name="employee_id"/>
+                                    <field name="description"/>
+                                    <field name="unit_amount"/>
+                                </tree>
+                                <kanban class="o_kanban_mobile">
+                                    <field name="ticket_id" invisible="1"/>
+                                    <field name="date"/>
+                                    <field name="employee_id"/>
+                                    <field name="description"/>
+                                    <field name="unit_amount"/>
+                                    <templates>
+                                        <t t-name="kanban-box">
+                                            <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                                                    <div class="row">
+                                                        <div class="col-8">
+                                                            <strong>
+                                                                <span>
+                                                                    Date:
+                                                                </span>
+                                                            </strong>
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <strong>
+                                                                <span>
+                                                                    <t t-esc="record.date.value"/>
+                                                                </span>
+                                                            </strong>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-8">
+                                                            <strong>
+                                                            <span>
+                                                                Employee:
+                                                            </span>
+                                                            </strong>
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <span >
+                                                                    <t t-esc="record.employee_id.value"/>
+                                                                </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-8">
+                                                            <strong>
+                                                            <span>
+                                                                Description:
+                                                            </span>
+                                                            </strong>
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <span>
+                                                                <t t-esc="record.description.value"/>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-8">
+                                                            <strong>
+                                                            <span>
+                                                                Duration(Hours):
+                                                            </span>
+                                                            </strong>
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <span>
+                                                                <t t-esc="record.unit_amount.value"/>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                        </t>
+                                    </templates>
+                                </kanban>
+
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="enzhelpdesk_supportaction" model="ir.actions.act_window">
+        <field name="name">Support</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">ticket.support</field>
+<!--        <field name="view_type">form</field>-->
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No Ticket !
+            </p>
+        </field>
+
+    </record>
+
+    <record id="enzhelpdesk_timesheettree" model="ir.ui.view">
+        <field name="name">Timesheet</field>
+        <field name="model">time.line.help</field>
+        <field name="arch" type="xml">
+            <tree string="Timesheet">
+                <field name="ticket_id"/>
+                <field name="date"/>
+                <field name="employee_id"/>
+                <field name="description"/>
+                <field name="unit_amount"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="enzhelpdesk_timesheet" model="ir.actions.act_window">
+        <field name="name">Timesheet</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">time.line.help</field>
+<!--        <field name="view_type">form</field>-->
+        <field name="view_mode">tree</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No Timesheet !
+            </p>
+        </field>
+
+    </record>
+
+
+    <menuitem id="enzhelpdesk_support"
+              name="Support"
+              parent="enzhelpdesk_main"
+              action="enzhelpdesk_supportaction" sequence="2" groups="helpdesk_support.group_helpdesksupport_support"
+    />
+    <menuitem id="enzhelpdesk_timesheetmenu"
+              name="Timesheet"
+              parent="enzhelpdesk_main"
+              action="enzhelpdesk_timesheet" sequence="2" groups="helpdesk_support.group_helpdesksupport_support"
+    />
+</odoo>

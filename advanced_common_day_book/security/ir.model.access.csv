@@ -1,0 +1,13 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+access_common_day_book,common.day.book.group_user,model_common_day_book,base.group_user,1,1,1,1
+access_common_day_book_lines,common.day.book.lines.group_user,model_common_day_book_lines,base.group_user,1,1,1,1
+access_sales_report,sales.report.group_user,model_sales_report,base.group_user,1,1,1,1
+access_sales_report_lines,sales.report.lines.group_user,model_sales_report_lines,base.group_user,1,1,1,1
+access_purchase_report_line,purchase.report.line.group_user,model_purchase_report_line,base.group_user,1,1,1,1
+access_purchase_report_lines,purchase.report.lines.group_user,model_purchase_report_lines,base.group_user,1,1,1,1
+access_report_expense,report.expense.group_user,model_report_expense,base.group_user,1,1,1,1
+access_report_expense_line,report.expense.line.group_user,model_report_expense_line,base.group_user,1,1,1,1
+
+
+

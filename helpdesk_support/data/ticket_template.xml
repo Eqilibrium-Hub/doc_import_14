@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="1">
+        <!--Customer Email template -->
+        <record id="email_template_ticketcus" model="mail.template">
+            <field name="name">Help Ticket: Send by email to Customer</field>
+            <field name="model_id" ref="helpdesk_support.model_help_desk_ticket"/>
+            <field name="email_from">${object.user_id.email_formatted |safe}</field>
+            <field name="email_to">${object.customer_mail}</field>
+<!--            <field name="subject">${object.company_id.name} Ticket (Ref ${object.name or 'n/a'})</field>-->
+            <field name="subject">Test Mail</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p>
+                        <center>
+                            <h1>Help Desk Ticket Mail</h1>
+                        </center>
+                        <center>
+                            <h1>Ticket Number ${object.name}</h1>
+                        </center>
+                        <br/>
+                        Dear ${object.customer_id},
+                        <br/>
+                        We have generate a help desk ticket we will do the needfull as soon as possible
+
+                    </p>
+                    <center>
+                        <table>
+                            <tr>
+                                <th>Description</th>
+                            </tr>
+                            <tr>
+                                <td>${object.description}</td>
+                            </tr>
+                        </table>
+                    </center>
+                </div>
+            </field>
+
+            <field name="report_template" ref="help_desk_ticket_report"/>
+            <field name="report_name">
+                Screenshot_${(object.name or '').replace('/','_')}${object.state == 'draft' and '_draft' or ''}
+            </field>
+<!--            <field name="lang">${object.partner_id.lang}</field>-->
+<!--            <field name="user_signature" eval="False"/>-->
+            <field name="auto_delete" eval="True"/>
+        </record>
+
+
+        <!--        Company template-->
+
+
+        <record id="email_template_ticketcomp" model="mail.template">
+            <field name="name">Help Ticket: Send by email Company</field>
+            <field name="model_id" ref="helpdesk_support.model_help_desk_ticket"/>
+            <field name="email_from">${object.user_id.email_formatted |safe}</field>
+            <field name="email_to">${object.company_mail}</field>
+            <field name="subject">${object.company_id.name} Ticket (Ref ${object.name or 'n/a'})</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p>
+                        <center>
+                            <h1>Help Desk Ticket Mail</h1>
+                        </center>
+                        <center>
+                            <h1>Ticket Number ${object.name}</h1>
+                        </center>
+                        <br/>
+                        Dear ${object.company_id.name},
+                        <br/>
+                        We have generate a help desk ticket for your company.${object.customer_id} generated this ticket
+                        will do the needfull as soon as possible.
+                    </p>
+                    <center>
+                        <table>
+                            <tr>
+                                <th>Description</th>
+                            </tr>
+                            <tr>
+                                <td>${object.description}</td>
+                            </tr>
+                        </table>
+                    </center>
+                </div>
+            </field>
+            <field name="report_template" ref="help_desk_ticket_report"/>
+            <field name="report_name">
+                Screenshot_${(object.name or '').replace('/','_')}${object.state == 'draft' and '_draft' or ''}
+            </field>
+<!--            <field name="user_signature" eval="False"/>-->
+            <field name="auto_delete" eval="True"/>
+        </record>
+
+        <!--        Admin Mail-->
+
+        <record id="email_template_ticketadmin" model="mail.template">
+            <field name="name">Help Ticket: Send by email Admin</field>
+            <field name="model_id" ref="helpdesk_support.model_help_desk_ticket"/>
+            <field name="email_from">${object.user_id.email_formatted |safe}</field>
+            <field name="email_to">${object.admin_mail}</field>
+            <field name="subject">${object.company_id.name} Ticket (Ref ${object.name or 'n/a'})</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p>
+                        <center>
+                            <h1>Help Desk Ticket Mail</h1>
+                        </center>
+                        <center>
+                            <h1>Ticket Number ${object.name}</h1>
+                        </center>
+                        <br/>
+                        Dear ${object.admin_id},
+                        <br/>
+                        ${object.customer_id} have generate a help desk ticket for their company.The mail has been gone
+                        to the support team leader ${object.team_leader}.
+                    </p>
+                    <center>
+                        <table>
+                            <tr>
+                                <th>Description</th>
+                            </tr>
+                            <tr>
+                                <td>${object.description}</td>
+                            </tr>
+                        </table>
+                    </center>
+                </div>
+            </field>
+            <field name="report_template" ref="help_desk_ticket_report"/>
+            <field name="report_name">
+                Screenshot_${(object.name or '').replace('/','_')}${object.state == 'draft' and '_draft' or ''}
+            </field>
+<!--            <field name="user_signature" eval="False"/>-->
+            <field name="auto_delete" eval="True"/>
+        </record>
+
+
+        <!--        Support Mail-->
+
+
+        <record id="email_template_ticketsupport" model="mail.template">
+            <field name="name">Help Ticket: Send by email Support Team</field>
+            <field name="model_id" ref="helpdesk_support.model_help_desk_ticket"/>
+            <field name="email_from">${object.user_id.email_formatted |safe}</field>
+            <field name="email_to">${object.team_mail}</field>
+            <field name="subject">${object.company_id.name} Ticket (Ref ${object.name or 'n/a'})</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p>
+                        <center>
+                            <h1>Help Desk Ticket Mail</h1>
+                        </center>
+                        <center>
+                            <h1>Ticket Number ${object.name}</h1>
+                        </center>
+                        <br/>
+                        Dear ${object.team_leader},
+                        <br/>
+                        ${object.customer_id} have generate a help desk ticket for their company.Please Check that and
+                        if neccessary assign the work to somebody and do the needfull or convince them the mistake.
+                    </p>
+                    <center>
+                        <table>
+                            <tr>
+                                <th>Description</th>
+                            </tr>
+                            <tr>
+                                <td>${object.description}</td>
+                            </tr>
+                        </table>
+                    </center>
+                </div>
+            </field>
+            <field name="report_template" ref="help_desk_ticket_report"/>
+            <field name="report_name">
+                Screenshot_${(object.name or '').replace('/','_')}${object.state == 'draft' and '_draft' or ''}
+            </field>
+<!--            <field name="user_signature" eval="False"/>-->
+            <field name="auto_delete" eval="True"/>
+        </record>
+
+
+        <!--        Employee Assign Template-->
+
+
+        <record id="email_template_ticketsupportemp" model="mail.template">
+            <field name="name">Help Ticket: Send by email Employee Assign</field>
+            <field name="model_id" ref="helpdesk_support.model_ticket_support"/>
+            <field name="email_from">${object.user_id.email_formatted |safe}</field>
+            <field name="email_to">${object.assign_mail}</field>
+            <field name="subject">${object.company_id.name} Ticket (Ref ${object.name or 'n/a'})</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p>
+                        <center>
+                            <h1>Help Desk Ticket Mail</h1>
+                        </center>
+                        <center>
+                            <h1>Ticket Number ${object.name}</h1>
+                        </center>
+                        <br/>
+                        Dear ${object.assign_to},
+                        <br/>
+                        ${object.company_id.name} have generate a help desk ticket for their company.The Task is
+                        Assigned To you please fix the issue and report.The Details are given below<br/>
+                        Test User Name: ${object.test_username}<br/>
+                        Test Password: ${object.password}<br/>
+                    </p>
+                    <center>
+                        <table>
+                            <tr>
+                                <th>Description</th>
+                            </tr>
+                            <tr>
+                                <td>${object.description}</td>
+                            </tr>
+                        </table>
+                    </center>
+                </div>
+            </field>
+            <field name="report_template" ref="help_desk_support_report"/>
+            <field name="report_name">
+                Screenshot_${(object.name or '').replace('/','_')}${object.state == 'draft' and '_draft' or ''}
+            </field>
+<!--            <field name="user_signature" eval="False"/>-->
+            <field name="auto_delete" eval="True"/>
+        </record>
+
+        <!--Employee Assign Admin-->
+
+
+        <record id="email_template_ticketsupportempadmin" model="mail.template">
+            <field name="name">Help Ticket: Send by email Employee Assign To Admin</field>
+            <field name="model_id" ref="helpdesk_support.model_ticket_support"/>
+            <field name="email_from">${object.user_id.email_formatted |safe}</field>
+            <field name="email_to">${object.admin_mail}</field>
+            <field name="subject">${object.company_id.name} Ticket (Ref ${object.name or 'n/a'})</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p>
+                        <center>
+                            <h1>Help Desk Ticket Mail</h1>
+                        </center>
+                        <center>
+                            <h1>Ticket Number ${object.name}</h1>
+                        </center>
+                        <br/>
+                        Dear ${object.admin},
+                        <br/>
+                        ${object.company_id.name} have generate a help desk ticket for their company.The Task is
+                        Assigned To ${object.assign_to}. The Details are given below.
+                    </p>
+                    <center>
+                        <table>
+                            <tr>
+                                <th>Description</th>
+                            </tr>
+                            <tr>
+                                <td>${object.description}</td>
+                            </tr>
+                        </table>
+                    </center>
+                </div>
+            </field>
+            <field name="report_template" ref="help_desk_support_report"/>
+            <field name="report_name">
+                Screenshot_${(object.name or '').replace('/','_')}${object.state == 'draft' and '_draft' or ''}
+            </field>
+<!--            <field name="user_signature" eval="False"/>-->
+            <field name="auto_delete" eval="True"/>
+        </record>
+
+
+        <!--        Finished Work Support-->
+        <!--            Company-->
+
+        <record id="email_template_ticketsupportempcompany" model="mail.template">
+            <field name="name">Help Ticket: Send by email Finished Company</field>
+            <field name="model_id" ref="helpdesk_support.model_ticket_support"/>
+            <field name="email_from">${object.user_id.email_formatted |safe}</field>
+            <field name="email_to">${object.company_mail}</field>
+            <field name="subject">${object.company_id.name} Ticket (Ref ${object.name or 'n/a'})</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p>
+                        <center>
+                            <h1>Help Desk Ticket Mail</h1>
+                        </center>
+                        <center>
+                            <h1>Ticket Number ${object.name}</h1>
+                        </center>
+                        <br/>
+                        Dear ${object.company_id.name},
+                        <br/>
+                        We have solved the issue which is raised by ${object.customer_id}.Please Check
+                    </p>
+                    <center>
+                        <table>
+                            <tr>
+                                <th>Description</th>
+                            </tr>
+                            <tr>
+                                <td>${object.description}</td>
+                            </tr>
+                        </table>
+                    </center>
+                    <center>
+                        <table>
+                            <tr>
+                                <th>Solution</th>
+                            </tr>
+                            <tr>
+                                <td>${object.solution}</td>
+                            </tr>
+                        </table>
+                    </center>
+                </div>
+            </field>
+            <field name="report_template" ref="help_desk_support_report"/>
+            <field name="report_name">
+                Screenshot_${(object.name or '').replace('/','_')}${object.state == 'draft' and '_draft' or ''}
+            </field>
+<!--            <field name="user_signature" eval="False"/>-->
+            <field name="auto_delete" eval="True"/>
+        </record>
+        <!--        Customer-->
+        <record id="email_template_ticketsupportempcustomer" model="mail.template">
+            <field name="name">Help Ticket: Send by email Finished Customer</field>
+            <field name="model_id" ref="helpdesk_support.model_ticket_support"/>
+            <field name="email_from">${object.user_id.email_formatted |safe}</field>
+            <field name="email_to">${object.customer_mail}</field>
+            <field name="subject">${object.company_id.name} Ticket (Ref ${object.name or 'n/a'})</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p>
+                        <center>
+                            <h1>Help Desk Ticket Mail</h1>
+                        </center>
+                        <center>
+                            <h1>Ticket Number ${object.name}</h1>
+                        </center>
+                        <br/>
+                        Dear ${object.customer_id},
+                        <br/>
+                        We have solved the issue which you have raised.Please Check..
+                    </p>
+                    <center>
+                        <table>
+                            <tr>
+                                <th>Description</th>
+                            </tr>
+                            <tr>
+                                <td>${object.description}</td>
+                            </tr>
+                        </table>
+                    </center>
+                    <center>
+                        <table>
+                            <tr>
+                                <th>Solution</th>
+                            </tr>
+                            <tr>
+                                <td>${object.solution}</td>
+                            </tr>
+                        </table>
+                    </center>
+                </div>
+            </field>
+            <field name="report_template" ref="help_desk_support_report"/>
+            <field name="report_name">
+                Screenshot_${(object.name or '').replace('/','_')}${object.state == 'draft' and '_draft' or ''}
+            </field>
+<!--            <field name="user_signature" eval="False"/>-->
+            <field name="auto_delete" eval="True"/>
+        </record>
+
+        <!--Admin mail copy-->
+        <record id="email_template_ticketsupportempcustomeradmin" model="mail.template">
+            <field name="name">Help Ticket: Send by email Finished Admin</field>
+            <field name="model_id" ref="helpdesk_support.model_ticket_support"/>
+            <field name="email_from">${object.user_id.email_formatted |safe}</field>
+            <field name="email_to">${object.admin_mail}</field>
+            <field name="subject">${object.company_id.name} Ticket (Ref ${object.name or 'n/a'})</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p>
+                        <center>
+                            <h1>Help Desk Ticket Mail</h1>
+                        </center>
+                        <center>
+                            <h1>Ticket Number ${object.name}</h1>
+                        </center>
+                        <br/>
+                        Dear ${object.admin_id},
+                        <br/>
+                        We have solved the issue which you have raised by ${object.customer_id}.Details are given below.
+                    </p>
+                    <center>
+                        <table>
+                            <tr>
+                                <th>Description</th>
+                            </tr>
+                            <tr>
+                                <td>${object.description}</td>
+                            </tr>
+                        </table>
+                    </center>
+                    <center>
+                        <table>
+                            <tr>
+                                <th>Solution</th>
+                            </tr>
+                            <tr>
+                                <td>${object.solution}</td>
+                            </tr>
+                        </table>
+                    </center>
+                </div>
+            </field>
+            <field name="report_template" ref="help_desk_support_report"/>
+            <field name="report_name">
+                Screenshot_${(object.name or '').replace('/','_')}${object.state == 'draft' and '_draft' or ''}
+            </field>
+<!--            <field name="user_signature" eval="False"/>-->
+            <field name="auto_delete" eval="True"/>
+        </record>
+
+
+        <!--        Employee Finsih Work Templates-->
+
+        <!--        Admin Copy-->
+
+        <record id="email_template_ticketemployeefinishadm" model="mail.template">
+            <field name="name">Help Ticket: Send by email Finished To Admin by Employee</field>
+            <field name="model_id" ref="helpdesk_support.model_assign_ticket_work"/>
+            <field name="email_from">${object.user_id.email_formatted |safe}</field>
+            <field name="email_to">${object.admin_mail}</field>
+            <field name="subject">${object.company_id.name} Ticket (Ref ${object.name or 'n/a'})</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p>
+                        <center>
+                            <h1>Help Desk Ticket Mail</h1>
+                        </center>
+                        <center>
+                            <h1>Ticket Number ${object.name}</h1>
+                        </center>
+                        <br/>
+                        Dear ${object.admin_id},
+                        <br/>
+                        I have solved the issue which you have raised by ${object.customer_id}.Details are given below.
+                    </p>
+                    <center>
+                        <table>
+                            <tr>
+                                <th>Description</th>
+                            </tr>
+                            <tr>
+                                <td>${object.description}</td>
+                            </tr>
+                        </table>
+                    </center>
+                    <center>
+                        <table>
+                            <tr>
+                                <th>Solution</th>
+                            </tr>
+                            <tr>
+                                <td>${object.solution}</td>
+                            </tr>
+                        </table>
+                    </center>
+                </div>
+            </field>
+
+<!--            <field name="user_signature" eval="False"/>-->
+            <field name="auto_delete" eval="True"/>
+        </record>
+
+        <!--        Support-->
+
+        <record id="email_template_ticketemployeefinishsup" model="mail.template">
+            <field name="name">Help Ticket: Send by email to Support by employee</field>
+            <field name="model_id" ref="helpdesk_support.model_assign_ticket_work"/>
+            <field name="email_from">${object.user_id.email_formatted |safe}</field>
+            <field name="email_to">${object.team_mail}</field>
+            <field name="subject">${object.company_id.name} Ticket (Ref ${object.name or 'n/a'})</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p>
+                        <center>
+                            <h1>Help Desk Ticket Mail</h1>
+                        </center>
+                        <center>
+                            <h1>Ticket Number ${object.name}</h1>
+                        </center>
+                        <br/>
+                        Dear ${object.team_leader},
+                        <br/>
+                        I have solved the issue which you have raised by ${object.customer_id}.Details are given below.Plese Check..
+                    </p>
+                    <center>
+                        <table>
+                            <tr>
+                                <th>Description</th>
+                            </tr>
+                            <tr>
+                                <td>${object.description}</td>
+                            </tr>
+                        </table>
+                    </center>
+                    <center>
+                        <table>
+                            <tr>
+                                <th>Solution</th>
+                            </tr>
+                            <tr>
+                                <td>${object.solution}</td>
+                            </tr>
+                        </table>
+                    </center>
+                </div>
+            </field>
+
+<!--            <field name="user_signature" eval="False"/>-->
+            <field name="auto_delete" eval="True"/>
+        </record>
+
+
+    </data>
+</odoo>

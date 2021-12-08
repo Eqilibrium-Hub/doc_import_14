@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="accounting_form_view" model="ir.ui.view">
+        <field name="name">accounting.form</field>
+        <field name="model">accounting.form</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="register_payment" type="object" string="Post" attrs="{'invisible': [('service_state', '=', 'posted')]}"/>
+                    <field name="service_state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="date"/>
+                        <field name="reference"/>
+
+                        </group>
+                        <group>
+                            <field name="journal"/>
+                            <field name="type" widget="radio"/>
+
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Bank Transfer">
+                            <field name="transfer">
+                                <tree editable="bottom">
+                                    <field name="narration"/>
+                                    <field name="from_acc_type" attrs="{'column_invisible': [('parent.type', '!=', 'journal')]}"/>
+                                    <field name="from_account_first" attrs="{'column_invisible': [('parent.type', '!=', 'journal')]}"/>
+                                    <field name="from_account" attrs="{'column_invisible': [('parent.type', '!=', 'expense')]}"/>
+                                    <field name="acc_type"/>
+                                    <field name="account"/>
+                                    <field name="partner"/>
+                                    <field name="amount" invisible="1"/>
+                                    <field name="total_amount"/>
+
+
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+
+
+                </sheet>
+
+            </form>
+        </field>
+    </record>
+
+    <record id="accounting_tree_view" model="ir.ui.view">
+        <field name="name">accounting.tree</field>
+        <field name="model">accounting.form</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="date"/>
+                <field name="reference"/>
+                <field name="journal"/>
+                <field name="service_state"/>
+            </tree>
+        </field>
+    </record>
+    <record id="accounting_form_action" model="ir.actions.act_window">
+        <field name="name">Accounting Form</field>
+        <field name="res_model">accounting.form</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new warr
+            </p>
+        </field>
+    </record>
+    <menuitem id="enz_accounting"
+              name="EnzVat"
+              sequence="5"/>
+    <menuitem id="enz_accounting_sub"
+              name="Expense Return"
+              parent="enz_accounting"
+              action="accounting_form_action"
+              sequence="5"/>
+</odoo>

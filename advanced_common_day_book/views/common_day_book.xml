@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="common_day_book_form_1" model="ir.ui.view">
+        <field name="name">Common Day Book</field>
+        <field name="model">common.day.book</field>
+        <field name="arch" type="xml">
+            <form string="Common Day Book">
+                <header>
+                    <button name="print_common_day_book" string="Print" type="object" class="btn-primary"/>
+
+
+                </header>
+
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            Common Day Book
+                        </h1>
+                    </div>
+                    <group>
+                    <group>
+                        <field name="name" invisible="1"/>
+                        <field name="type" widget="radio" options="{'horizontal':True}"/>
+                        <label for="transaction_type"/>
+
+                            <div class="o_row">
+                                <field name="transaction_type" invisible="1"/>
+                                 <label for="transaction_type_sale"/>
+                                 <field name="transaction_type_sale" widget="checkboxes"/>
+                                <label for="transaction_type_purchase"/>
+                                <field name="transaction_type_purchase" widget="checkboxes"/>
+                                <label for="transaction_type_expense" />
+                                <field name="transaction_type_expense" widget="checkboxes"/>
+                                <label for="transaction_type_all"/>
+                                <field name="transaction_type_all" widget="checkboxes"/>
+
+                            </div>
+
+
+
+
+                    </group>
+                        <group>
+                            <field name="from_date" attrs="{'invisible': [('type','!=','Date Wise')]}"/>
+                        <field name="to_date" attrs="{'invisible': [('type','!=','Date Wise')]}"/>
+                        <field name="date" attrs="{'invisible': [('type','!=','Day Book')]}"/>
+                        <field name="sale_check" readonly="1" invisible="1" />
+                        <field name="pur_check" readonly="1" invisible="1"/>
+                        <field name="exp_check" readonly="1" invisible="1"/>
+                        <field name="all_check" readonly="1" invisible="1"/>
+                            <field name="company_id" readonly="1" invisible="1"/>
+
+
+
+                        </group>
+
+
+                    </group>
+                    <notebook>
+                        <page string="Reports">
+                            <field name="common_day_book_lines">
+                                <tree editable="bottom">
+                                    <field name="date"/>
+                                    <field name="description"/>
+                                    <field name="source"/>
+                                    <field name="customer_name"/>
+                                    <field name="invoice_amount"/>
+                                    <field name="debit" sum="Total"/>
+                                    <field name="credit" sum="Total"/>
+                                    <field name="company_id" readonly="1" invisible="1"/>
+
+
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="common_day_book_menu_action_1" model="ir.actions.act_window">
+        <field name="name">Common Day Book Form</field>
+        <field name="res_model">common.day.book</field>
+        <field name="view_mode">form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Create New Record Form Here.
+            </p>
+        </field>
+    </record>
+
+
+
+
+<!--    <menuitem name="Common Day Book"-->
+<!--              id="common_day_book_id" sequence="1"/>-->
+    <menuitem name="Common Day Book"
+              id="common_day_book_id_1" sequence="2"
+              parent="account.account_account_menu"
+              action="common_day_book_menu_action_1"
+              />
+</odoo>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <report id="sale_report_en"
+      		model="sales.report"
+      		string="Sales Report"
+      		report_type="qweb-pdf"
+      		name="advanced_common_day_book.sales_report_en_view_1"
+      		file="advanced_common_day_book.sales_report_en_view_1" menu="False"/>
+
+    <report id="sale_report_en_ar"
+      		model="sales.report"
+      		string="Sales Report/تقرير المبيعات"
+      		report_type="qweb-pdf"
+      		name="advanced_common_day_book.sales_report_en_ar_view_1"
+      		file="advanced_common_day_book.sales_report_en_ar_view_1" menu="False"/>
+    <report id="sale_report_ar"
+      		model="sales.report"
+      		string="تقرير المبيعات"
+      		report_type="qweb-pdf"
+      		name="advanced_common_day_book.sales_report_ar_view_1"
+      		file="advanced_common_day_book.sales_report_ar_view_1" menu="False"/>
+</odoo>

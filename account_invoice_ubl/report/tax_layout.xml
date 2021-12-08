@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="report_tax_invoice_layout">
+    <t t-call="web.html_container">
+<t t-if="not doc" t-set="doc" t-value="o"/>
+<t t-if="not company">
+<!--  Multicompany  -->
+<t t-if="company_id">
+<t t-set="company" t-value="company_id"/>
+</t>
+<t t-elif="doc and 'company_id' in doc">
+<t t-set="company" t-value="doc.company_id.sudo()"/>
+</t>
+<t t-else="else">
+<t t-set="company" t-value="res_company"/>
+</t>
+</t>
+<div class="header" t-att-style="report_header_style">
+<!--            <div class="row">-->
+<!--<div class="col-6">-->
+<!--    <h6>حكومة المملكة العربية السعودية<br/>GOVERNMENT OF SAUDI ARABIA</h6>-->
+<!--    </div>-->
+
+
+<!--        <div class="col-6" style="text-align:right;">-->
+<!--                   <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height:100px;align=left;" alt="Logo"/>-->
+
+<!--            <h6>دائرة الاراضي<br/>Land Department</h6>-->
+
+
+<!--        </div>-->
+<!---->
+<!--    </div>-->
+
+    <div class="row">
+<div class="col-6">
+       <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height:100px;align=left;" alt="Logo"/>
+    </div>
+
+
+        <div class="col-6" style="text-align:right;">
+            <h6><t t-esc="company.partner_id.name"/> </h6>
+            <h6><t t-esc="company.street"/> </h6>
+            <h6><t t-esc="company.street2"/> </h6>
+            <h6><t t-esc="company.city"/> </h6>
+            <h6><t t-esc="company.state_id.name"/> </h6>
+            <h6><t t-esc="company.zip"/> </h6>
+            <h6><t t-esc="company.company_registry"/> </h6>
+
+
+        </div>
+<!---->
+    </div>
+</div>
+<div class="col-9 text-right" style="margin-top:22px;" t-field="company.report_header" name="moto">
+<div t-field="company.partner_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'/>
+</div>
+<div class="article" t-att-data-oe-model="doc and doc._name" t-att-data-oe-id="doc and doc.id" t-att-data-oe-lang="doc and doc.env.context.get('lang')">
+<t t-raw="0"/>
+</div>
+<div class="footer o_background_footer">
+<div>
+<div t-field="company.report_footer"/>
+<div t-if="report_type == 'pdf'" class="text-muted">
+    <hr style="text-color:orange; width:100%;"></hr>
+    <t t-esc="o.print_system_date()"/>
+     <div class="row">
+
+
+        <div class="col-6" style="text-align:right;">
+                        Page:
+                <span class="page"/>
+                         /
+                 <span class="topage"/>
+        </div>
+        <div class="col-6" style="text-align:right;">
+            <span style="color:gray;"> Powered by Enzapps</span>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+    </t>
+    </template>
+ <template id="report_tax_invoice_layout1">
+    <t t-call="web.html_container">
+<t t-if="not o" t-set="o" t-value="doc"/>
+<t t-if="not company">
+<!--  Multicompany  -->
+<t t-if="company_id">
+<t t-set="company" t-value="company_id"/>
+</t>
+<t t-elif="o and 'company_id' in o">
+<t t-set="company" t-value="o.company_id.sudo()"/>
+</t>
+<t t-else="else">
+<t t-set="company" t-value="res_company"/>
+</t>
+</t>
+<!--<div class="header" t-att-style="report_header_style">-->
+<!--<table style="width:100%;">-->
+<!--    <tr>-->
+<!--        <th><img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height:100px;" alt="Logo"/></th>-->
+<!--        <th style="text-align:right;"> <div t-field="company.partner_id"-->
+<!--                         t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'-->
+<!--                     /></th>-->
+<!--    </tr>-->
+
+<!--</table>-->
+<!--    <div class="row">-->
+<!--        <div class="col-6" style="">-->
+<!--            <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height:100px;" alt="Logo"/>-->
+<!--        </div>-->
+<!--        <div class="col-6" style="text-align:right;">-->
+<!--            <div t-field="company.partner_id"-->
+<!--                         t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'-->
+<!--                     />-->
+
+<!--        </div>-->
+<!--    </div>-->
+
+<!--<img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height:100px;" alt="Logo"/>-->
+<!--</div>-->
+<!--    <div class="col-6">-->
+<!--          <div t-field="company.partner_id"-->
+<!--                         t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'-->
+<!--                     />-->
+
+<!--    </div>-->
+<!--<div class="col-9 text-right" style="margin-top:22px;" t-field="company.report_header" name="moto">-->
+<!--&lt;!&ndash;<div t-field="company.partner_id" t-options="{"widget": "contact", "fields": ["address", "name"], "no_marker": true}"/>&ndash;&gt;-->
+<!--</div>-->
+<!--</div>-->
+<!--             <div t-if="company.logo or company.report_header" class="row zero_min_height">-->
+<!--                 <div class="col-12">-->
+<!--                     <div style="border-bottom: 1px solid black;"/>-->
+<!--                 </div>-->
+<!--             </div>-->
+<!--             <div class="row">-->
+<!--                 <div class="col-6" name="company_address">-->
+<!--                     <div t-field="company.partner_id"-->
+<!--                         t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'-->
+<!--                     />-->
+<!--                 </div>-->
+<!--             </div> -->
+<!--</div>-->
+<div class="article" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+<t t-raw="0"/>
+</div>
+<div class="footer o_background_footer">
+<div>
+
+<!--                 <ul class="list-inline">-->
+<!--                     <li t-if="company.phone" class="list-inline-item"><i class="fa fa-phone" role="img" aria-label="Phone" title="Phone"/> <span t-field="company.phone"/></li>-->
+<!--                     <li t-if="company.email" class="list-inline-item"><i class="fa fa-at" role="img" aria-label="Email" title="Email"/> <span t-field="company.email"/></li>-->
+<!--                     <li t-if="company.website" class="list-inline-item"><i class="fa fa-globe" role="img" aria-label="Website" title="Website"/> <span t-field="company.website"/></li>-->
+<!--                     <li t-if="company.vat" class="list-inline-item"><i class="fa fa-building-o" role="img" aria-label="Fiscal number"/><t t-esc="(company.country_id.vat_label or 'Tax ID').replace(' ','\N{NO-BREAK SPACE}')"/>: <span t-esc="company.vat.replace(' ','\N{NO-BREAK SPACE}')"/></li>-->
+<!--                 </ul> -->
+<div t-field="company.report_footer"/>
+<div t-if="report_type == 'pdf'" class="text-muted">
+    <hr style="text-color:orange; width:100%;"></hr>
+    <t t-esc="o.print_system_date()"/>
+     <div class="row">
+
+
+        <div class="col-6" style="text-align:right;">
+                        Page:
+                <span class="page"/>
+                         /
+                 <span class="topage"/>
+        </div>
+        <div class="col-6" style="text-align:right;">
+            <span style="color:gray;"> Powered by Enzapps</span>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+    </t>
+    </template>
+
+
+</odoo>

@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_accounting_form,access.accounting.form,model_accounting_form,,1,1,1,1
+access_bank_transfer,access.bank.transfer,model_bank_transfer,,1,1,1,1
+access_journal_records,access.journal.records,model_journal_records,,1,1,1,1
+access_journal_report,access.journal.report,model_journal_report,,1,1,1,1
+access_account_form,access.account.form,model_account_form,,1,1,1,1
+access_bak_transfer,access.bak.transfer,model_bak_transfer,,1,1,1,1
+access_open_account_balance,access.open.account.balance,model_open_account_balance,,1,1,1,1
+access_open_account_balance_line,access.open.account.balance.line,model_open_account_balance_line,,1,1,1,1

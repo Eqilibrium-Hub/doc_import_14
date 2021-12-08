@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="saleorder_inherited_advance" model="ir.ui.view">
+        <field name="name">SO Inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_confirm']" position="before">
+                <button name="create_advance_payment" type="object" class="oe_highlight" string="Advance Payment" attrs="{'invisible':[('invoice_count','!=',0)]}"/>
+            </xpath>
+            <xpath expr="//page[@name='order_lines']" position="after">
+                <page string="Advance">
+                            <field name="adavance_lines" mode="tree,kanban" context="{
+                            'default_payment_type': 'inbound',
+                            'default_partner_id':partner_id,
+                            'default_partner_type': 'customer',
+                            'search_default_inbound_filter': 1,
+                            'default_sale_order_id':id,
+                            'default_sale_order_visibility':True,
+                            'default_move_journal_types': ('bank', 'cash'),
+                        }"/>
+                        </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

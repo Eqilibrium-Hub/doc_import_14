@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_einvoice_admin,einvoice.admin.group_user,model_einvoice_admin,base.group_user,1,1,1,1

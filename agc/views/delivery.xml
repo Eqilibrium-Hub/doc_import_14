@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="menu_galvnizing_delivery_form" model="ir.ui.view">
+        <field name="name">Delivery</field>
+        <field name="model">galv.delivery.form</field>
+        <field name="arch" type="xml">
+            <form string="Delivery" delete="false">
+                <header>
+                    <field name="state" widget="statusbar"/>
+                    <button name="done" string="Done" type="object" class="oe_highlight"
+                            attrs="{'invisible':[('state','!=','draft')]}" groups="agc.group_delivery"/>
+                    <!--                    <button name="search_values" string="Done" type="object" class="oe_highlight"/>-->
+                    <button name="create_invoice" class="oe_highlight" type="object" string="Create Invoice"
+                            attrs="{'invisible':[('state','!=','done')]}" groups="agc.group_hotel_invoicing"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <div class="oe_button_box" name="button_box" groups="agc.group_hotel_invoicing">
+                        <button name="view_invoice"
+                                attrs="{'invisible': [('state', '!=', 'invoiced')]}"
+                                class="oe_stat_button"
+                                type="object" icon="fa-pencil-square-o" string="Invoice">
+                        </button>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="date"/>
+                            <field name="partner_id" groups="agc.group_hotel_invoicing"/>
+                            <field name="po_no"/>
+                            <field name="job"/>
+                            <field name="lot_no"/>
+                            <field name="dc_no"/>
+                        </group>
+                        <group>
+                            <field name="driver_id"/>
+                            <field name="driver_mobile"/>
+                            <field name="truck_no"/>
+                            <field name="wbs_no"/>
+                            <field name="invoice_id" invisible="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Delivery Lines">
+                            <field name="delivery_lines">
+                                <tree editable="bottom">
+                                    <field name="job_no"/>
+                                    <field name="product_id"/>
+                                    <field name="name"/>
+                                    <field name="no_of_pices"/>
+                                    <field name="wbg"/>
+                                    <field name="wag"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                    <footer>
+                        <group>
+                            <group>
+
+                            </group>
+                            <group>
+                                <div class="oe_subtotal_footer_separator">
+                                     <label for="total_no_of_pices_galv"
+                                           style="font-weight: bold;"/>
+                                </div>
+                                <field name="total_no_of_pices_galv" nolabel="1"
+                                       style="font-weight: bold;"/>
+                                <div class="oe_subtotal_footer_separator">
+                                    <label for="total_weight_before_galv"
+                                           style="font-weight: bold;"/>
+
+
+                                </div>
+                                <field name="total_weight_before_galv" nolabel="1"
+                                       style="font-weight: bold;"/>
+                                <div class="oe_subtotal_footer_separator">
+                                     <label for="total_weight_after_galv"
+                                           style="font-weight: bold;"/>
+                                </div>
+
+                                <field name="total_weight_after_galv" nolabel="1"
+                                       style="font-weight: bold;"/>
+
+                            </group>
+                        </group>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="menu_galvnizing_delivery_tree" model="ir.ui.view">
+        <field name="name">Delivery</field>
+        <field name="model">galv.delivery.form</field>
+        <field name="arch" type="xml">
+            <tree string="Delivery" delete="false">
+                <field name="name"/>
+                <field name="date"/>
+                <field name="po_no"/>
+                <field name="job"/>
+                <field name="lot_no"/>
+                <field name="dc_no"/>
+                <field name="driver_id"/>
+                <field name="driver_mobile"/>
+                <field name="truck_no"/>
+                <field name="wbs_no"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="menu_galvnizing_delivery_action" model="ir.actions.act_window">
+        <field name="name">Delivery</field>
+        <field name="res_model">galv.delivery.form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('state','=','draft')]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No New Delivery Created!
+            </p>
+        </field>
+    </record>
+    <record id="menu_galvnizing_delivery_action_done" model="ir.actions.act_window">
+        <field name="name">Completed Delivery</field>
+        <field name="res_model">galv.delivery.form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('state','!=','draft')]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No Delivery Completed!
+            </p>
+        </field>
+    </record>
+    <record id="menu_galvnizing_inv_pen_action" model="ir.actions.act_window">
+        <field name="name">Pending Invoice</field>
+        <field name="res_model">galv.delivery.form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('state','=','done')]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No New Delivery Completed!
+            </p>
+        </field>
+    </record>
+    <record id="menu_galvnizing_inv_com_action" model="ir.actions.act_window">
+        <field name="name">Invoiced</field>
+        <field name="res_model">galv.delivery.form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('state','=','invoiced')]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No Invoice created!
+            </p>
+        </field>
+    </record>
+    <record id="menu_galvnizing_inv_draft_action" model="ir.actions.act_window">
+        <field name="name">Invoiced</field>
+        <field name="res_model">account.move</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('move_type', '=', 'out_invoice'),('state','=','draft')]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No Invoice in Draft!
+            </p>
+        </field>
+    </record>
+    <record id="menu_galvnizing_inv_posted_action" model="ir.actions.act_window">
+        <field name="name">Invoiced</field>
+        <field name="res_model">account.move</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('move_type', '=', 'out_invoice'),('state','=','posted')]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No Invoice Posted!
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_galvnizing_root"
+              name="EnzGalvanizing"
+              sequence="35"/>
+    <menuitem id="menu_galvnizing_config"
+              name="Delivery" parent="menu_galvnizing_root"
+              sequence="1" groups="agc.group_delivery"/>
+    <menuitem id="menu_galvnizing_delivery"
+              name="New" parent="menu_galvnizing_config"
+              action="menu_galvnizing_delivery_action" sequence="1"/>
+    <menuitem id="menu_galvnizing_delivery_done"
+              name="Done" parent="menu_galvnizing_config"
+              action="menu_galvnizing_delivery_action_done" sequence="1"/>
+    <menuitem id="menu_galvnizing_invoicing"
+              name="Invoicing" parent="menu_galvnizing_root"
+              sequence="2" groups="agc.group_hotel_invoicing"/>
+    <menuitem id="menu_galvnizing_delivery_inv"
+              name="Pending" parent="menu_galvnizing_invoicing"
+              action="menu_galvnizing_inv_pen_action" sequence="1"/>
+    <menuitem id="menu_galvnizing_delivery_inv_comp"
+              name="Invoiced" parent="menu_galvnizing_invoicing"
+              action="menu_galvnizing_inv_com_action" sequence="2"/>
+    <menuitem id="menu_galvnizing_delivery_out"
+              name="Invoice" parent="menu_galvnizing_invoicing"
+              sequence="3"/>
+    <menuitem id="menu_galvnizing_delivery_outinv"
+              name="Draft" parent="menu_galvnizing_delivery_out"
+              action="menu_galvnizing_inv_draft_action" sequence="1"/>
+    <menuitem id="menu_galvnizing_delivery_outinvpos"
+              name="Posted" parent="menu_galvnizing_delivery_out"
+              action="menu_galvnizing_inv_posted_action" sequence="2"/>
+</odoo>

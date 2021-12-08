@@ -1,0 +1,444 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* enz_workshop
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-12-05 11:00+0000\n"
+"PO-Revision-Date: 2021-12-05 11:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: enz_workshop
+#: model_terms:ir.ui.view,arch_db:enz_workshop.job_order_form
+msgid "Approve"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.model.fields.selection,name:enz_workshop.selection__job_order__state__approved
+msgid "Approved"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.model.fields,field_description:enz_workshop.field_vehicle_brand__name
+#: model:ir.model.fields,field_description:enz_workshop.field_vehicle_config__brand_id
+#: model:ir.ui.menu,name:enz_workshop.menu_brand
+msgid "Brand"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.model.fields,field_description:enz_workshop.field_complaint_lines__compalint_id
+msgid "Compalint"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.model.fields,field_description:enz_workshop.field_job_order__complaint_lines
+msgid "Complaint Lines"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.ui.menu,name:enz_workshop.enzworkshop_complaint_menu
+#: model_terms:ir.ui.view,arch_db:enz_workshop.job_order_form
+msgid "Complaints"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.ui.menu,name:enz_workshop.enzworkshop_config_menu
+msgid "Configuration"
+msgstr ""
+
+#. module: enz_workshop
+#: model_terms:ir.ui.view,arch_db:enz_workshop.job_order_form
+msgid "Create Invoice"
+msgstr ""
+
+#. module: enz_workshop
+#: model_terms:ir.ui.view,arch_db:enz_workshop.workshop_services_form
+msgid "Create Product"
+msgstr ""
+
+#. module: enz_workshop
+#: model_terms:ir.actions.act_window,help:enz_workshop.job_order_action
+msgid "Create a New Job Order!"
+msgstr ""
+
+#. module: enz_workshop
+#: model_terms:ir.actions.act_window,help:enz_workshop.workshop_brand_action
+msgid "Create a Vehicle Brand!"
+msgstr ""
+
+#. module: enz_workshop
+#: model_terms:ir.actions.act_window,help:enz_workshop.workshop_vehicle_action
+msgid "Create a Vehicle!"
+msgstr ""
+
+#. module: enz_workshop
+#: model_terms:ir.actions.act_window,help:enz_workshop.workshop_complaints_action
+msgid "Create a Workshop Complaints!"
+msgstr ""
+
+#. module: enz_workshop
+#: model_terms:ir.actions.act_window,help:enz_workshop.workshop_services_action
+msgid "Create a Workshop Services!"
+msgstr ""
+
+#. module: enz_workshop
+#: model_terms:ir.actions.act_window,help:enz_workshop.workshop_solutions_action
+msgid "Create a Workshop Solutions!"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.model.fields.selection,name:enz_workshop.selection__workshop_services__state__created
+msgid "Created"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.model.fields,field_description:enz_workshop.field_complaint_lines__create_uid
+#: model:ir.model.fields,field_description:enz_workshop.field_job_order__create_uid
+#: model:ir.model.fields,field_description:enz_workshop.field_spare_parts__create_uid
+#: model:ir.model.fields,field_description:enz_workshop.field_vehicle_brand__create_uid
+#: model:ir.model.fields,field_description:enz_workshop.field_vehicle_config__create_uid
+#: model:ir.model.fields,field_description:enz_workshop.field_vehicle_services__create_uid
+#: model:ir.model.fields,field_description:enz_workshop.field_workshop_complaints__create_uid
+#: model:ir.model.fields,field_description:enz_workshop.field_workshop_services__create_uid
+#: model:ir.model.fields,field_description:enz_workshop.field_workshop_solutions__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.model.fields,field_description:enz_workshop.field_complaint_lines__create_date
+#: model:ir.model.fields,field_description:enz_workshop.field_job_order__create_date
+#: model:ir.model.fields,field_description:enz_workshop.field_spare_parts__create_date
+#: model:ir.model.fields,field_description:enz_workshop.field_vehicle_brand__create_date
+#: model:ir.model.fields,field_description:enz_workshop.field_vehicle_config__create_date
+#: model:ir.model.fields,field_description:enz_workshop.field_vehicle_services__create_date
+#: model:ir.model.fields,field_description:enz_workshop.field_workshop_complaints__create_date
+#: model:ir.model.fields,field_description:enz_workshop.field_workshop_services__create_date
+#: model:ir.model.fields,field_description:enz_workshop.field_workshop_solutions__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.model.fields,field_description:enz_workshop.field_job_order__customer_id
+#: model:ir.model.fields,field_description:enz_workshop.field_vehicle_config__customer_id
+msgid "Customer"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.ui.menu,name:enz_workshop.contacts_menu_cus
+msgid "Customers"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.model.fields,field_description:enz_workshop.field_job_order__date
+msgid "Date"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.model.fields,field_description:enz_workshop.field_job_order__delivery_date
+msgid "Delivery Date"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.model.fields,field_description:enz_workshop.field_complaint_lines__display_name
+#: model:ir.model.fields,field_description:enz_workshop.field_job_order__display_name
+#: model:ir.model.fields,field_description:enz_workshop.field_spare_parts__display_name
+#: model:ir.model.fields,field_description:enz_workshop.field_vehicle_brand__display_name
+#: model:ir.model.fields,field_description:enz_workshop.field_vehicle_config__display_name
+#: model:ir.model.fields,field_description:enz_workshop.field_vehicle_services__display_name
+#: model:ir.model.fields,field_description:enz_workshop.field_workshop_complaints__display_name
+#: model:ir.model.fields,field_description:enz_workshop.field_workshop_services__display_name
+#: model:ir.model.fields,field_description:enz_workshop.field_workshop_solutions__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.model.fields.selection,name:enz_workshop.selection__job_order__state__done
+#: model_terms:ir.ui.view,arch_db:enz_workshop.job_order_form
+msgid "Done"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.model.fields.selection,name:enz_workshop.selection__job_order__state__draft
+#: model:ir.model.fields.selection,name:enz_workshop.selection__workshop_services__state__draft
+msgid "Draft"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.ui.menu,name:enz_workshop.enzworkshop_menu
+msgid "EnzWorkshop"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.model.fields,field_description:enz_workshop.field_job_order__name
+msgid "Event No"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.model.fields,field_description:enz_workshop.field_complaint_lines__id
+#: model:ir.model.fields,field_description:enz_workshop.field_job_order__id
+#: model:ir.model.fields,field_description:enz_workshop.field_spare_parts__id
+#: model:ir.model.fields,field_description:enz_workshop.field_vehicle_brand__id
+#: model:ir.model.fields,field_description:enz_workshop.field_vehicle_config__id
+#: model:ir.model.fields,field_description:enz_workshop.field_vehicle_services__id
+#: model:ir.model.fields,field_description:enz_workshop.field_workshop_complaints__id
+#: model:ir.model.fields,field_description:enz_workshop.field_workshop_services__id
+#: model:ir.model.fields,field_description:enz_workshop.field_workshop_solutions__id
+msgid "ID"
+msgstr ""
+
+#. module: enz_workshop
+#: code:addons/enz_workshop/models/job_order.py:0
+#: code:addons/enz_workshop/models/job_order.py:0
+#: model:ir.model.fields,field_description:enz_workshop.field_job_order__invoice_id
+#: model_terms:ir.ui.view,arch_db:enz_workshop.job_order_form
+#, python-format
+msgid "Invoice"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.model.fields,field_description:enz_workshop.field_job_order__invoice_count
+msgid "Invoice Count"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.model.fields.selection,name:enz_workshop.selection__job_order__state__invoiced
+msgid "Invoiced"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.model.fields,field_description:enz_workshop.field_complaint_lines__job_id
+#: model:ir.model.fields,field_description:enz_workshop.field_spare_parts__job_id
+#: model:ir.model.fields,field_description:enz_workshop.field_vehicle_services__job_id
+msgid "Job"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.actions.act_window,name:enz_workshop.job_order_action
+#: model:ir.ui.menu,name:enz_workshop.enzworkshop_job_order_menu
+#: model:ir.ui.menu,name:enz_workshop.enzworkshop_services_menu
+msgid "Job Order"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.model.fields,field_description:enz_workshop.field_complaint_lines____last_update
+#: model:ir.model.fields,field_description:enz_workshop.field_job_order____last_update
+#: model:ir.model.fields,field_description:enz_workshop.field_spare_parts____last_update
+#: model:ir.model.fields,field_description:enz_workshop.field_vehicle_brand____last_update
+#: model:ir.model.fields,field_description:enz_workshop.field_vehicle_config____last_update
+#: model:ir.model.fields,field_description:enz_workshop.field_vehicle_services____last_update
+#: model:ir.model.fields,field_description:enz_workshop.field_workshop_complaints____last_update
+#: model:ir.model.fields,field_description:enz_workshop.field_workshop_services____last_update
+#: model:ir.model.fields,field_description:enz_workshop.field_workshop_solutions____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.model.fields,field_description:enz_workshop.field_complaint_lines__write_uid
+#: model:ir.model.fields,field_description:enz_workshop.field_job_order__write_uid
+#: model:ir.model.fields,field_description:enz_workshop.field_spare_parts__write_uid
+#: model:ir.model.fields,field_description:enz_workshop.field_vehicle_brand__write_uid
+#: model:ir.model.fields,field_description:enz_workshop.field_vehicle_config__write_uid
+#: model:ir.model.fields,field_description:enz_workshop.field_vehicle_services__write_uid
+#: model:ir.model.fields,field_description:enz_workshop.field_workshop_complaints__write_uid
+#: model:ir.model.fields,field_description:enz_workshop.field_workshop_services__write_uid
+#: model:ir.model.fields,field_description:enz_workshop.field_workshop_solutions__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.model.fields,field_description:enz_workshop.field_complaint_lines__write_date
+#: model:ir.model.fields,field_description:enz_workshop.field_job_order__write_date
+#: model:ir.model.fields,field_description:enz_workshop.field_spare_parts__write_date
+#: model:ir.model.fields,field_description:enz_workshop.field_vehicle_brand__write_date
+#: model:ir.model.fields,field_description:enz_workshop.field_vehicle_config__write_date
+#: model:ir.model.fields,field_description:enz_workshop.field_vehicle_services__write_date
+#: model:ir.model.fields,field_description:enz_workshop.field_workshop_complaints__write_date
+#: model:ir.model.fields,field_description:enz_workshop.field_workshop_services__write_date
+#: model:ir.model.fields,field_description:enz_workshop.field_workshop_solutions__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.model.fields,field_description:enz_workshop.field_vehicle_brand__model
+msgid "Model"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.model.fields,field_description:enz_workshop.field_workshop_complaints__name
+#: model:ir.model.fields,field_description:enz_workshop.field_workshop_services__name
+#: model:ir.model.fields,field_description:enz_workshop.field_workshop_solutions__name
+msgid "Name"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.model.fields,field_description:enz_workshop.field_vehicle_services__price
+#: model:ir.model.fields,field_description:enz_workshop.field_workshop_services__price
+msgid "Price"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.model.fields,field_description:enz_workshop.field_spare_parts__product_id
+#: model:ir.model.fields,field_description:enz_workshop.field_workshop_services__product_id
+msgid "Product"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.model.fields,field_description:enz_workshop.field_spare_parts__quantity
+msgid "Quantity"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.model.fields,field_description:enz_workshop.field_job_order__sale_id
+msgid "Sale"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.model.fields,field_description:enz_workshop.field_job_order__sale_count
+msgid "Sale Count"
+msgstr ""
+
+#. module: enz_workshop
+#: code:addons/enz_workshop/models/job_order.py:0
+#: code:addons/enz_workshop/models/job_order.py:0
+#: model_terms:ir.ui.view,arch_db:enz_workshop.job_order_form
+#, python-format
+msgid "Sale Order"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.model.fields,field_description:enz_workshop.field_vehicle_services__service_id
+msgid "Service"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.ui.menu,name:enz_workshop.enzworkshop_services_menu1
+#: model_terms:ir.ui.view,arch_db:enz_workshop.job_order_form
+msgid "Services"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.model.fields,field_description:enz_workshop.field_complaint_lines__solutions
+#: model:ir.ui.menu,name:enz_workshop.enzworkshop_solutions_menu
+msgid "Solutions"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.model.fields,field_description:enz_workshop.field_job_order__spare_part_lines
+msgid "Spare Part Lines"
+msgstr ""
+
+#. module: enz_workshop
+#: model_terms:ir.ui.view,arch_db:enz_workshop.job_order_form
+msgid "Spare Parts"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.model.fields,field_description:enz_workshop.field_job_order__state
+#: model:ir.model.fields,field_description:enz_workshop.field_workshop_services__state
+msgid "State"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.model.fields,field_description:enz_workshop.field_spare_parts__sub_total
+msgid "Sub Total"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.model.fields,field_description:enz_workshop.field_spare_parts__tax_ids
+#: model:ir.model.fields,field_description:enz_workshop.field_vehicle_services__tax_ids
+msgid "Tax"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.model.fields,field_description:enz_workshop.field_spare_parts__unit_price
+msgid "Unit Price"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.actions.act_window,name:enz_workshop.workshop_brand_action
+#: model:ir.actions.act_window,name:enz_workshop.workshop_vehicle_action
+#: model:ir.model.fields,field_description:enz_workshop.field_job_order__vehicle_id
+msgid "Vehicle"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.model.fields,field_description:enz_workshop.field_job_order__vehicle_services_lines
+msgid "Vehicle Services Lines"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.ui.menu,name:enz_workshop.menu_vehicles
+msgid "Vehicles"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.model.fields,field_description:enz_workshop.field_vehicle_config__name
+msgid "Vehilce No"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.actions.act_window,name:enz_workshop.workshop_complaints_action
+msgid "Workshop Complaints"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.actions.act_window,name:enz_workshop.workshop_services_action
+msgid "Workshop Services"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.actions.act_window,name:enz_workshop.workshop_solutions_action
+msgid "Workshop Solutions"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.model,name:enz_workshop.model_complaint_lines
+msgid "complaint.lines"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.model,name:enz_workshop.model_job_order
+msgid "job.order"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.model,name:enz_workshop.model_spare_parts
+msgid "spare.parts"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.model,name:enz_workshop.model_vehicle_brand
+msgid "vehicle.brand"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.model,name:enz_workshop.model_vehicle_config
+msgid "vehicle.config"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.model,name:enz_workshop.model_vehicle_services
+msgid "vehicle.services"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.model,name:enz_workshop.model_workshop_complaints
+msgid "workshop.complaints"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.model,name:enz_workshop.model_workshop_services
+msgid "workshop.services"
+msgstr ""
+
+#. module: enz_workshop
+#: model:ir.model,name:enz_workshop.model_workshop_solutions
+msgid "workshop.solutions"
+msgstr ""

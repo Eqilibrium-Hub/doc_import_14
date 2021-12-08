@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="workshop_services_form" model="ir.ui.view">
+        <field name="name">Workshop Services</field>
+        <field name="model">workshop.services</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar"/>
+                    <button name="create_product" type="object" class="oe_highlight" string="Create Product" attrs="{'invisible':[('state','=','created')]}"/>
+                </header>
+                <sheet>
+
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="price"/>
+                        </group>
+                        <group>
+                            <field name="product_id" readonly="1"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="workshop_services_tree" model="ir.ui.view">
+        <field name="name">Workshop Services</field>
+        <field name="model">workshop.services</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="price"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="workshop_services_action" model="ir.actions.act_window">
+        <field name="name">Workshop Services</field>
+        <field name="res_model">workshop.services</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a Workshop Services!
+            </p>
+        </field>
+    </record>
+
+
+    <record id="workshop_complaints_form" model="ir.ui.view">
+        <field name="name">Workshop Complaints</field>
+        <field name="model">workshop.complaints</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                </header>
+                <sheet>
+
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="workshop_complaints_tree" model="ir.ui.view">
+        <field name="name">Workshop Complaints</field>
+        <field name="model">workshop.complaints</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="workshop_complaints_action" model="ir.actions.act_window">
+        <field name="name">Workshop Complaints</field>
+        <field name="res_model">workshop.complaints</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a Workshop Complaints!
+            </p>
+        </field>
+    </record>
+
+    <record id="workshop_solutions_form" model="ir.ui.view">
+        <field name="name">Workshop Solutions</field>
+        <field name="model">workshop.solutions</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                </header>
+                <sheet>
+
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="workshop_solutions_tree" model="ir.ui.view">
+        <field name="name">Workshop Solutions</field>
+        <field name="model">workshop.solutions</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="workshop_solutions_action" model="ir.actions.act_window">
+        <field name="name">Workshop Solutions</field>
+        <field name="res_model">workshop.solutions</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a Workshop Solutions!
+            </p>
+        </field>
+    </record>
+
+    <record id="workshop_vehicle_form" model="ir.ui.view">
+        <field name="name">Vehilcle</field>
+        <field name="model">vehicle.config</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="customer_id"/>
+                            <field name="brand_id"/>
+                        </group>
+                        <group>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="workshop_vehicle_tree" model="ir.ui.view">
+        <field name="name">Vehicle</field>
+        <field name="model">vehicle.config</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="customer_id"/>
+                <field name="brand_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="workshop_vehicle_action" model="ir.actions.act_window">
+        <field name="name">Vehicle</field>
+        <field name="res_model">vehicle.config</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a Vehicle!
+            </p>
+        </field>
+    </record>
+
+
+    <record id="workshop_brand_form" model="ir.ui.view">
+        <field name="name">Vehilcle</field>
+        <field name="model">vehicle.brand</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="model"/>
+                        </group>
+                        <group>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="workshop_brand_tree" model="ir.ui.view">
+        <field name="name">Vehicle</field>
+        <field name="model">vehicle.brand</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="model"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="workshop_brand_action" model="ir.actions.act_window">
+        <field name="name">Vehicle</field>
+        <field name="res_model">vehicle.brand</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a Vehicle Brand!
+            </p>
+        </field>
+    </record>
+    <menuitem id="enzworkshop_menu"
+              name="EnzWorkshop"
+              sequence="6"/>
+
+    <menuitem id="enzworkshop_config_menu"
+              name="Configuration"
+              parent="enzworkshop_menu"
+              sequence="6"/>
+
+    <menuitem id="enzworkshop_services_menu1"
+              name="Services"
+              parent="enzworkshop_config_menu"
+              sequence="1" action="workshop_services_action"/>
+    <menuitem id="enzworkshop_complaint_menu"
+              name="Complaints"
+              parent="enzworkshop_config_menu"
+              sequence="2" action="workshop_complaints_action"/>
+    <menuitem id="enzworkshop_solutions_menu"
+              name="Solutions"
+              parent="enzworkshop_config_menu"
+              sequence="2" action="workshop_solutions_action"/>
+
+    <menuitem id="menu_brand"
+              name="Brand" parent="enzworkshop_config_menu"
+              action="workshop_brand_action" sequence="4"/>
+
+    <menuitem id="menu_vehicles"
+              name="Vehicles" parent="enzworkshop_config_menu"
+              action="workshop_vehicle_action" sequence="5"/>
+    <menuitem id="contacts_menu_cus"
+              name="Customers"
+              parent="enzworkshop_config_menu"
+              sequence="3" action="account.res_partner_action_customer"/>
+</odoo>

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="report_invoice_b2c_debit">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+                <t t-set="n" t-value="1"/>
+<!--             <t t-foreach="range(1)" t-as="n">-->
+
+
+            <t t-call="account_invoice_ubl.report_tax_invoice_layout1">
+                <div class="page" >
+                      <p><center>فاتورة الخصم المبسطة<br/>Simplified Debit Invoice</center></p>
+
+                    <table class="border" style="border:1px solid black;width:100%;">
+                        <tr>
+                            <td colspan="1" style="border:1px solid black;">
+                                    Invoice No:
+
+                            </td>
+                            <td colspan="1" style="border:1px solid black;">
+   <t t-esc="o.name"/>
+                            </td>
+                            <td colspan="1" style="border:1px solid black;text-align:right;">
+   <t t-esc="o.name"/>
+
+
+                            </td>
+                            <td colspan="1" style="border:1px solid black;text-align:right;">
+                                   رقم الفاتورة
+
+                            </td>
+                        </tr>
+
+                             <tr>
+                                <td colspan="1" style="border:1px solid black;">
+                                        Invoice Issue Date:
+
+                                </td> <td colspan="1" style="border:1px solid black;">
+<t t-esc="o.invoice_date"/>
+
+                                </td> <td colspan="1" style="border:1px solid black;text-align:right;">
+<t t-esc="o.invoice_date"/>
+
+
+                                </td> <td colspan="1" style="border:1px solid black;text-align:right;">
+                                     تاريخ إصدار الفاتورة
+
+                                </td>
+                            </tr>
+
+
+
+
+                        <tr>
+
+<!--                            <td  style="border:1px solid black;"><center><b>رقم سري</b><br/>SI.No</center></td>-->
+                            <td colspan="1" style="border:1px solid black;"><center><b>تفاصیل السلع أو الخدما</b><br/>Nature Of Goods or Service</center></td>
+<!--                            <td style="border:1px solid black;"><center><b>كمية</b><br/>QTY</center></td>-->
+<!--                            <td style="border:1px solid black;"><center><b>وحدة</b><br/>Unit</center></td>-->
+                            <td style="border:1px solid black;"><center><b>سعر الوحدة</b><br/>Unit Price</center></td>
+                            <td style="border:1px solid black;"><center><b>الكمیة</b><br/>Quantity</center></td>
+
+<!--                            <td style="border:1px solid black;"><center><b>خصم</b><br/>Discount</center></td>-->
+<!--                            <td style="border:1px solid black;"><center><b>مجموع</b><br/>Total</center></td>-->
+<!--                            <td style="border:1px solid black;"><center><b>ضريبة</b><br/>VAT</center></td>-->
+<!--                            <td style="border:1px solid black;"><center>Disc%</center></td>-->
+<!--                            <td style="border:1px solid black;"><center>Tax</center></td>-->
+                            <td style="border:1px solid black;"><center><b>(المجموع (شامل ضریبة القیمة المضافة </b><br/>Item Subtotal(Including VAT)</center></td>
+                        </tr>
+                        <t t-set="i" t-value="1"/>
+                    <t t-foreach="o.invoice_line_ids" t-as="l">
+                        <tr>
+<!--                            <td style="border:1px solid black;"><center><t t-esc="i"/></center></td>-->
+                            <td colspan="1" style="border:1px solid black;"><center><t t-esc="l.product_id.name"/><br/><b><t t-esc="l.product_id.ar_name"/></b></center></td>
+<!--                            <td style="border:1px solid black;"><center><b><t t-esc="l.product_id.uom_id.name"/> </b></center></td>-->
+                            <td style="border:1px solid black;"><center><b> <t t-esc="l.price_unit"/><t t-esc="o.company_id.currency_id.name"/></b></center></td>
+                            <td style="border:1px solid black;"><center><b><t t-esc="l.quantity"/></b></center></td>
+
+<!--                            <td style="border:1px solid black;"><center></center></td>-->
+<!--                            <td style="border:1px solid black;"><center><b><t t-esc="l.ar_price_subtotal"/></b></center></td>-->
+<!--                            <td style="border:1px solid black;"><center>-->
+<!--                                <t t-esc="l.invoice_line_tax_ids.name"/>-->
+<!--                               <span><b>١٥٪ضريبة</b></span>-->
+<!--                            </center></td>-->
+<!--                            <td style="border:1px solid black;"><center></center></td>-->
+<!--                            <td style="border:1px solid black;"><center><t t-esc="l.invoice_line_tax_ids.mapped('name')[0]"/></center></td>-->
+<!--                            <td style="border:1px solid black;"><center><t t-esc="o.tax_names(l)"/></center></td>-->
+<!--                            <td style="border:1px solid black;"><b><center><t t-esc="o.ar_price_subtotal(l)"/></center></b></td>-->
+                            <td style="border:1px solid black;"><b><center><t t-esc="o.price_subtotal(l)"/><t t-esc="o.company_id.currency_id.name"/> </center></b></td>
+                        </tr>
+                        <t t-set="i" t-value="i+1"/>
+                                </t>
+
+
+                            <tr>
+                                <td colspan="1" style="border:1px solid black;"><b>Total Taxable Amount (Excluding VAT)</b></td>
+                                <td colspan="2" style="border:1px solid black;">
+                        <b><span style="text-align:right;"> (الإجمالي الخاضع ضريبة (غير شاملة ضريبة القيمة المضافة</span></b>
+                        </td>
+                                <td colspan="1" style="border:1px solid black;text-align:center;"><b><t t-esc="o.amount_untaxed"/><t t-esc="o.company_id.currency_id.name"/> </b></td>
+<!--                                <td colspan="2" style="border:1px solid black;text-align:right;"><b>الإجمالي (باستثناء الضرائب) </b></td>-->
+                        </tr>
+                        <tr>
+                            <td colspan="1" style="border:1px solid black;"><b> Total VAT</b></td>
+                            <td colspan="2" style="border:1px solid black;"><b>
+                                مجموع ضريبة القيمة المضافة</b>
+                            </td>
+                            <td colspan="1" style="border:1px solid black;text-align:center;"><b><t t-esc="o.amount_tax" /><t t-esc="o.company_id.currency_id.name"/></b></td>
+<!--                            <td colspan="2" style="border:1px solid black;text-align:right;"><b> مجموع ضريبة القيمة المضافة </b></td>-->
+                        </tr>
+
+                      <tr>
+                          <td colspan="1" style="border:1px solid black;"><b> Total Amount Due</b></td>
+                            <td colspan="2" style="border:1px solid black;"><b>إجمالي المبلغ المستحق</b>
+                            </td>
+                            <td colspan="1" style="border:1px solid black;text-align:center;"><b><t t-esc="o.amount_residual" /><t t-esc="o.company_id.currency_id.name"/></b></td>
+<!--                            <td colspan="2" style="border:1px solid black;text-align:right;"><b> مجموع ضريبة القيمة المضافة </b></td>-->
+                        </tr>
+                    </table>
+                </div>
+                 <div id="qrcode">
+                     <div class="row">
+                         <div class="col-xs-4" style="width:30%"/>
+<!--                     <span t-esc="o.qr()"/>-->
+                       <div id="qrcode" class="col-xs-4" style="width:40%;"><br/>
+                           <center><img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('QR', o.testing(), 250, 250)" style="width:250px;height:250px;"/>
+                   </center>
+                    </div>
+                         </div>
+                     <div class="col-xs-4" style="width:30%"/>
+
+
+                    </div>
+            </t>
+<!--                 <t t-set="n" t-value="n+1"/>-->
+        </t>
+<!--        </t>-->
+    </t>
+    </template>
+
+</odoo>

@@ -1,0 +1,14 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_partner_ledger_customer,partner.ledger.customer.group_user,model_partner_ledger_customer,,1,1,1,1
+access_supplier_ledger_customer,supplier.ledger.customer.group_user,model_supplier_ledger_customer,,1,1,1,1
+access_cash_book_info,cash.book.info.group_user,model_cash_book_info,,1,1,1,1
+access_sale_report_custom,sale.report.custom.group_user,model_sale_report_custom,,1,1,1,1
+access_sale_report_custom_line,sale.report.custom.line.group_user,model_sale_report_custom_line,,1,1,1,1
+access_purchase_report_custom,purchase.report.custom.group_user,model_purchase_report_custom,,1,1,1,1
+access_purchase_report_custom_line,purchase.report.custom.line.group_user,model_purchase_report_custom_line,,1,1,1,1
+access_purchase_profit_repo,purchase.profit.repo.group_user,model_purchase_profit_repo,,1,1,1,1
+access_customer_area_aged,customer.area.aged.group_user,model_customer_area_aged,,1,1,1,1
+access_cash_report_custom,cash.report.custom.group_user,model_cash_report_custom,,1,1,1,1
+access_cash_denomination_line,cash.denomination.line.group_user,model_cash_denomination_line,,1,1,1,1
+access_cash_report_custom_line,cash.report.custom.line.group_user,model_cash_report_custom_line,,1,1,1,1
+access_partner_ledger_report,partner.ledger.report.group_user,model_partner_ledger_report,,1,1,1,1

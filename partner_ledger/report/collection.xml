@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+<!--         <report id="partner_ledger_customer"-->
+<!--      		model="partner.ledger.customer"-->
+<!--      		string="All Print"-->
+<!--      		report_type="qweb-pdf"-->
+<!--      		name="ezp_cash_collection.repo_ledger"-->
+<!--      		file="ezp_cash_collection.repo_ledger"/>-->
+
+     <report id="partner_ledger_customerss"
+                model="partner.ledger.report"
+                string="Print Report"
+                report_type="qweb-pdf"
+                name="partner_ledger.repo_ledger1"
+                file="partner_ledger.repo_ledger1"/>
+
+     <report id="cashbook_customers"
+                    model="cash.report.custom"
+                    string="Print CashBook Report"
+                    report_type="qweb-pdf"
+                    name="partner_ledger.repo_cashbook"
+                    file="partner_ledger.repo_cashbook"/>
+
+
+    </data>
+</odoo>

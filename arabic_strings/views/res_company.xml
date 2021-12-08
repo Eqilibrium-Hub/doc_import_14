@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="ar_res_company_change" model="ir.ui.view">
+        <field name="name">Comapany Arabic</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='street']" position="after">
+                <field name="ar_street"/>
+            </xpath>
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="ar_name"/>
+            </xpath>
+            <xpath expr="//field[@name='street2']" position="after">
+                <field name="ar_street2"/>
+            </xpath>
+            <xpath expr="//field[@name='city']" position="after">
+                <field name="ar_city"/>
+            </xpath>
+            <xpath expr="//field[@name='country_id']" position="after">
+                <field name="ar_country"/>
+            </xpath>
+            <xpath expr="//field[@name='state_id']" position="after">
+                <field name="ar_state"/>
+            </xpath>
+            <xpath expr="//field[@name='zip']" position="after">
+                <field name="ar_zip"/>
+            </xpath>
+            <xpath expr="//field[@name='phone']" position="after">
+                <field name="ar_phone"/>
+            </xpath>
+            <xpath expr="//field[@name='vat']" position="after">
+                <field name="ar_tax_id"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

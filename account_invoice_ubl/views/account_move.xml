@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  Copyright 2016-2017 Akretion (Alexis de Lattre <alexis.delattre@akretion.com>)
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <record id="view_move_form" model="ir.ui.view">
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="arch" type="xml">
+            <button name="button_draft" position="before">
+                <button
+                    type="object"
+                    name="attach_ubl_xml_file_button"
+                    attrs="{'invisible': ['|', ('move_type', 'not in', ['out_invoice', 'out_refund']), ('state', '!=', 'posted')]}"
+                    string="Generate UBL XML File"
+                />
+<!--                <button-->
+<!--                    type="object"-->
+<!--                    name="attach_ubl_xml_file_button"-->
+<!--                    attrs="{'invisible': [('state', '!=', 'posted')]}"-->
+<!--                    string="Generate UBL XML File"-->
+<!--                />-->
+            </button>
+<!--           <xpath expr="//field[@name='invoice_date']" position="after">-->
+<!--               <field name="decoded_data" />-->
+<!--               <field name="uuid" />-->
+<!--               <field name="qr_image" widget="image" width="200px;" height="200px;"/>-->
+<!--           </xpath>-->
+            <xpath expr="//field[@name='invoice_line_ids']//field[@name='account_id']" position="after">
+                <field name='vat_category' />
+            </xpath>
+            <xpath expr="//page[@id='aml_tab']" position="after">
+                <page string="E-Invoice Information" attrs="{'invisible': [('move_type', 'not in', ['out_invoice', 'out_refund'])]}">
+                    <group>
+                        <field name="ubl_preview" invisible="1"/>
+                        <field name="decoded_data"/>
+                        <field name="uuid"/>
+                        <field name="qr_image" widget="image" width="200px;" height="200px;"/>
+                    </group>
+
+
+
+                </page>
+
+
+            </xpath>
+             <xpath expr="//button[@name='open_reconcile_view']" position="after">
+                <button name="view_attachments" icon="fa-file-text-o" type="object"
+                        attrs="{'invisible': [('ubl_preview', '=', 0)]}">
+                    <span class="o_stat_text">UBL XML</span>
+                    <field name="ubl_preview" widget="statinfo" string="UBL XML"/>
+                </button>
+            </xpath>
+
+<!--            <page id="aml_tab" string="Journal Items" groups="account.group_account_readonly">-->
+        </field>
+    </record>
+
+     <record id="company_einv_inherit" model="ir.ui.view">
+        <field name="name">company.inherit</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+        <field name="vat" position="after">
+               <field name="schema_id" invisible="1"/>
+               <field name="schema_id_no" invisible="1"/>
+        </field>
+        </field></record>
+
+     <record id="contact_sale_einv" model="ir.ui.view">
+        <field name="name">Contact Inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='vat']" position="after">
+                <field name="type_of_customer" widget="radio"/>
+                <field name="schema_id"/>
+                <field name="schema_id_no" required="1"/>
+                 <field name="building_no"/>
+                <field name="plot_id"/>
+            </xpath>
+        </field>
+     </record>
+</odoo>

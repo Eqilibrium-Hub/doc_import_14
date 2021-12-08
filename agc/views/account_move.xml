@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+        <record id="account_invoice_inherit" model="ir.ui.view">
+            <field name="name">account.invoice.print</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <!-- add state field in header -->
+                <xpath expr="//field[@name='payment_reference']" position="after">
+                    <field name="po_number"/>
+                    <field name="po_date"/>
+                    <field name="delivery_note_no"/>
+<!---->
+                </xpath>
+                <xpath expr="//field[@name='invoice_line_ids']//tree//field[@name='quantity']" position="before">
+                <field name="date_of_supply"/>
+            </xpath>
+                <xpath expr="//field[@name='line_ids']//tree//field[@name='name']" position="before">
+                <field name="date_of_supply" invisible="1"/>
+                <field name="no_of_pices" invisible="1"/>
+                <field name="job_no" invisible="1"/>
+            </xpath>
+                <xpath expr="//field[@name='quantity']" position="attributes">
+                    <attribute name="string">Weight</attribute>
+                </xpath>
+                <xpath expr="//field[@name='quantity']" position="after">
+                    <field name="no_of_pices"/>
+                </xpath>
+
+            </field>
+    </record>
+
+    <record id="res_company_inherit" model="ir.ui.view">
+            <field name="name">res.company</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+                <!-- add state field in header -->
+                <xpath expr="//field[@name='phone']" position="after">
+                    <field name="industry_no"/>
+                </xpath>
+                <xpath expr="//field[@name='favicon']" position="after">
+                    <field name="footer_image" widget="image" class="oe_avatar"/>
+<!--                    <field name="footer_images" widget="image" class="oe_avatar"/>-->
+<!---->
+                </xpath>
+
+
+            </field>
+    </record>
+
+</odoo>

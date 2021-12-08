@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <report id="expense_report_en"
+      		model="report.expense"
+      		string="Expense Report"
+      		report_type="qweb-pdf"
+      		name="advanced_common_day_book.expense_report_en_view_1"
+      		file="advanced_common_day_book.expense_report_en_view_1" menu="False"/>
+
+    <report id="expense_report_en_ar"
+      		model="report.expense"
+      		string="Expense Report/تقرير المصاريف"
+      		report_type="qweb-pdf"
+      		name="advanced_common_day_book.expense_report_en_ar_view_1"
+      		file="advanced_common_day_book.expense_report_en_ar_view_1" menu="False"/>
+    <report id="expense_report_ar"
+      		model="report.expense"
+      		string="تقرير المصاريف"
+      		report_type="qweb-pdf"
+      		name="advanced_common_day_book.expense_report_ar_view_1"
+      		file="advanced_common_day_book.expense_report_ar_view_1" menu="False"/>
+</odoo>

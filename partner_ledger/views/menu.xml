@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+
+     <menuitem name="Accounting"
+              id="menu_ezp_acc"
+              parent="enz_account.enz_accounting"
+              sequence="-1"
+    />
+
+     <menuitem name="Ledger Balance"
+                  id="menu_ledger"
+                  parent="partner_ledger.menu_ezp_acc"
+                  sequence="1"
+        />
+    <menuitem name="Reporting"
+                  id="menu_ezp_reporting"
+                  parent="partner_ledger.menu_ezp_acc"
+                  sequence="2"
+        />
+
+    <menuitem name="Inventory Reporting"
+                  id="menu_ezp_inv_reporting"
+                  parent="partner_ledger.menu_ezp_reporting"
+                  sequence="2"
+        />
+    <menuitem name="Accounting Reporting"
+                  id="menu_ezp_acc_reporting"
+                  parent="partner_ledger.menu_ezp_reporting"
+                  sequence="1"
+        />
+      <menuitem name="Partner Ledger"
+              id="menu_partner_ledger"
+              parent="menu_ledger"
+              action="actions_partner_ledger" sequence="1"
+    />
+
+<!--    <menuitem name="Supplier Ledger"-->
+<!--              id="menu_supplier_led" sequence="2"-->
+<!--              parent="menu_ledger"-->
+<!--              action="actions_supplier_ledger"/>-->
+
+    <menuitem name="Cash Book"
+              id="menu_cash_book_info" sequence="3"
+              parent="menu_ledger"
+              action="actions_cash_book_info"/>
+
+     <menuitem name="Customer Aged Report" id="menu_customer_aged_id"
+              action="action_customer_area_aged" sequence="2"
+              parent="menu_ezp_acc_reporting"/>
+
+    <menuitem name="Sales Report" id="menu_se"
+              action="action_sale_report_custom" sequence="2"
+              parent="menu_ezp_inv_reporting"/>
+
+
+     <menuitem name="Opening Balance for Customers"
+              id="opening_balance_customers_saudhi.menu_op_bal" sequence="1"
+              parent="menu_ezp_acc_reporting"
+              action="opening_balance_customers_saudhi.actions_opening_balance_customers"/>
+
+     <menuitem name="Inventory Sale Purchase"
+              id="inventory_sale_purchase.menu_inv_po_so" sequence="1"
+              parent="menu_ezp_inv_reporting"
+              action="inventory_sale_purchase.actions_inventory_purchase_sale"/>
+
+    <menuitem name="Purchase Report" id="menu_po1"
+              action="action_purchase_report_custom" sequence="3"
+              parent="menu_ezp_inv_reporting"/>
+
+
+    <menuitem name="Profit Report"
+              id="men_profit" sequence="4"
+              parent="menu_ezp_inv_reporting"
+              action="action_purchase_profit_repo"
+    />
+
+
+    <menuitem name="Cash Book Report" id="menu_cer"
+              action="action_cash_report_custom" sequence="3"
+              parent="menu_ezp_acc_reporting"/>
+
+
+    <menuitem name="Partner Ledger Report" id="menu_pdg"
+              action="action_partner_ledger_report" sequence="4"
+              parent="menu_ezp_acc_reporting"/>
+
+    <menuitem name="Common Day Book"
+              id="advanced_common_day_book.common_day_book_id_1" sequence="5"
+              parent="menu_ezp_acc_reporting"
+              action="advanced_common_day_book.common_day_book_menu_action_1"
+              />
+
+
+
+
+
+</odoo>

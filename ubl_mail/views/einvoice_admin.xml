@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="einvoice_admin_default_tree" model="ir.ui.view">
+        <field name="name">Einvoice Admin</field>
+        <field name="model">einvoice.admin</field>
+        <field name="arch" type="xml">
+            <tree string="Einvoice Config">
+                <field name="name"/>
+                <field name="email_id" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="einvoice_admin_default_form" model="ir.ui.view">
+        <field name="name">Einvoice Admin</field>
+        <field name="model">einvoice.admin</field>
+        <field name="arch" type="xml">
+            <form string="Einvoice Admin">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="email_id" invisible="1"/>
+                        </group>
+                        <group>
+
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="einvoice_admin_default_action" model="ir.actions.act_window">
+        <field name="name">Einvoice Admin Configuration</field>
+        <field name="res_model">einvoice.admin</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No Einvoice Admin Configuration Created!
+            </p>
+        </field>
+    </record>
+    <menuitem name="Einvoice Mail" id="einvoiceadminconfig_main" parent="account.menu_finance_configuration"/>
+    <menuitem name="Admin" id="einvoiceadminconfig_main_sub" parent="einvoiceadminconfig_main"
+              action="einvoice_admin_default_action"/>
+
+</odoo>

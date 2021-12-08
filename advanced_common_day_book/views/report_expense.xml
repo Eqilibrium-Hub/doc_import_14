@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+<!--    <record id="view_hr_expense_sheet_form" model="ir.ui.view">-->
+<!--        <field name="name">hr.expense.sheet.form</field>-->
+<!--        <field name="model">hr.expense.sheet</field>-->
+<!--        <field eval="25" name="priority"/>-->
+<!--        <field name="inherit_id" ref="hr_expense.view_hr_expense_sheet_form"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//button[@name='%(hr_expense.hr_expense_sheet_register_payment_wizard_action)d']"-->
+<!--                   position="replace">-->
+<!--                <button name="%(hr_expense.hr_expense_sheet_register_payment_wizard_action)d" type="action"-->
+<!--                        string="Register Payment" class="oe_highlight o_expense_sheet_pay"-->
+<!--                        attrs="{'invisible': [('state', '!=', 'post')]}"-->
+<!--                        context="{'default_amount': total_amount, 'partner_id': address_id,'default_expense_ref': id}"-->
+<!--                        groups="account.group_account_manager"/>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    <record id="hr_expense_sheet_register_payment_view_form" model="ir.ui.view">-->
+<!--        <field name="name">hr.expense.sheet.register.payment.wizard.form</field>-->
+<!--        <field name="model">hr.expense.sheet.register.payment.wizard</field>-->
+<!--        <field name="inherit_id" ref="hr_expense.hr_expense_sheet_register_payment_view_form"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//field[@name='partner_id']" position="after">-->
+<!--                <field name="expense_ref" readonly="1"/>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+
+
+    <record id="report_expense_form" model="ir.ui.view">
+        <field name="name">Expense Report</field>
+        <field name="model">report.expense</field>
+        <field name="arch" type="xml">
+            <form string="Expense Report">
+                <header>
+                    <button name="print_expense_report" string="Print" type="object" class="btn-primary"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            Expense Report
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name" invisible="1"/>
+
+                            <field name="type" widget="radio" options="{'horizontal':True}"/>
+                            <label for="transaction_type"/>
+
+                            <div class="o_row">
+                                <field name="transaction_type" invisible="1"/>
+                                <label for="transaction_type_expense"/>
+                                <field name="transaction_type_expense" widget="checkboxes"/>
+
+
+                            </div>
+                            <field name="customer_employee"/>
+                        </group>
+                        <group>
+                            <field name="date" attrs="{'invisible': [('type','!=','Day Book')]}"/>
+                            <field name="from_date" attrs="{'invisible': [('type','!=','Date Wise')]}"/>
+                            <field name="to_date" attrs="{'invisible': [('type','!=','Date Wise')]}"/>
+                            <field name="company_id" readonly="1" invisible="1"/>
+
+
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Reports">
+                            <field name="report_expense_lines">
+                                <tree editable="bottom">
+                                    <field name="date"/>
+                                    <field name="description"/>
+                                    <field name="source"/>
+                                    <field name="customer"/>
+                                    <field name="invoice_amount"/>
+                                    <field name="debit" sum="Total"/>
+                                    <field name="credit" sum="Total"/>
+                                    <field name="company_id" readonly="1" invisible="1"/>
+
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="report_expense_menu_action" model="ir.actions.act_window">
+        <field name="name">Expense Report</field>
+        <field name="res_model">report.expense</field>
+        <field name="view_mode">form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Create New Record Form Here.
+            </p>
+        </field>
+    </record>
+
+
+    <menuitem name="Expense Report"
+              id="expense_report_ids" sequence="3"
+              parent="hr_expense.menu_hr_expense_reports"
+              action="report_expense_menu_action"
+    />
+</odoo>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <report id="common_day_book_report_1"
+      		model="common.day.book"
+      		string="Common Day Book Report"
+      		report_type="qweb-pdf"
+      		name="advanced_common_day_book.common_day_book_view_1"
+      		file="advanced_common_day_book.common_day_book_view_1" menu="False"/>
+
+	<report id="common_day_book_report_en_ar"
+      		model="common.day.book"
+      		string="Common Day Book Report/تقرير الكتاب اليومي"
+      		report_type="qweb-pdf"
+      		name="advanced_common_day_book.common_day_book_view_en_ar"
+      		file="advanced_common_day_book.common_day_book_view_en_ar" menu="False"/>
+</odoo>

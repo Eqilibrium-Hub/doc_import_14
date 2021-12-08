@@ -1,0 +1,1248 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="invoice_format_layout">
+        <t t-call="web.html_container">
+            <t t-if="not o" t-set="o" t-value="doc"/>
+            <t t-if="not company">
+                <!--  Multicompany  -->
+                <t t-if="company_id">
+                    <t t-set="company" t-value="company_id"/>
+                </t>
+                <t t-elif="o and 'company_id' in o">
+                    <t t-set="company" t-value="o.company_id.sudo()"/>
+                </t>
+                <t t-else="else">
+                    <t t-set="company" t-value="res_company"/>
+                </t>
+            </t>
+            <div class="header" t-att-style="report_header_style">
+                <div class="row">
+                    <div class="col-4" style="text-align:left;">
+<!--                        <h6>CIN:</h6>-->
+<!--                        <h6>GSTIN:-->
+<!--                            <t t-esc="company.vat"/>-->
+<!--                        </h6>-->
+                        <!--            <h6><t t-esc="company.partner_id.name"/> </h6>-->
+                        <h6><t t-esc="company.street"/>,
+                            <t t-esc="company.street2"/>
+                        </h6>
+                        <h6><t t-esc="company.city"/>,<t t-esc="company.state_id.name"/>-
+                            <t t-esc="company.zip"/>
+                        </h6>
+                        <h6>
+                            <t t-esc="company.phone"/>
+                        </h6>
+                        <h6>
+                            <t t-esc="company.email"/>
+                        </h6>
+                        <h6>
+
+                            VAT:<t t-esc="company.vat"/>
+                        </h6>
+
+
+                    </div>
+                    <div class="col-4" align="center">
+
+                        <img t-if="company.logo" t-att-src="image_data_uri(company.logo)"
+                             style="max-height:70px;align:center;" alt="Logo"/>
+                        <h6 style="border: 1px solid black;
+  padding: 50px;
+  border-radius: 15px;padding:20px;">DELIVERY NOTE:<br></br>مذكرة تسليم:
+                        </h6>
+
+                    </div>
+
+                    <div class="col-4" style="text-align:right;">
+                        <h6></h6>
+                        <h6>
+                            <t t-esc="company.ar_tax_id"/>
+                        </h6>
+                        <!--            <h6><t t-esc="company.partner_id.name"/> </h6>-->
+                        <h6><t t-esc="company.ar_street"/>,
+                            <t t-esc="company.ar_street2"/>
+                        </h6>
+                        <h6><t t-esc="company.ar_city"/>,<t t-esc="company.ar_state"/>-
+                            <t t-esc="company.ar_zip"/>
+                        </h6>
+                        <h6>
+                            <t t-esc="company.ar_phone"/>
+                        </h6>
+                        <h6>
+                            <t t-esc="company.email"/>
+                        </h6>
+                        <h6>
+                            <t t-esc="company.vat"/>:ضريبة القيمة المضافة
+                        </h6>
+                    </div>
+
+                    <!--        <div class="col-6" style="text-align:right;">-->
+                    <!--            <h6><t t-esc="company.partner_id.name"/> </h6>-->
+                    <!--            <h6><t t-esc="company.street"/> </h6>-->
+                    <!--            <h6><t t-esc="company.street2"/> </h6>-->
+                    <!--            <h6><t t-esc="company.city"/> </h6>-->
+                    <!--            <h6><t t-esc="company.state_id.name"/> </h6>-->
+                    <!--            <h6><t t-esc="company.zip"/> </h6>-->
+
+
+                    <!--        </div>-->
+                    <!---->
+                </div>
+            </div>
+            <div class="col-9 text-right" style="margin-top:22px;" t-field="company.report_header" name="moto">
+                <div t-field="company.partner_id"
+                     t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'/>
+            </div>
+            <div class="article" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id"
+                 t-att-data-oe-lang="o and o.env.context.get('lang')">
+                <t t-raw="0"/>
+            </div>
+            <div class="footer o_background_footer">
+                <div>
+                    <div t-field="company.report_footer"/>
+                    <div t-if="report_type == 'pdf'" class="text-muted">
+                        <hr style="text-color:orange; width:100%;"></hr>
+                        <!--     <div class="row">-->
+                        <div class="row">
+                            <div class="col-12" style="font-size:50px;">
+<!--                                <h6>-->
+<!--                                    <center>-->
+<!--                                        <b>Note :White :Customer ,Yellow :Accounting ,Green :Job File Blue:WordPad</b>-->
+<!--                                    </center>-->
+<!--                                </h6>-->
+                            </div>
+                        </div>
+                        <!--         <br></br>-->
+
+                        <div class="row">
+                            <div class="col-12" style="font-size:50px;">
+                                <h6>
+                                    <center>
+<!--                                        <b>-->
+<!--                                            ملاحظة: أبيض: عميل ، أصفر: محاسبة ، أخضر: ملف عمل أزرق: الدفتر-->
+<!--                                        </b>-->
+                                    </center>
+                                </h6>
+                                <!--                        Page:-->
+                                <!--                <span class="page"/>-->
+                                <!--                         /-->
+                                <!--                 <span class="topage"/>-->
+                                <!--        </div>-->
+                                <!--        <div class="col-6" style="text-align:right;">-->
+                                <!--            <span style="color:gray;"> Powered by Enzapps</span>-->
+                                <!--        </div>-->
+                            </div>
+                        </div>
+                        <!--            </div>-->
+                        <!--     </div>-->
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+    <template id="invoice_format_view">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="agc.invoice_format_layout">
+                    -----------------------------------------------------------------------------------------------------------------------------------
+                    <div class="page">
+                        <table style="width:100%">
+
+
+                            <tr>
+
+<!--                                <td colspan="1"-->
+<!--                                    style="text-align:left;font-size:15px;">-->
+<!--                                    <b>CR-->
+<!--                                        <t t-esc="o.company_id.company_registry"/>-->
+<!--                                    </b>-->
+<!--                                </td>-->
+                                <!--                            </tr>-->
+                                <!--                            <tr style="border: 1px solid black;border-collapse: collapse;">-->
+
+<!--                                <td colspan="1"-->
+<!--                                    style="text-align:right;font-size:15px;">-->
+
+<!--                                    <t t-esc="o.company_id.company_registry"/>:كر لا-->
+<!--                                </td>-->
+                            </tr>
+                            <tr>
+
+<!--                                <td colspan="1"-->
+<!--                                    style="text-align:left;font-size:15px;">-->
+<!--                                    <b>INDUSTRIAL LICENSE NO.-->
+<!--                                        <t t-esc="o.company_id.industry_no"/>-->
+<!--                                    </b>-->
+<!--                                </td>-->
+                                <!--                            </tr>-->
+                                <!--                            <tr style="border: 1px solid black;border-collapse: collapse;">-->
+
+<!--                                <td colspan="1"-->
+<!--                                    style="text-align:right;font-size:15px;">-->
+
+<!--                                    <t t-esc="o.company_id.industry_no"/>:رقم الترخيص الصناعي-->
+<!--                                </td>-->
+                            </tr>
+                        </table>
+                        <!--                                <td colspan="1"-->
+                        <!--                                style="width:25%;height:20px;border: 1px solid black;border-collapse: collapse;">-->
+                        <!--                                <center>Description<br></br>وصف-->
+                        <!--                            </center></td>-->
+                        <!--                    <div class="header" t-att-style="report_header_style">-->
+                        <div class="row">
+                            <div class="col-6" style="text-align:left;">
+
+                                <br></br>
+                                <h6 style="font-size:20px;">
+                                    <b>NO.&amp;nbsp;&amp;nbsp;
+                                        <t t-esc="o.name"/>
+                                    </b>
+                                </h6>
+                                <br></br>
+                                <br></br>
+                                <br></br>
+                                <h6 style="font-size:20px;">
+                                    <b>To:</b> &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&amp;nbsp; &amp;nbsp;
+                                    &amp;nbsp;&amp;nbsp; &amp;nbsp; &amp;nbsp;&amp;nbsp; &amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp;
+                                    &amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp; &amp;nbsp;
+                                </h6>
+                                <t t-esc="o.partner_id.name"/>
+                                <br/>
+                                <t t-if="o.partner_id.street"><t t-esc="o.partner_id.street"/>,
+                                </t>
+                                <t t-if="o.partner_id.street2">
+                                    <t t-esc="o.partner_id.street2"/>
+                                    ,
+                                </t>
+                                <br/>
+                                <t t-if="o.partner_id.city">
+                                    <t t-esc="o.partner_id.city"/>
+                                    ,
+                                </t>
+                                <t t-if="o.partner_id.mobile"><t t-esc="o.partner_id.mobile"/>,
+                                </t>
+                                <br/>
+                                <t t-if="o.partner_id.state_id">
+                                    <t t-esc="o.partner_id.state_id.name"/>
+                                    ,
+                                </t>
+                                <t t-if="o.partner_id.country_id">
+                                    <t t-esc="o.partner_id.country_id.name"/>
+                                    ,
+                                </t>
+                                <br/>
+
+
+                                <!--            <h6><t t-esc="company.partner_id.name"/> </h6>-->
+                                <!--            <h6><t t-esc="company.street"/>,<t t-esc="company.street2"/> </h6>-->
+                                <!--            <h6><t t-esc="company.city"/>,<t t-esc="company.state_id.name"/>-<t t-esc="company.zip"/> </h6>-->
+                                <!--            <h6>t:<t t-esc="company.phone"/> </h6>-->
+                                <!--            <h6><t t-esc="company.email"/> </h6>-->
+
+
+                            </div>
+                            <!--<div class="col-4" align="center">-->
+
+                            <!--       <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height:70px;align:center;" alt="Logo"/>-->
+                            <!--    </div>-->
+
+                            <div class="col-6" style="text-align:left;">
+                                <p>DATE &amp;nbsp;&amp;nbsp;:
+                                    <t t-esc="o.date"/>
+                                </p>
+                                <p>تاريخ</p>
+                                <!--            <h6><t t-esc="company.partner_id.name"/> </h6>-->
+                                <p>P.O &amp;nbsp;&amp;nbsp;:
+                                    <t t-esc="o.po_no"/>
+                                </p>
+                                <p>أمر شراء</p>
+                                <p>JOB &amp;nbsp;&amp;nbsp;:
+                                    <t t-esc="o.job"/>
+                                </p>
+                                <p>مهنة</p>
+                                <p>Dc.No &amp;nbsp;&amp;nbsp;:
+                                    <t t-esc="o.dc_no"/>
+                                </p>
+                                <p>Driver Name &amp;nbsp;&amp;nbsp;:
+                                    <t t-esc="o.driver_id"/>
+                                </p>
+                                <p>اسم السائق</p>
+                                <p>Driver Phone:<t t-esc="o.driver_mobile"/>
+
+                                </p>
+                                <p>Truck No:
+                                    <t t-esc="o.truck_no"/>
+                                </p>
+                                <p>
+                                    Weight Bridge Slip No:<t t-esc="o.wbs_no"/>
+                                </p>
+                                <!--                        <p style="text-align:right;">عميل# </p>-->
+
+
+                            </div>
+
+                            <!--        <div class="col-6" style="text-align:right;">-->
+                            <!--            <h6><t t-esc="company.partner_id.name"/> </h6>-->
+                            <!--            <h6><t t-esc="company.street"/> </h6>-->
+                            <!--            <h6><t t-esc="company.street2"/> </h6>-->
+                            <!--            <h6><t t-esc="company.city"/> </h6>-->
+                            <!--            <h6><t t-esc="company.state_id.name"/> </h6>-->
+                            <!--            <h6><t t-esc="company.zip"/> </h6>-->
+
+
+                            <!--        </div>-->
+                            <!---->
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <h6 style="font-size:20px;text-align:left;">
+                                    <b>CUSTOMER #</b>
+                                </h6>
+                            </div>
+                            <div class="col-6">
+                                <h6 style="font-size:20px;text-align:right;">
+                                    <b># عميل</b>
+                                </h6>
+                            </div>
+                        </div>
+
+                        <table style="width:100%">
+
+
+                            <tr style="height:10px;border: 1px solid black;border-collapse: collapse;">
+
+                                <td colspan="1"
+                                    style="width:10%;border: 1px solid black;border-collapse: collapse;">
+                                    <center>
+                                        SL#<br></br>رقم سري
+                                    </center>
+                                </td>
+                                <!--                            </tr>-->
+                                <!--                            <tr style="border: 1px solid black;border-collapse: collapse;">-->
+
+                                <td colspan="1"
+                                    style="width:20%;border: 1px solid black;border-collapse: collapse;">
+                                    <center>
+                                        Job No.<br></br>رقم طلب العمل
+                                    </center>
+                                </td>
+                                <td colspan="1"
+                                    style="width:25%;border: 1px solid black;border-collapse: collapse;">
+                                    <center>Description<br></br>وصف السلعة
+                                    </center>
+                                </td>
+                                <!--                            </tr>-->
+                                <!--                            <tr style="border: 1px solid black;border-collapse: collapse;">-->
+
+                                <td colspan="1"
+                                    style="width:20%;border: 1px solid black;border-collapse: collapse;">
+                                    <center>Weight Before Galvanizing<br></br>الوزن قبل الجلفنة
+                                    </center>
+                                </td>
+                                <td colspan="1"
+                                    style="width:20%;border: 1px solid black;border-collapse: collapse;">
+                                    <center>Weight After Galvanizing<br></br>الوزن بعد الجلفنة
+                                    </center>
+                                </td>
+                                <!--                            </tr>-->
+                                <!--                            <tr style="border: 1px solid black;border-collapse: collapse;">-->
+
+                                <td colspan="1"
+                                    style="width:15%;border: 1px solid black;border-collapse: collapse;">
+                                    <center>
+                                        No Of Pieces.<br></br>لا القطع.
+                                    </center>
+                                </td>
+                                <!--                                <td colspan="6"-->
+                                <!--                                style="border: 1px solid black;border-collapse: collapse;">-->
+                                <!--                                Credit-->
+                                <!--                            </td>-->
+                                <!--                            </tr>-->
+                                <!--                            <tr style="border: 1px solid black;border-collapse: collapse;">-->
+
+                                <!--                            <td colspan="6"-->
+                                <!--                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">-->
+                                <!--                                Journal-->
+                                <!--                            </td>-->
+                            </tr>
+                            <t t-set="i" t-value="1"/>
+                            <t t-foreach="o.delivery_lines" t-as="line">
+
+
+                                <tr style="height:10px;border: 1px solid black;border-collapse: collapse;">
+
+                                    <td colspan="1" style="border: 1px solid black;border-collapse: collapse;">
+                                        <center>
+                                            <t t-esc="i"/>
+                                        </center>
+                                    </td>
+                                    <td colspan="1" style="border: 1px solid black;border-collapse: collapse;">
+                                        <center>
+                                            <t t-esc="line.job_no"/>
+                                        </center>
+                                    </td>
+                                    <!--                                <td colspan="1" style="border: 1px solid black;border-collapse: collapse;">-->
+                                    <!--                                    <center><t t-esc="line.product_id.name"/></center>-->
+                                    <!--                                </td>-->
+                                    <td colspan="1" style="border: 1px solid black;border-collapse: collapse;">
+                                        <center>
+                                            <t t-esc="line.name.name"/>
+                                        </center>
+                                    </td>
+                                    <td colspan="1" style="border: 1px solid black;border-collapse: collapse;">
+                                        <center>
+                                            <t t-if="line.wbg != 0.00">
+                                            <t t-esc="'%.2f' % line.wbg"/>
+                                            </t>
+                                            <t t-else="">
+
+                                            </t>
+                                        </center>
+                                    </td>
+                                    <td colspan="1"
+                                        style="border: 1px solid black;border-collapse: collapse;font-size:">
+                                        <center>
+                                            <t t-esc="'%.2f' % line.wag"/>
+                                        </center>
+                                    </td>
+                                    <td colspan="1"
+                                        style="border: 1px solid black;border-collapse: collapse;font-size:">
+                                        <center>
+                                            <t t-esc="'%.2f' % line.no_of_pices"/>
+                                        </center>
+                                    </td>
+
+                                </tr>
+                                <t t-set="i" t-value="i+1"/>
+                            </t>
+                            <tr>
+                                <td colspan="1"
+                                    style="border: 1px solid black;border-collapse: collapse;font-size:"></td>
+                                <td colspan="1"
+                                    style="border: 1px solid black;border-collapse: collapse;font-size:"></td>
+                                <td colspan="1" style="border: 1px solid black;border-collapse: collapse;font-size:">
+                                    <center>Total</center>
+                                </td>
+                                <td colspan="1"
+                                    style="border: 1px solid black;border-collapse: collapse;font-size:">
+                                    <center>
+                                    <t t-if="o.total_weight_before_galv != 0.00">
+                                            <t t-esc="'%.2f' % o.total_weight_before_galv"/>
+                                            </t>
+                                            <t t-else="">
+
+                                            </t>
+                                    </center>
+                                </td>
+                                <td colspan="1" style="border: 1px solid black;border-collapse: collapse;font-size:">
+                                    <center>
+                                        <t t-esc="'%.2f' % o.total_weight_after_galv"/>
+                                    </center>
+                                </td>
+                                <td colspan="1" style="border: 1px solid black;border-collapse: collapse;font-size:">
+                                    <center>
+                                        <t t-esc="'%.2f' % o.total_no_of_pices_galv"/>
+                                    </center>
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="row">
+                            <div class="col-6" style="text-align:left;">
+                                <br></br>
+                                <h6>PREPARED</h6>
+                                <!--             <br></br>-->
+                                <!--             <br></br>-->
+                                <!--             <br></br>-->
+                                <h6>CHECKED BY:</h6>
+                                <!--             <br></br>-->
+                                <!--             <br></br>-->
+                                <!--             <br></br>-->
+                                <!--             <br></br>-->
+                                <!--                         <h6 style="font-size:20px;">CUSTOMER #  </h6>-->
+
+
+                                <!--            <h6><t t-esc="company.partner_id.name"/> </h6>-->
+                                <!--            <h6><t t-esc="company.street"/>,<t t-esc="company.street2"/> </h6>-->
+                                <!--            <h6><t t-esc="company.city"/>,<t t-esc="company.state_id.name"/>-<t t-esc="company.zip"/> </h6>-->
+                                <!--            <h6>t:<t t-esc="company.phone"/> </h6>-->
+                                <!--            <h6><t t-esc="company.email"/> </h6>-->
+
+
+                            </div>
+                            <!--<div class="col-4" align="center">-->
+
+                            <!--       <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height:70px;align:center;" alt="Logo"/>-->
+                            <!--    </div>-->
+
+                            <div class="col-6" style="text-align:left;">
+                                <br></br>
+                                <!--            <h6>DATE: </h6>-->
+<!--                                <h6>تاريخ</h6>-->
+                                <!--            <h6><t t-esc="company.partner_id.name"/> </h6>-->
+                                <!--            <h6>P.O </h6>-->
+                                <!--            <h6>تاريخ </h6>-->
+                                <!--            <h6>JOB </h6>-->
+                                <!--            <h6>تاريخ </h6>-->
+                                <!--            <h6>Dc.No: </h6>-->
+                                <!--            <h6>Driver Name </h6>-->
+                                <!--                        <h6>تاريخ   </h6>-->
+                                <h6>RECEIVED BY:</h6>
+                                <!--                        <h6 style="text-align:right;">تاريخ </h6>-->
+
+
+                            </div>
+
+                            <!--        <div class="col-6" style="text-align:right;">-->
+                            <!--            <h6><t t-esc="company.partner_id.name"/> </h6>-->
+                            <!--            <h6><t t-esc="company.street"/> </h6>-->
+                            <!--            <h6><t t-esc="company.street2"/> </h6>-->
+                            <!--            <h6><t t-esc="company.city"/> </h6>-->
+                            <!--            <h6><t t-esc="company.state_id.name"/> </h6>-->
+                            <!--            <h6><t t-esc="company.zip"/> </h6>-->
+
+
+                            <!--        </div>-->
+                            <!---->
+                        </div>
+                        <!--                    <table style="width:100%">-->
+                        <!--                        <tr >-->
+                        <!--                            <td colspan="1">-->
+                        <!--                            </td>-->
+                        <!--<td colspan="1">-->
+                        <!--                            </td>-->
+
+
+                        <!--                            <td >-->
+                        <!--                                DATE-->
+                        <!--                            </td>-->
+
+                        <!--                             <td colspan="1">-->
+                        <!--                                <t t-esc=""/>-->
+                        <!--                            </td>-->
+                        <!--                            &lt;!&ndash;                         <td colspan="1" >:</td> &ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="1">&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                <t t-esc="doc.account_type.name"/>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+                        <!--                        </tr>-->
+                        <!--                        <tr>-->
+                        <!--                            <td colspan="1" style="font-size:20px;">-->
+                        <!--                                NO.-->
+                        <!--                            </td>-->
+                        <!--                            <td colspan="1" style="font-size:20px;">-->
+
+                        <!--                            </td>-->
+                        <!--                            &lt;!&ndash;                         <td colspan="1" >:</td> &ndash;&gt;-->
+                        <!--                            <td colspan="1">-->
+                        <!--                                تاريخ-->
+                        <!--                            </td>-->
+                        <!--                            <td colspan="1">-->
+
+                        <!--                            </td>-->
+                        <!--                            &lt;!&ndash;                         <td colspan="1" >:</td> &ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="1">&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                <t t-esc="doc.all"/>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+                        <!--                        </tr>-->
+                        <!-- <tr>-->
+                        <!--                            <td colspan="1" style="font-size:20px;">-->
+
+                        <!--                            </td>-->
+                        <!--                            <td colspan="1" style="font-size:20px;">-->
+
+                        <!--                            </td>-->
+                        <!--                            &lt;!&ndash;                         <td colspan="1" >:</td> &ndash;&gt;-->
+                        <!--                            <td colspan="1">-->
+                        <!--                                P.O-->
+                        <!--                            </td>-->
+                        <!--                            <td colspan="1">-->
+
+                        <!--                            </td>-->
+                        <!--                            &lt;!&ndash;                         <td colspan="1" >:</td> &ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="1">&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                <t t-esc="doc.all"/>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+                        <!--                        </tr>-->
+                        <!--                        <tr>-->
+                        <!--                            <td colspan="1" style="font-size:20px;">-->
+
+                        <!--                            </td>-->
+                        <!--                            <td colspan="1" style="font-size:20px;">-->
+
+                        <!--                            </td>-->
+                        <!--                            &lt;!&ndash;                         <td colspan="1" >:</td> &ndash;&gt;-->
+                        <!--                            <td colspan="1">-->
+                        <!--                                تاريخ-->
+                        <!--                            </td>-->
+                        <!--                            <td colspan="1">-->
+
+                        <!--                            </td>-->
+                        <!--                            &lt;!&ndash;                         <td colspan="1" >:</td> &ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="1">&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                <t t-esc="doc.all"/>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+                        <!--                        </tr>-->
+                        <!--<tr>-->
+                        <!--                            <td colspan="1" style="font-size:20px;">-->
+
+                        <!--                            </td>-->
+                        <!--                            <td colspan="1" style="font-size:20px;">-->
+
+                        <!--                            </td>-->
+                        <!--                            &lt;!&ndash;                         <td colspan="1" >:</td> &ndash;&gt;-->
+                        <!--                            <td colspan="1">-->
+                        <!--                                JOB-->
+                        <!--                            </td>-->
+                        <!--                            <td colspan="1">-->
+
+                        <!--                            </td>-->
+                        <!--                            &lt;!&ndash;                         <td colspan="1" >:</td> &ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="1">&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                <t t-esc="doc.all"/>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+                        <!--                        </tr>-->
+                        <!--<tr>-->
+                        <!--                            <td colspan="1" style="font-size:20px;">-->
+                        <!--To.-->
+                        <!--                            </td>-->
+                        <!--                            <td colspan="1" style="font-size:20px;">-->
+
+                        <!--                            </td>-->
+                        <!--                            &lt;!&ndash;                         <td colspan="1" >:</td> &ndash;&gt;-->
+                        <!--                            <td colspan="1">-->
+                        <!--                                JOB-->
+                        <!--                            </td>-->
+                        <!--                            <td colspan="1">-->
+
+                        <!--                            </td>-->
+                        <!--                            &lt;!&ndash;                         <td colspan="1" >:</td> &ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="1">&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                <t t-esc="doc.all"/>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+                        <!--                        </tr>-->
+
+                        <!--&lt;!&ndash;                        <tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;&lt;!&ndash;                            <t t-if="doc.account.name">&ndash;&gt;&ndash;&gt;-->
+
+                        <!--&lt;!&ndash;                            <td colspan="1">&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                To Account&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="1">&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                <t t-esc="doc.account.name"/>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            </t>&ndash;&gt;-->
+
+
+                        <!--&lt;!&ndash;                            &lt;!&ndash;                         <td colspan="1" >:</td> &ndash;&gt;&ndash;&gt;-->
+
+                        <!--&lt;!&ndash;                            <td colspan="1">&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            &lt;!&ndash;                         <td colspan="1" >:</td> &ndash;&gt;&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="1">&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                        </tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;&lt;!&ndash;                        <tr>&ndash;&gt;&ndash;&gt;-->
+                        <!--&lt;!&ndash;&lt;!&ndash;                            <td colspan="1"&ndash;&gt;&ndash;&gt;-->
+                        <!--&lt;!&ndash;&lt;!&ndash;                                style="border: 1px solid black;border-collapse: collapse;background-color:LightGray">&ndash;&gt;&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                passport type&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            &lt;!&ndash;                         <td colspan="1" >:</td> &ndash;&gt;&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="1" style="border: 1px solid black;border-collapse: collapse;">&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                <t t-esc="doc.type"/>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                        </tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                        </tr>&ndash;&gt;-->
+                        <!--                    </table>-->
+                        <!--                    <table style="border: 1px solid black;width:100%">-->
+                        <!--                    <tr >-->
+
+
+                        <!--&lt;!&ndash;                    <div class="row">&ndash;&gt;-->
+
+                        <!--&lt;!&ndash;                                    <div class="col-6">&ndash;&gt;-->
+                        <!--&lt;!&ndash;&lt;!&ndash;                                        <table style="width:100%">&ndash;&gt;&ndash;&gt;-->
+                        <!--&lt;!&ndash;&lt;!&ndash;                                             <tr style="border: 1px solid black;border-top:0px;border-bottom:0px">&ndash;&gt;&ndash;&gt;-->
+                        <!--                        <td colspan="6"-->
+                        <!--                        style="border: 1px solid black"><center><b>CUSTOMER DETAILS</b></center></td>-->
+                        <!--&lt;!&ndash;                         <td colspan="5" style="border: 1px solid black;border-left:0px;border-right:0px;border-bottom:0px">invoice no:</td>&ndash;&gt;-->
+
+                        <!--&lt;!&ndash;                                             </tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                        </table>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                    </div>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                    <div class="col-6">&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                        <table style="width:100%">&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <tr style="border: 1px solid black;border-top:0px;border-bottom:0px">&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                                    <td colspan="5"&ndash;&gt;-->
+                        <!--&lt;!&ndash;                        style="border: 1px solid black"><center><b>CUSTOMER DETAILS</b></center></td>&ndash;&gt;-->
+                        <!--                                            <td colspan="5" style="border: 1px solid black;border-bottom:0px;border-right:0px;"><b>Invoice No</b></td>-->
+                        <!--                                            <td colspan="5" style="border: 1px solid black;border-bottom:0px;border-right:0px;border-left:0px;"><center><b>A07438</b></center></td>-->
+                        <!--                                            <td colspan="5" style="border: 1px solid black;border-bottom:0px;border-left:0px;text-align:right;"><b>invoice no:</b></td>-->
+                        <!--                    </tr>-->
+                        <!--                                        <tr >-->
+                        <!--                                                <td colspan="6" style="border: 1px solid black;border-bottom:0px;border-right:0px;"><b>invoice no:</b></td>-->
+                        <!--                                            <td colspan="5" style="border: 1px solid black;border-bottom:0px;border-right:0px;border-top:0px;"><b>Invoice Date:</b></td>-->
+                        <!--                                            <td colspan="5" style="border: 1px solid black;border-bottom:0px;border-left:0px;border-right:0px;border-top:0px"><center><b>invoice no:</b></center></td>-->
+                        <!--                                            <td colspan="5" style="border: 1px solid black;border-bottom:0px;border-left:0px;border-top:0px;text-align:right;"><b>invoice no:</b></td>-->
+                        <!--                                        </tr>-->
+                        <!--                                         <tr>-->
+                        <!--                                                <td colspan="6" style="border: 1px solid black;border-bottom:0px;border-right:0px;border-top:0px;"><b>invoice no:2</b></td>-->
+                        <!--                                            <td colspan="5" style="border: 1px solid black;border-bottom:0px;border-right:0px;border-top:0px;"><b>P O No:</b></td>-->
+                        <!--                                            <td colspan="5" style="border: 1px solid black;border-bottom:0px;border-left:0px;border-right:0px;border-right:0px;border-top:0px;"><center><b>invoice no:</b></center></td>-->
+                        <!--                                             <td colspan="5" style="border: 1px solid black;border-bottom:0px;border-left:0px;border-top:0px;border-left:0px;text-align:right;"><b>invoice no:</b></td>-->
+                        <!--                                        </tr>-->
+                        <!--                                        <tr>-->
+                        <!--                                            <td colspan="6" style="border: 1px solid black;border-bottom:0px;border-right:0px;border-top:0px;"><b>invoice no:3</b></td>-->
+                        <!--                                            <td colspan="5" style="border: 1px solid black;border-bottom:0px;border-right:0px;border-top:0px;"><b>P O Date:</b></td>-->
+                        <!--                                            <td colspan="5" style="border: 1px solid black;border-bottom:0px;border-left:0px;border-right:0px;border-top:0px;"><center><b>invoice no:</b></center></td>-->
+                        <!--                                            <td colspan="5" style="border: 1px solid black;border-bottom:0px;border-left:0px;border-top:0px;text-align:right;"><b>invoice no:</b></td>-->
+
+                        <!--                                        </tr>-->
+                        <!--                                        <tr>-->
+                        <!--                                            <td colspan="6" style="border: 1px solid black;border-bottom:0px;border-right:0px;border-top:0px;"><b>invoice no:4</b></td>-->
+                        <!--                                            <td colspan="5" style="border: 1px solid black;border-bottom:0px;border-right:0px;border-top:0px;"><b>Ref No:</b></td>-->
+                        <!--                                            <td colspan="5" style="border: 1px solid black;border-bottom:0px;border-left:0px;border-right:0px;border-top:0px;"><center><b>invoice no:</b></center></td>-->
+                        <!--                                             <td colspan="5" style="border: 1px solid black;border-bottom:0px;border-left:0px;border-top:0px;text-align:right;"><b>invoice no:</b></td>-->
+
+                        <!--                                        </tr>-->
+                        <!--                                        <tr>-->
+                        <!--                                            <td colspan="6" style="border: 1px solid black;border-bottom:0px;border-right:0px;border-top:0px;"><b>invoice no:5</b></td>-->
+                        <!--                                            <td colspan="5" style="border: 1px solid black;border-right:0px;border-bottom:0px;border-top:0px;"><b>Delivery Note No:</b></td>-->
+                        <!--                                            <td colspan="5" style="border: 1px solid black;border-left:0px;border-bottom:0px;border-right:0px;border-top:0px;"><center><b>invoice no:</b></center></td>-->
+                        <!--                                            <td colspan="5" style="border: 1px solid black;border-left:0px;border-bottom:0px;border-top:0px;text-align:right;"><b>invoice no:</b></td>-->
+                        <!--                                        </tr>-->
+                        <!--                                       <tr>-->
+                        <!--                                           <td colspan="2" style="border: 1px solid black;"><center><b>No</b></center></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;"><center><b>Lot/Job no</b></center></td>-->
+                        <!--                                            <td colspan="1" style="border: 1px solid black;"><center><b>Item Description</b></center></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;"><center><b>Date of Delivery</b></center></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;"><center><b>UM</b></center></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;"><center><b>Weight</b></center></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;"><center><b>Unit Price SAR</b></center></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;"><center><b>Amount SAR</b></center></td>-->
+                        <!--                                        </tr>-->
+                        <!--                                        <tr>-->
+                        <!--                                           <td colspan="2" style="height:100px;border: 1px solid black;border-bottom:0px;"><center><b></b></center></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;"><center><b></b></center></td>-->
+                        <!--                                            <td colspan="1" style="border: 1px solid black;border-bottom:0px;"><center><b></b></center></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;"><center><b></b></center></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;"><center><b></b></center></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;"><center><b></b></center></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;"><center><b></b></center></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;"><center><b></b></center></td>-->
+                        <!--                                        </tr>-->
+                        <!--                        <tr>-->
+                        <!--                                           <td colspan="2" style="height:100px;border: 1px solid black;border-bottom:0px;border-top:0px;"><center><b></b></center></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;border-top:0px;"><center><b></b></center></td>-->
+                        <!--                                            <td colspan="1" style="border: 1px solid black;border-bottom:0px;border-top:0px;"><center><b></b></center></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;border-top:0px;"><center><b></b></center></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;border-top:0px;"><center><b></b></center></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;border-top:0px;"><center><b></b></center></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;border-top:0px;"><center><b></b></center></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;border-top:0px;"><center><b></b></center></td>-->
+                        <!--                                        </tr>-->
+                        <!--                        <tr>-->
+                        <!--                                           <td colspan="2" style="height:100px;border: 1px solid black;border-bottom:0px;border-top:0px;"><center><b></b></center></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;border-top:0px;"><center><b></b></center></td>-->
+                        <!--                                            <td colspan="1" style="border: 1px solid black;border-bottom:0px;border-top:0px;"><center><b></b></center></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;border-top:0px;"><center><b></b></center></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;border-top:0px;"><center><b></b></center></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;border-top:0px;"><center><b></b></center></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;border-top:0px;"><center><b></b></center></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;border-top:0px;"><center><b></b></center></td>-->
+                        <!--                                        </tr>-->
+                        <!--                        <tr>-->
+                        <!--                                           <td colspan="2" style="height:100px;border: 1px solid black;border-bottom:0px;border-top:0px;"><center><b></b></center></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;border-top:0px;"><center><b></b></center></td>-->
+                        <!--                                            <td colspan="1" style="border: 1px solid black;border-bottom:0px;border-top:0px;"><center><b></b></center></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;border-top:0px;"><center><b></b></center></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;border-top:0px;"><center><b></b></center></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;border-top:0px;"><center><b></b></center></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;border-top:0px;"><center><b></b></center></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;border-top:0px;"><center><b></b></center></td>-->
+                        <!--                                        </tr>-->
+                        <!--                        <tr>-->
+                        <!--                                           <td colspan="2" style="height:100px;border: 1px solid black;border-bottom:0px;border-top:0px;"><center><b></b></center></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;border-top:0px;"><center><b></b></center></td>-->
+                        <!--                                            <td colspan="1" style="border: 1px solid black;border-bottom:0px;border-top:0px;"><center><b></b></center></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;border-top:0px;"><center><b></b></center></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;border-top:0px;"><center><b></b></center></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;border-top:0px;"><center><b></b></center></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;border-top:0px;"><center><b></b></center></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;border-top:0px;"><center><b></b></center></td>-->
+                        <!--                                        </tr>-->
+                        <!--                        <tr>-->
+                        <!--                                           <td colspan="2" style="height:100px;border: 1px solid black;border-bottom:0px;border-top:0px;"><center><b></b></center></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;border-top:0px;"><center><b></b></center></td>-->
+                        <!--                                            <td colspan="1" style="border: 1px solid black;border-bottom:0px;border-top:0px;"><center><b></b></center></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;border-top:0px;"><center><b></b></center></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;border-top:0px;"><center><b></b></center></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;border-top:0px;"><center><b></b></center></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;border-top:0px;"><center><b></b></center></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;border-top:0px;"><center><b></b></center></td>-->
+                        <!--                                        </tr>-->
+                        <!--                                        <tr>-->
+                        <!--                                           <td colspan="4" style="height:20px;border: 1px solid black;border-right:0px;"></td>-->
+                        <!--                                            <td colspan="2" style="border: 1px solid black;border-left:0px;"></td>-->
+                        <!--&lt;!&ndash;                                            <td colspan="1" style="border: 1px solid black;"></td>&ndash;&gt;-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;"></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;"></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;"></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;"></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;"></td>-->
+                        <!--                                        </tr>-->
+                        <!--                        <tr>-->
+                        <!--                                           <td colspan="4" style="height:20px;border: 1px solid black;border-right:0px;"></td>-->
+                        <!--                                            <td colspan="2" style="border: 1px solid black;border-left:0px;"></td>-->
+                        <!--&lt;!&ndash;                                            <td colspan="1" style="border: 1px solid black;"></td>&ndash;&gt;-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;"></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;"></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;"></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;"></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;"></td>-->
+                        <!--                                        </tr><tr>-->
+                        <!--                                           <td colspan="4" style="height:20px;border: 1px solid black;border-right:0px;"></td>-->
+                        <!--                                            <td colspan="2" style="border: 1px solid black;border-left:0px;"></td>-->
+                        <!--&lt;!&ndash;                                            <td colspan="1" style="border: 1px solid black;"></td>&ndash;&gt;-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;"></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;"></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;"></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;"></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;"></td>-->
+                        <!--                                        </tr>-->
+                        <!--                        <tr>-->
+                        <!--                                           <td colspan="4" style="height:20px;border: 1px solid black;border-right:0px;"></td>-->
+                        <!--                                            <td colspan="2" style="border: 1px solid black;border-left:0px;"></td>-->
+                        <!--&lt;!&ndash;                                            <td colspan="1" style="border: 1px solid black;"></td>&ndash;&gt;-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;"></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;"></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;"></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;"></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;"></td>-->
+                        <!--                                        </tr>-->
+                        <!--&lt;!&ndash;                        <tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                           <td colspan="4" style="height:20px;border: 1px solid black;border-left:0px;border-right:0px;border-top:0px;border-bottom:0px;">Amount in Words:</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="2" style="border: 1px solid black;border-left:0px;border-right:0px;border-top:0px;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;&lt;!&ndash;                                            <td colspan="1" style="border: 1px solid black;"></td>&ndash;&gt;&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-left:0px;border-right:0px;border-top:0px;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-left:0px;border-right:0px;border-top:0px;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-left:0px;border-right:0px;border-top:0px;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-left:0px;border-right:0px;border-top:0px;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-left:0px;border-top:0px;border-Bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                        </tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                        <tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                           <td colspan="2" style="height:50px;border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="1" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                        </tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                        <tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                           <td colspan="2" style="height:50px;border: 1px solid black;border-bottom:0px;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="1" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                        </tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                        <tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                           <td colspan="2" style="height:50px;border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="1" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                        </tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                        <tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                           <td colspan="2" style="height:50px;border: 1px solid black;border-bottom:0px;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="1" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                        </tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                        <tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                           <td colspan="2" style="height:50px;border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="1" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                        </tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                        <tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                           <td colspan="2" style="height:50px;border: 1px solid black;border-bottom:0px;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="1" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                        </tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                        <tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                           <td colspan="2" style="height:50px;border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="1" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                        </tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                        <tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                           <td colspan="2" style="height:50px;border: 1px solid black;border-bottom:0px;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="1" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                        </tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                        <tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                           <td colspan="2" style="height:50px;border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="1" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                        </tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                        <tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                           <td colspan="2" style="height:50px;border: 1px solid black;border-bottom:0px;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="1" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                        </tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                        <tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                           <td colspan="2" style="height:50px;border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="1" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                        </tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                        <tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                           <td colspan="2" style="height:50px;border: 1px solid black;border-bottom:0px;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="1" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                        </tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                        <tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                           <td colspan="2" style="height:50px;border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="1" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                        </tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                        <tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                           <td colspan="2" style="height:50px;border: 1px solid black;border-bottom:0px;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="1" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                        </tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                        <tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                           <td colspan="2" style="height:50px;border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="1" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-bottom:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                        </tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                        <tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                           <td colspan="2" style="height:50px;border: 1px solid black;border-bottom:0px;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="1" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-top:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                        </tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                        <tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                                <td colspan="5" style="border: 1px solid black;border-right:0px;border-top:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="5" style="border: 1px solid black;border-right:0px;border-top:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="5" style="border: 1px solid black;border-left:0px;border-right:0px;border-top:0px;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="5" style="border: 1px solid black;border-left:0px;border-top:0px;text-align:right;"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                        </tr>&ndash;&gt;-->
+
+
+                        <!--&lt;!&ndash;                                        <td colspan="5" style="border: 1px solid black"><center><b>INVOICE NO:</b></center></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                        <strong>INVOICE DATE:</strong>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                        <strong>P.O No:</strong>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                        <strong>P.O Date:</strong>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                        <strong>Ref No:</strong>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                        <strong>Delivery Note No:</strong>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            </tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                        </table>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                    </div>&ndash;&gt;-->
+
+
+                        <!--            </div>-->
+                        <!--                    <table style="width:100%">-->
+                        <!--                     <tr>-->
+                        <!--                                           <td colspan="4" style="height:20px;border: 1px solid black;border-left:0px;border-right:0px;border-top:0px;border-bottom:0px;">Amount in Words:</td>-->
+                        <!--                                            <td colspan="2" style="border: 1px solid black;border-left:0px;border-right:0px;border-top:0px;border-bottom:0px;"></td>-->
+                        <!--&lt;!&ndash;                                            <td colspan="1" style="border: 1px solid black;"></td>&ndash;&gt;-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;border-left:0px;border-right:0px;border-top:0px;border-bottom:0px;"></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;border-left:0px;border-right:0px;border-top:0px;border-bottom:0px;"></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;border-left:0px;border-right:0px;border-top:0px;border-bottom:0px;"></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;border-left:0px;border-right:0px;border-top:0px;border-bottom:0px;"></td>-->
+                        <!--                                            <td colspan="3" style="border: 1px solid black;border-left:0px;border-top:0px;border-Bottom:0px;"></td>-->
+                        <!--                                        </tr>-->
+                        <!--                <br></br>-->
+                        <!--            <br></br>-->
+                        <!--                    <br></br>-->
+                        <!--&lt;!&ndash;                    <br></br>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                    <br></br>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                    <br></br>&ndash;&gt;-->
+                        <!--                     <table style="width:100%">-->
+                        <!--                        <tr >-->
+                        <!--                            <td colspan="6">prepared and checked by:-->
+                        <!--                            </td>-->
+
+
+                        <!--&lt;!&ndash;                            <td >&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                <t t-esc="doc.from_date"/>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+                        <!--                             <td colspan="6">-->
+                        <!--                                approved by:-->
+                        <!--                            </td>-->
+                        <!--                            &lt;!&ndash;                         <td colspan="1" >:</td> &ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="1">&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                <t t-esc="doc.account_type.name"/>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            </td>&ndash;&gt;-->
+                        <!--                        </tr>-->
+                        <!--                     </table>-->
+                        <!--&lt;!&ndash;                    <tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                           <td colspan="11" style="height:20px;border: 1px solid black;border-left:0px;border-right:0px;border-top:0px;border-bottom:0px;">prepared and checked by</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;&lt;!&ndash;                                            <td colspan="2" style="border: 1px solid black;border-left:0px;border-right:0px;border-top:0px;border-bottom:0px;"></td>&ndash;&gt;&ndash;&gt;-->
+                        <!--&lt;!&ndash;&lt;!&ndash;                                            <td colspan="1" style="border: 1px solid black;"></td>&ndash;&gt;&ndash;&gt;-->
+                        <!--&lt;!&ndash;&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-left:0px;border-right:0px;border-top:0px;border-bottom:0px;"></td>&ndash;&gt;&ndash;&gt;-->
+                        <!--&lt;!&ndash;&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-left:0px;border-right:0px;border-top:0px;border-bottom:0px;"></td>&ndash;&gt;&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <td colspan="11" style="border: 1px solid black;border-left:0px;border-right:0px;border-top:0px;border-bottom:0px;">approved by</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-left:0px;border-right:0px;border-top:0px;border-bottom:0px;"></td>&ndash;&gt;&ndash;&gt;-->
+                        <!--&lt;!&ndash;&lt;!&ndash;                                            <td colspan="3" style="border: 1px solid black;border-left:0px;border-top:0px;border-Bottom:0px;"></td>&ndash;&gt;&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                        </tr>&ndash;&gt;-->
+
+                        <!--&lt;!&ndash;                    <table style="width:100%">&ndash;&gt;-->
+                        <!--&lt;!&ndash;                        <tr style="border: 1px solid black;border-top:0px;border-bottom:0px">&ndash;&gt;-->
+                        <!--&lt;!&ndash;                        <td colspan="5"&ndash;&gt;-->
+                        <!--&lt;!&ndash;                        style="border: 1px solid black"><center><b>CUSTOMER DETAILS</b></center></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                         <td colspan="5" style="border: 1px solid black;border-left:0px;border-right:0px;border-bottom:0px">invoice no:</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                         <td colspan="5" style="border: 1px solid black;border-left:0px;border-right:0px;border-bottom:0px">invoice no</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                         <td colspan="5" style="border: 1px solid black;border-left:0px;border-bottom:0px">invoice no</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                        </tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                        <tr style="border: 1px solid black;border-top:0px;border-bottom:0px">&ndash;&gt;-->
+                        <!--&lt;!&ndash;                        <td colspan="5" style="border: 1px solid black;border-left:0px;border-right:0px;border-bottom:0px">fjjnfjf</td>&ndash;&gt;-->
+
+
+                        <!--&lt;!&ndash;                    </table>&ndash;&gt;-->
+
+                        <!--&lt;!&ndash;                            <td colspan="1"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="1"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="1"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="1"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="1"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="1"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="1"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="1"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="1"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="1"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="1"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                        </tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                        <tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="8" style="font-size:50px"><b>INVOICE.</b></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="3"><br/></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                        </tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                        <tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="7"><br/></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="4" style="font-size:25px">Total Amount Payable</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                        </tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                        <tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="7"><br/></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="4" style="font-size:15px"><t t-esc="o.amount_total"/></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                        </tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                        <tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="1">BUYER:</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="7"><t t-esc="o.partner_id.name"/></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="3"><br/></td>&ndash;&gt;-->
+
+                        <!--&lt;!&ndash;                        </tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                      <tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="1">ADDRESS:</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="6"><t t-esc="o.partner_id.street"/>,<t t-esc="o.partner_id.street2"/>,<t t-esc="o.partner_id.city"/></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="2">INVOICE NO:</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="2"><t t-esc="o.payment_reference"/> </td>&ndash;&gt;-->
+
+                        <!--&lt;!&ndash;                        <tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="1">MOBILE NO:</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="10"><t t-esc="o.partner_id.mobile"/> </td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                        </tr>&ndash;&gt;-->
+
+                        <!--&lt;!&ndash;                        </tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                         <tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="1">GSTIN:</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;&lt;!&ndash;                             <td colspan="5"> </td>&ndash;&gt;&ndash;&gt;-->
+
+                        <!--&lt;!&ndash;                            <td colspan="6"><t t-esc="o.partner_id.vat"/><br/></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="2">INVOICE DATE:</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="2"><t t-esc="o.invoice_date"/> </td>&ndash;&gt;-->
+
+                        <!--&lt;!&ndash;                        </tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                        <tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="1">PO NO.AND DATE:</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="6"><br/></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="2">INVOICE TIME:</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="2"><br/> </td>&ndash;&gt;-->
+
+                        <!--&lt;!&ndash;                        </tr>&ndash;&gt;-->
+
+                        <!--&lt;!&ndash;                        <tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="1">CONSIGNEE:</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="7"><t t-esc="o.partner_id.name"/></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="3"><br/></td>&ndash;&gt;-->
+
+                        <!--&lt;!&ndash;                        </tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                        <tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="1">ADDRESS:</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="7"><t t-esc="o.partner_id.street"/>,<t t-esc="o.partner_id.street2"/>,<t t-esc="o.partner_id.city"/></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="3"><br/></td>&ndash;&gt;-->
+
+                        <!--&lt;!&ndash;                        </tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                        <tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="1" style="border:1px solid black;border-left:0px;border-right:0px"><center><b>SL NO</b></center></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="1" style="border:1px solid black;border-left:0px;border-right:0px"><center><b>ITEM CODE AND DESCRIPTION</b></center></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="1" style="border:1px solid black;border-left:0px;border-right:0px"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;&lt;!&ndash;                            <td colspan="1" style="border:1px solid black;border-left:0px;border-right:0px"><center><b></b></center></td>&ndash;&gt;&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="1" style="border:1px solid black;border-left:0px;border-right:0px"><center><b>HSN/SAC</b></center></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="1" style="border:1px solid black;border-left:0px;border-right:0px"><center><b>UNIT PRICE</b></center></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="1" style="border:1px solid black;border-left:0px;border-right:0px"><center><b>DISC</b></center></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="1" style="border:1px solid black;border-left:0px;border-right:0px"><center><b>TAXABLE VALUE</b></center></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="1" style="border:1px solid black;border-left:0px;border-right:0px"><center><b>TAX RATE</b></center></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="1" style="border:1px solid black;border-left:0px;border-right:0px"><center><b>GROSS VALUE</b></center></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="1" style="border:1px solid black;border-left:0px;border-right:0px"><center><b>QTY</b></center></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="1" style="border:1px solid black;border-left:0px;border-right:0px"><center><b>TOTAL AMOUNT</b></center></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                        </tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                        <t t-set="i" t-value="1"/>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                        <t t-foreach="o.invoice_line_ids" t-as="m">&ndash;&gt;-->
+                        <!--&lt;!&ndash;                        <tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td  colspan="1" ><center><t t-esc="i"/> </center></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td  colspan="1"><center><t t-esc="m.product_id.name"/></center> </td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td  colspan="1"><center><t t-esc="m.product_id.name"/></center></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td  colspan="1"><center><t t-esc="m.product_id.default_code"/></center> </td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td  colspan="1"><center><t t-esc="m.price_subtotal"/></center> </td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td  colspan="1"><center><t t-esc="m.discount"/> </center></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;&lt;!&ndash;                            <td  colspan="1"><center><br/></center></td>&ndash;&gt;&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td  colspan="1"><center><t t-esc="m.price_subtotal"/> </center></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td  colspan="1"><center><t t-esc="m.tax_ids.name"/> </center></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td  colspan="1"><center><t t-esc="m.cal_gross_value()"/> </center></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td  colspan="1"><center><t t-esc="m.quantity"/> </center></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td  colspan="1"><center><t t-esc="m.total_amount()"/> </center></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                        </tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                        </t>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                    </table>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                    <br/>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                    <br/>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                    <br/>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                    <br/>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                    <br/>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                    <br/>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                    <br/>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                    <table style="width:100%">&ndash;&gt;-->
+                        <!--&lt;!&ndash;                        <tr style="border:1px solid black;border-left:0px;border-right:0px">&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="1"><center>E AND OE</center></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="1"><center><br/></center></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="1"><center>GRAND TOTAL</center></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="1"><center><br/></center></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="1"><center><br/></center></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="1"><center><br/></center></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="1"><center><br/></center></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="1"><center><br/></center></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="1"><center><br/></center></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="1"><center><br/></center></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="1" style="padding-right:20px"><center><t t-esc="sum(o.invoice_line_ids.mapped('quantity'))"/></center></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="1" style="padding-right:20px"><center><t t-esc="o.amount_total"/></center></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;&lt;!&ndash;                            <td colspan="2">E AND OE</td>&ndash;&gt;&ndash;&gt;-->
+                        <!--&lt;!&ndash;&lt;!&ndash;                            <td colspan="7" style="text-align:left">GRAND TOTAL</td>&ndash;&gt;&ndash;&gt;-->
+                        <!--&lt;!&ndash;&lt;!&ndash;                            <td colspan="1" style="text-align:left"><t t-esc="sum(o.invoice_line_ids.mapped('quantity'))"/></td>&ndash;&gt;&ndash;&gt;-->
+                        <!--&lt;!&ndash;&lt;!&ndash;                            <td colspan="1" style="text-align:left"><t t-esc="o.amount_total"/></td>&ndash;&gt;&ndash;&gt;-->
+                        <!--&lt;!&ndash;                        </tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                        <tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="6">TOTAL AMOUNT PAYABLE</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="5"><br/></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                        </tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                        <tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="6"><t t-esc="o.amount_total_to_words()"/> </td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="1">Grand Total:</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="4"><t t-esc="o.amount_untaxed"/> </td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                        </tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                        <tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="6"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="1">CGST 9%:</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="4"><t t-esc="o.tax_half_amount()"/> </td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                        </tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                        <tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="6">Declaration</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="1">SGST 9%:</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="4"><t t-esc="o.tax_half_amount()"/></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                        </tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                        <tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="6">Certified that all the particulars shown in this tax invoice are true</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="5"><br/></td>&ndash;&gt;-->
+
+                        <!--&lt;!&ndash;                        </tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                        <tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="6">and correct and that our registration under GST Rules are valid</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="5"><br/></td>&ndash;&gt;-->
+
+                        <!--&lt;!&ndash;                        </tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                        <tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="6">as on the date of this bill.</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="1">Roundoff:</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="4"></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                        </tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                        <tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="6">-Subject to Malappuram Jurisdiction</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="1">Total Amount Payable:</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            <td colspan="4"><t t-esc="o.amount_total"/> </td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                        </tr>&ndash;&gt;-->
+
+
+                        <!--                    </table>-->
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

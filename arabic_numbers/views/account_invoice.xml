@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+        <record id="accountmove_change" model="ir.ui.view">
+        <field name="name">Account Invoice Arabic</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page/field[@name='invoice_line_ids']/tree//field[@name='quantity']"
+                   position="after">
+                <field name="ar_quantity" invisible="1"/>
+            </xpath>
+            <xpath expr="//notebook/page/field[@name='invoice_line_ids']/tree//field[@name='price_unit']"
+                   position="after">
+                <field name="ar_price" invisible="1"/>
+            </xpath>
+            <xpath expr="//notebook/page/field[@name='invoice_line_ids']/tree//field[@name='price_subtotal']"
+                   position="after">
+                <field name="ar_price_subtotal" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='amount_untaxed']" position="after">
+                <field name="ar_amount_untaxed"/>
+                <field name="amount_in_word_en" invisible="1"/>
+                <field name="amount_in_word_ar" />
+            </xpath>
+            <xpath expr="//field[@name='amount_total']" position="after">
+                <field name="ar_amount_total"/>
+                <field name="amount_in_word_vat_en" invisible="1"/>
+                <field name="amount_in_word_vat_ar" />
+            </xpath>
+            <xpath expr="//field[@name='amount_tax']" position="after">
+                <field name="ar_amount_tax"/>
+
+            </xpath>
+            <xpath expr="//field[@name='invoice_date']" position="after">
+                <field name="arabic_date"/>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

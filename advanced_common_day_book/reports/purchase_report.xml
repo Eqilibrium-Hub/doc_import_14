@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <report id="purchase_report_en"
+      		model="purchase.report.line"
+      		string="Purchase Report"
+      		report_type="qweb-pdf"
+      		name="advanced_common_day_book.purchase_report_en_view_1"
+      		file="advanced_common_day_book.purchase_report_en_view_1" menu="False"/>
+
+    <report id="purchase_report_en_ar"
+      		model="purchase.report.line"
+      		string="Purchase Report/تقرير الشراء"
+      		report_type="qweb-pdf"
+      		name="advanced_common_day_book.purchase_report_en_ar_view_1"
+      		file="advanced_common_day_book.purchase_report_en_ar_view_1" menu="False"/>
+    <report id="purchase_report_ar"
+      		model="purchase.report.line"
+      		string="تقرير الشراء"
+      		report_type="qweb-pdf"
+      		name="advanced_common_day_book.purchase_report_ar_view_1"
+      		file="advanced_common_day_book.purchase_report_ar_view_1" menu="False"/>
+</odoo>

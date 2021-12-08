@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_help_desk_ticket,help.desk.ticket.group_user,model_help_desk_ticket,base.group_user,1,1,1,1
+access_admin_config,admin.config.group_user,model_admin_config,base.group_user,1,1,1,1
+access_support_config,support.config.group_user,model_support_config,base.group_user,1,1,1,1
+access_ticket_support,ticket.support.group_user,model_ticket_support,base.group_user,1,1,1,1
+access_assign_ticket_work,assign.ticket.work.group_user,model_assign_ticket_work,base.group_user,1,1,1,1
+access_time_line_help,time.line.help.group_user,model_time_line_help,base.group_user,1,1,1,1
+access_module_list,module.list.group_user,model_module_list,base.group_user,1,1,1,1
+access_templates,templates.group_user,model_templates,base.group_user,1,1,1,1
+
+

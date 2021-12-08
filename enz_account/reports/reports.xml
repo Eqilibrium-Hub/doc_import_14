@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="paperformat_a4" model="report.paperformat">
+        <field name="name">A4</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">55</field>
+        <field name="margin_bottom">30</field>
+        <field name="margin_left">7</field>
+        <field name="margin_right">7</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">45</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <report
+            id="account_id"
+            model="journal.report"
+            string="pdf"
+            report_type="qweb-pdf"
+            name="enz_account.account_view"
+            file="enz_account.account_view"
+            paperformat="enz_account.paperformat_a4"/>
+<!--    <report-->
+<!--        id="sale_estimate_id"-->
+<!--        model="travel.booking"-->
+<!--        string="booking"-->
+<!--        report_type="qweb-pdf"-->
+<!--        name="travel_report.sale_estimate_view"-->
+<!--        file="travel_report.sale_estimate_view"-->
+<!--    />-->
+<!-- <report-->
+<!--        id="sale_estimate_pass_id"-->
+<!--        model="travel.day"-->
+<!--        string="passport booking"-->
+<!--        report_type="qweb-pdf"-->
+<!--        name="travel_report.sale_estimate_passport_view"-->
+<!--        file="travel_report.sale_estimate_passport_view"-->
+<!--    />-->
+
+
+
+<!--    <report-->
+<!--        id="sale_estimate"-->
+<!--        model="sale.order"-->
+<!--        string="Estimate"-->
+<!--        report_type="qweb-pdf"-->
+<!--        name="enz_contract.sale_estimate_view"-->
+<!--        file="enz_contract.sale_estimate_view"-->
+<!--    />-->
+
+
+
+</odoo>

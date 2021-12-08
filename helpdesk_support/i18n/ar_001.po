@@ -1,0 +1,1377 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* helpdesk_support
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-28 07:13+0000\n"
+"PO-Revision-Date: 2021-10-28 07:13+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: helpdesk_support
+#: model:mail.template,report_name:helpdesk_support.email_template_ticketadmin
+#: model:mail.template,report_name:helpdesk_support.email_template_ticketcomp
+#: model:mail.template,report_name:helpdesk_support.email_template_ticketcus
+#: model:mail.template,report_name:helpdesk_support.email_template_ticketsupport
+#: model:mail.template,report_name:helpdesk_support.email_template_ticketsupportemp
+#: model:mail.template,report_name:helpdesk_support.email_template_ticketsupportempadmin
+#: model:mail.template,report_name:helpdesk_support.email_template_ticketsupportempcompany
+#: model:mail.template,report_name:helpdesk_support.email_template_ticketsupportempcustomer
+#: model:mail.template,report_name:helpdesk_support.email_template_ticketsupportempcustomeradmin
+msgid ""
+"\n"
+"                Screenshot_${(object.name or '').replace('/','_')}${object.state == 'draft' and '_draft' or ''}\n"
+"            "
+msgstr ""
+
+#. module: helpdesk_support
+#: model:mail.template,subject:helpdesk_support.email_template_test_cus
+#: model:mail.template,subject:helpdesk_support.email_template_ticketadmin
+#: model:mail.template,subject:helpdesk_support.email_template_ticketadmin_test
+#: model:mail.template,subject:helpdesk_support.email_template_ticketcomp
+#: model:mail.template,subject:helpdesk_support.email_template_ticketcomp_test
+#: model:mail.template,subject:helpdesk_support.email_template_ticketemployeefinishadm
+#: model:mail.template,subject:helpdesk_support.email_template_ticketemployeefinishadm_test
+#: model:mail.template,subject:helpdesk_support.email_template_ticketemployeefinishsup
+#: model:mail.template,subject:helpdesk_support.email_template_ticketemployeefinishsup_test
+#: model:mail.template,subject:helpdesk_support.email_template_ticketsupport
+#: model:mail.template,subject:helpdesk_support.email_template_ticketsupport_test
+#: model:mail.template,subject:helpdesk_support.email_template_ticketsupportemp
+#: model:mail.template,subject:helpdesk_support.email_template_ticketsupportemp_test
+#: model:mail.template,subject:helpdesk_support.email_template_ticketsupportempadmin
+#: model:mail.template,subject:helpdesk_support.email_template_ticketsupportempadmin_test
+#: model:mail.template,subject:helpdesk_support.email_template_ticketsupportempcompany
+#: model:mail.template,subject:helpdesk_support.email_template_ticketsupportempcompany_test
+#: model:mail.template,subject:helpdesk_support.email_template_ticketsupportempcustomer
+#: model:mail.template,subject:helpdesk_support.email_template_ticketsupportempcustomer_test
+#: model:mail.template,subject:helpdesk_support.email_template_ticketsupportempcustomeradmin
+#: model:mail.template,subject:helpdesk_support.email_template_ticketsupportempcustomeradmin_test
+msgid "${object.company_id.name} Ticket (Ref ${object.name or 'n/a'})"
+msgstr ""
+
+#. module: helpdesk_support
+#: model:mail.template,body_html:helpdesk_support.email_template_ticketsupportempadmin_test
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"                    <p>\n"
+"                        <center>\n"
+"                            <h1>Help Desk Ticket Mail</h1>\n"
+"                        </center>\n"
+"                        <center>\n"
+"                            <h1>Ticket Number ${object.name}</h1>\n"
+"                        </center>\n"
+"                        <br/>\n"
+"                        Dear ${object.admin_id},\n"
+"                        <br/>\n"
+"                        ${object.company_id.name} have generate a help desk ticket for their company.The Task is\n"
+"                        Assigned To ${object.assign_to}. The Details are given below.\n"
+"                    </p>\n"
+"                    <center>\n"
+"                        <table>\n"
+"                            <tr>\n"
+"                                <th>Description</th>\n"
+"                            </tr>\n"
+"                            <tr>\n"
+"                                <td>${object.description}</td>\n"
+"                            </tr>\n"
+"                        </table>\n"
+"                    </center>\n"
+"                </div>\n"
+"            "
+msgstr ""
+
+#. module: helpdesk_support
+#: model:mail.template,body_html:helpdesk_support.email_template_ticketadmin_test
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"                    <p>\n"
+"                        <center>\n"
+"                            <h1>Help Desk Ticket Mail</h1>\n"
+"                        </center>\n"
+"                        <center>\n"
+"                            <h1>Ticket Number ${object.name}</h1>\n"
+"                        </center>\n"
+"                        <br/>\n"
+"                        Dear ${object.admin_id},\n"
+"                        <br/>\n"
+"                        ${object.customer_id} have generate a help desk ticket for their company.The mail has been gone\n"
+"                        to the support team leader ${object.team_leader}.\n"
+"                    </p>\n"
+"                    <center>\n"
+"                        <table>\n"
+"                            <tr>\n"
+"                                <th>Description</th>\n"
+"                            </tr>\n"
+"                            <tr>\n"
+"                                <td>${object.description.name}</td>\n"
+"                            </tr>\n"
+"                        </table>\n"
+"                    </center>\n"
+"                </div>\n"
+"            "
+msgstr ""
+
+#. module: helpdesk_support
+#: model:mail.template,body_html:helpdesk_support.email_template_ticketadmin
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"                    <p>\n"
+"                        <center>\n"
+"                            <h1>Help Desk Ticket Mail</h1>\n"
+"                        </center>\n"
+"                        <center>\n"
+"                            <h1>Ticket Number ${object.name}</h1>\n"
+"                        </center>\n"
+"                        <br/>\n"
+"                        Dear ${object.admin_id},\n"
+"                        <br/>\n"
+"                        ${object.customer_id} have generate a help desk ticket for their company.The mail has been gone\n"
+"                        to the support team leader ${object.team_leader}.\n"
+"                    </p>\n"
+"                    <center>\n"
+"                        <table>\n"
+"                            <tr>\n"
+"                                <th>Description</th>\n"
+"                            </tr>\n"
+"                            <tr>\n"
+"                                <td>${object.description}</td>\n"
+"                            </tr>\n"
+"                        </table>\n"
+"                    </center>\n"
+"                </div>\n"
+"            "
+msgstr ""
+
+#. module: helpdesk_support
+#: model:mail.template,body_html:helpdesk_support.email_template_ticketemployeefinishadm_test
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"                    <p>\n"
+"                        <center>\n"
+"                            <h1>Help Desk Ticket Mail</h1>\n"
+"                        </center>\n"
+"                        <center>\n"
+"                            <h1>Ticket Number ${object.name}</h1>\n"
+"                        </center>\n"
+"                        <br/>\n"
+"                        Dear ${object.admin_id},\n"
+"                        <br/>\n"
+"                        I have solved the issue which you have raised by ${object.customer_id}.Details are given below.\n"
+"                    </p>\n"
+"                    <center>\n"
+"                        <table>\n"
+"                            <tr>\n"
+"                                <th>Description</th>\n"
+"                            </tr>\n"
+"                            <tr>\n"
+"                                <td>${object.description}</td>\n"
+"                            </tr>\n"
+"                        </table>\n"
+"                    </center>\n"
+"                    <center>\n"
+"                        <table>\n"
+"                            <tr>\n"
+"                                <th>Solution</th>\n"
+"                            </tr>\n"
+"                            <tr>\n"
+"                                <td>${object.solutions}</td>\n"
+"                            </tr>\n"
+"                        </table>\n"
+"                    </center>\n"
+"                </div>\n"
+"            "
+msgstr ""
+
+#. module: helpdesk_support
+#: model:mail.template,body_html:helpdesk_support.email_template_ticketemployeefinishadm
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"                    <p>\n"
+"                        <center>\n"
+"                            <h1>Help Desk Ticket Mail</h1>\n"
+"                        </center>\n"
+"                        <center>\n"
+"                            <h1>Ticket Number ${object.name}</h1>\n"
+"                        </center>\n"
+"                        <br/>\n"
+"                        Dear ${object.admin_id},\n"
+"                        <br/>\n"
+"                        I have solved the issue which you have raised by ${object.customer_id}.Details are given below.\n"
+"                    </p>\n"
+"                    <center>\n"
+"                        <table>\n"
+"                            <tr>\n"
+"                                <th>Description</th>\n"
+"                            </tr>\n"
+"                            <tr>\n"
+"                                <td>${object.description}</td>\n"
+"                            </tr>\n"
+"                        </table>\n"
+"                    </center>\n"
+"                    <center>\n"
+"                        <table>\n"
+"                            <tr>\n"
+"                                <th>Solution</th>\n"
+"                            </tr>\n"
+"                            <tr>\n"
+"                                <td>${object.solution}</td>\n"
+"                            </tr>\n"
+"                        </table>\n"
+"                    </center>\n"
+"                </div>\n"
+"            "
+msgstr ""
+
+#. module: helpdesk_support
+#: model:mail.template,body_html:helpdesk_support.email_template_ticketsupportempcustomeradmin
+#: model:mail.template,body_html:helpdesk_support.email_template_ticketsupportempcustomeradmin_test
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"                    <p>\n"
+"                        <center>\n"
+"                            <h1>Help Desk Ticket Mail</h1>\n"
+"                        </center>\n"
+"                        <center>\n"
+"                            <h1>Ticket Number ${object.name}</h1>\n"
+"                        </center>\n"
+"                        <br/>\n"
+"                        Dear ${object.admin_id},\n"
+"                        <br/>\n"
+"                        We have solved the issue which you have raised by ${object.customer_id}.Details are given below.\n"
+"                    </p>\n"
+"                    <center>\n"
+"                        <table>\n"
+"                            <tr>\n"
+"                                <th>Description</th>\n"
+"                            </tr>\n"
+"                            <tr>\n"
+"                                <td>${object.description}</td>\n"
+"                            </tr>\n"
+"                        </table>\n"
+"                    </center>\n"
+"                    <center>\n"
+"                        <table>\n"
+"                            <tr>\n"
+"                                <th>Solution</th>\n"
+"                            </tr>\n"
+"                            <tr>\n"
+"                                <td>${object.solution}</td>\n"
+"                            </tr>\n"
+"                        </table>\n"
+"                    </center>\n"
+"                </div>\n"
+"            "
+msgstr ""
+
+#. module: helpdesk_support
+#: model:mail.template,body_html:helpdesk_support.email_template_ticketsupportempadmin
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"                    <p>\n"
+"                        <center>\n"
+"                            <h1>Help Desk Ticket Mail</h1>\n"
+"                        </center>\n"
+"                        <center>\n"
+"                            <h1>Ticket Number ${object.name}</h1>\n"
+"                        </center>\n"
+"                        <br/>\n"
+"                        Dear ${object.admin},\n"
+"                        <br/>\n"
+"                        ${object.company_id.name} have generate a help desk ticket for their company.The Task is\n"
+"                        Assigned To ${object.assign_to}. The Details are given below.\n"
+"                    </p>\n"
+"                    <center>\n"
+"                        <table>\n"
+"                            <tr>\n"
+"                                <th>Description</th>\n"
+"                            </tr>\n"
+"                            <tr>\n"
+"                                <td>${object.description}</td>\n"
+"                            </tr>\n"
+"                        </table>\n"
+"                    </center>\n"
+"                </div>\n"
+"            "
+msgstr ""
+
+#. module: helpdesk_support
+#: model:mail.template,body_html:helpdesk_support.email_template_ticketsupportemp
+#: model:mail.template,body_html:helpdesk_support.email_template_ticketsupportemp_test
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"                    <p>\n"
+"                        <center>\n"
+"                            <h1>Help Desk Ticket Mail</h1>\n"
+"                        </center>\n"
+"                        <center>\n"
+"                            <h1>Ticket Number ${object.name}</h1>\n"
+"                        </center>\n"
+"                        <br/>\n"
+"                        Dear ${object.assign_to},\n"
+"                        <br/>\n"
+"                        ${object.company_id.name} have generate a help desk ticket for their company.The Task is\n"
+"                        Assigned To you please fix the issue and report.The Details are given below<br/>\n"
+"                        Test User Name: ${object.test_username}<br/>\n"
+"                        Test Password: ${object.password}<br/>\n"
+"                    </p>\n"
+"                    <center>\n"
+"                        <table>\n"
+"                            <tr>\n"
+"                                <th>Description</th>\n"
+"                            </tr>\n"
+"                            <tr>\n"
+"                                <td>${object.description}</td>\n"
+"                            </tr>\n"
+"                        </table>\n"
+"                    </center>\n"
+"                </div>\n"
+"            "
+msgstr ""
+
+#. module: helpdesk_support
+#: model:mail.template,body_html:helpdesk_support.email_template_ticketcomp_test
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"                    <p>\n"
+"                        <center>\n"
+"                            <h1>Help Desk Ticket Mail</h1>\n"
+"                        </center>\n"
+"                        <center>\n"
+"                            <h1>Ticket Number ${object.name}</h1>\n"
+"                        </center>\n"
+"                        <br/>\n"
+"                        Dear ${object.company_id.name},\n"
+"                        <br/>\n"
+"                        We have generate a help desk ticket for your company.${object.customer_id} generated this ticket\n"
+"                        will do the needfull as soon as possible.\n"
+"                    </p>\n"
+"                    <center>\n"
+"                        <table>\n"
+"                            <tr>\n"
+"                                <th>Description</th>\n"
+"                            </tr>\n"
+"                            <tr>\n"
+"                                <td>${object.description.name}</td>\n"
+"                            </tr>\n"
+"                        </table>\n"
+"                    </center>\n"
+"                </div>\n"
+"            "
+msgstr ""
+
+#. module: helpdesk_support
+#: model:mail.template,body_html:helpdesk_support.email_template_ticketcomp
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"                    <p>\n"
+"                        <center>\n"
+"                            <h1>Help Desk Ticket Mail</h1>\n"
+"                        </center>\n"
+"                        <center>\n"
+"                            <h1>Ticket Number ${object.name}</h1>\n"
+"                        </center>\n"
+"                        <br/>\n"
+"                        Dear ${object.company_id.name},\n"
+"                        <br/>\n"
+"                        We have generate a help desk ticket for your company.${object.customer_id} generated this ticket\n"
+"                        will do the needfull as soon as possible.\n"
+"                    </p>\n"
+"                    <center>\n"
+"                        <table>\n"
+"                            <tr>\n"
+"                                <th>Description</th>\n"
+"                            </tr>\n"
+"                            <tr>\n"
+"                                <td>${object.description}</td>\n"
+"                            </tr>\n"
+"                        </table>\n"
+"                    </center>\n"
+"                </div>\n"
+"            "
+msgstr ""
+
+#. module: helpdesk_support
+#: model:mail.template,body_html:helpdesk_support.email_template_ticketsupportempcompany
+#: model:mail.template,body_html:helpdesk_support.email_template_ticketsupportempcompany_test
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"                    <p>\n"
+"                        <center>\n"
+"                            <h1>Help Desk Ticket Mail</h1>\n"
+"                        </center>\n"
+"                        <center>\n"
+"                            <h1>Ticket Number ${object.name}</h1>\n"
+"                        </center>\n"
+"                        <br/>\n"
+"                        Dear ${object.company_id.name},\n"
+"                        <br/>\n"
+"                        We have solved the issue which is raised by ${object.customer_id}.Please Check\n"
+"                    </p>\n"
+"                    <center>\n"
+"                        <table>\n"
+"                            <tr>\n"
+"                                <th>Description</th>\n"
+"                            </tr>\n"
+"                            <tr>\n"
+"                                <td>${object.description}</td>\n"
+"                            </tr>\n"
+"                        </table>\n"
+"                    </center>\n"
+"                    <center>\n"
+"                        <table>\n"
+"                            <tr>\n"
+"                                <th>Solution</th>\n"
+"                            </tr>\n"
+"                            <tr>\n"
+"                                <td>${object.solution}</td>\n"
+"                            </tr>\n"
+"                        </table>\n"
+"                    </center>\n"
+"                </div>\n"
+"            "
+msgstr ""
+
+#. module: helpdesk_support
+#: model:mail.template,body_html:helpdesk_support.email_template_test_cus
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"                    <p>\n"
+"                        <center>\n"
+"                            <h1>Help Desk Ticket Mail</h1>\n"
+"                        </center>\n"
+"                        <center>\n"
+"                            <h1>Ticket Number ${object.name}</h1>\n"
+"                        </center>\n"
+"                        <br/>\n"
+"                        Dear ${object.customer_id},\n"
+"                        <br/>\n"
+"                        We have generate a help desk ticket we will do the needfull as soon as possible\n"
+"\n"
+"                    </p>\n"
+"                    <center>\n"
+"                        <table>\n"
+"                            <tr>\n"
+"                                <th>Description</th>\n"
+"                            </tr>\n"
+"                            <tr>\n"
+"                                <td>${object.description.name}</td>\n"
+"                            </tr>\n"
+"                        </table>\n"
+"                    </center>\n"
+"                </div>\n"
+"\n"
+"           "
+msgstr ""
+
+#. module: helpdesk_support
+#: model:mail.template,body_html:helpdesk_support.email_template_ticketcus
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"                    <p>\n"
+"                        <center>\n"
+"                            <h1>Help Desk Ticket Mail</h1>\n"
+"                        </center>\n"
+"                        <center>\n"
+"                            <h1>Ticket Number ${object.name}</h1>\n"
+"                        </center>\n"
+"                        <br/>\n"
+"                        Dear ${object.customer_id},\n"
+"                        <br/>\n"
+"                        We have generate a help desk ticket we will do the needfull as soon as possible\n"
+"\n"
+"                    </p>\n"
+"                    <center>\n"
+"                        <table>\n"
+"                            <tr>\n"
+"                                <th>Description</th>\n"
+"                            </tr>\n"
+"                            <tr>\n"
+"                                <td>${object.description}</td>\n"
+"                            </tr>\n"
+"                        </table>\n"
+"                    </center>\n"
+"                </div>\n"
+"            "
+msgstr ""
+
+#. module: helpdesk_support
+#: model:mail.template,body_html:helpdesk_support.email_template_ticketsupportempcustomer
+#: model:mail.template,body_html:helpdesk_support.email_template_ticketsupportempcustomer_test
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"                    <p>\n"
+"                        <center>\n"
+"                            <h1>Help Desk Ticket Mail</h1>\n"
+"                        </center>\n"
+"                        <center>\n"
+"                            <h1>Ticket Number ${object.name}</h1>\n"
+"                        </center>\n"
+"                        <br/>\n"
+"                        Dear ${object.customer_id},\n"
+"                        <br/>\n"
+"                        We have solved the issue which you have raised.Please Check..\n"
+"                    </p>\n"
+"                    <center>\n"
+"                        <table>\n"
+"                            <tr>\n"
+"                                <th>Description</th>\n"
+"                            </tr>\n"
+"                            <tr>\n"
+"                                <td>${object.description}</td>\n"
+"                            </tr>\n"
+"                        </table>\n"
+"                    </center>\n"
+"                    <center>\n"
+"                        <table>\n"
+"                            <tr>\n"
+"                                <th>Solution</th>\n"
+"                            </tr>\n"
+"                            <tr>\n"
+"                                <td>${object.solution}</td>\n"
+"                            </tr>\n"
+"                        </table>\n"
+"                    </center>\n"
+"                </div>\n"
+"            "
+msgstr ""
+
+#. module: helpdesk_support
+#: model:mail.template,body_html:helpdesk_support.email_template_ticketsupport_test
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"                    <p>\n"
+"                        <center>\n"
+"                            <h1>Help Desk Ticket Mail</h1>\n"
+"                        </center>\n"
+"                        <center>\n"
+"                            <h1>Ticket Number ${object.name}</h1>\n"
+"                        </center>\n"
+"                        <br/>\n"
+"                        Dear ${object.team_leader},\n"
+"                        <br/>\n"
+"                        ${object.customer_id} have generate a help desk ticket for their company.Please Check that and\n"
+"                        if neccessary assign the work to somebody and do the needfull or convince them the mistake.\n"
+"                    </p>\n"
+"                    <center>\n"
+"                        <table>\n"
+"                            <tr>\n"
+"                                <th>Description</th>\n"
+"                            </tr>\n"
+"                            <tr>\n"
+"                                <td>${object.description.name}</td>\n"
+"                            </tr>\n"
+"                        </table>\n"
+"                    </center>\n"
+"                </div>\n"
+"            "
+msgstr ""
+
+#. module: helpdesk_support
+#: model:mail.template,body_html:helpdesk_support.email_template_ticketsupport
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"                    <p>\n"
+"                        <center>\n"
+"                            <h1>Help Desk Ticket Mail</h1>\n"
+"                        </center>\n"
+"                        <center>\n"
+"                            <h1>Ticket Number ${object.name}</h1>\n"
+"                        </center>\n"
+"                        <br/>\n"
+"                        Dear ${object.team_leader},\n"
+"                        <br/>\n"
+"                        ${object.customer_id} have generate a help desk ticket for their company.Please Check that and\n"
+"                        if neccessary assign the work to somebody and do the needfull or convince them the mistake.\n"
+"                    </p>\n"
+"                    <center>\n"
+"                        <table>\n"
+"                            <tr>\n"
+"                                <th>Description</th>\n"
+"                            </tr>\n"
+"                            <tr>\n"
+"                                <td>${object.description}</td>\n"
+"                            </tr>\n"
+"                        </table>\n"
+"                    </center>\n"
+"                </div>\n"
+"            "
+msgstr ""
+
+#. module: helpdesk_support
+#: model:mail.template,body_html:helpdesk_support.email_template_ticketemployeefinishsup_test
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"                    <p>\n"
+"                        <center>\n"
+"                            <h1>Help Desk Ticket Mail</h1>\n"
+"                        </center>\n"
+"                        <center>\n"
+"                            <h1>Ticket Number ${object.name}</h1>\n"
+"                        </center>\n"
+"                        <br/>\n"
+"                        Dear ${object.team_leader},\n"
+"                        <br/>\n"
+"                        I have solved the issue which you have raised by ${object.customer_id}.Details are given below.Plese Check..\n"
+"                    </p>\n"
+"                    <center>\n"
+"                        <table>\n"
+"                            <tr>\n"
+"                                <th>Description</th>\n"
+"                            </tr>\n"
+"                            <tr>\n"
+"                                <td>${object.description}</td>\n"
+"                            </tr>\n"
+"                        </table>\n"
+"                    </center>\n"
+"                    <center>\n"
+"                        <table>\n"
+"                            <tr>\n"
+"                                <th>Solution</th>\n"
+"                            </tr>\n"
+"                            <tr>\n"
+"                                <td>${object.solutions}</td>\n"
+"                            </tr>\n"
+"                        </table>\n"
+"                    </center>\n"
+"                </div>\n"
+"            "
+msgstr ""
+
+#. module: helpdesk_support
+#: model:mail.template,body_html:helpdesk_support.email_template_ticketemployeefinishsup
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"                    <p>\n"
+"                        <center>\n"
+"                            <h1>Help Desk Ticket Mail</h1>\n"
+"                        </center>\n"
+"                        <center>\n"
+"                            <h1>Ticket Number ${object.name}</h1>\n"
+"                        </center>\n"
+"                        <br/>\n"
+"                        Dear ${object.team_leader},\n"
+"                        <br/>\n"
+"                        I have solved the issue which you have raised by ${object.customer_id}.Details are given below.Plese Check..\n"
+"                    </p>\n"
+"                    <center>\n"
+"                        <table>\n"
+"                            <tr>\n"
+"                                <th>Description</th>\n"
+"                            </tr>\n"
+"                            <tr>\n"
+"                                <td>${object.description}</td>\n"
+"                            </tr>\n"
+"                        </table>\n"
+"                    </center>\n"
+"                    <center>\n"
+"                        <table>\n"
+"                            <tr>\n"
+"                                <th>Solution</th>\n"
+"                            </tr>\n"
+"                            <tr>\n"
+"                                <td>${object.solution}</td>\n"
+"                            </tr>\n"
+"                        </table>\n"
+"                    </center>\n"
+"                </div>\n"
+"            "
+msgstr ""
+
+#. module: helpdesk_support
+#: model_terms:ir.ui.view,arch_db:helpdesk_support.enzhelpdesk_supportform
+msgid ""
+"<strong>\n"
+"                                                                <span>\n"
+"                                                                    Date:\n"
+"                                                                </span>\n"
+"                                                            </strong>"
+msgstr ""
+"<strong>\n"
+"                                                                <span>\n"
+"                                                                    تاريخ:\n"
+"                                                                </span>\n"
+"                                                            </strong>"
+
+#. module: helpdesk_support
+#: model_terms:ir.ui.view,arch_db:helpdesk_support.enzhelpdesk_supportform
+msgid ""
+"<strong>\n"
+"                                                            <span>\n"
+"                                                                Description:\n"
+"                                                            </span>\n"
+"                                                            </strong>"
+msgstr ""
+"<strong>\n"
+"                                                            <span>\n"
+"                                                                وصف:\n"
+"                                                            </span>\n"
+"                                                            </strong>"
+#. module: helpdesk_support
+#: model_terms:ir.ui.view,arch_db:helpdesk_support.enzhelpdesk_supportform
+msgid ""
+"<strong>\n"
+"                                                            <span>\n"
+"                                                                Duration(Hours):\n"
+"                                                            </span>\n"
+"                                                            </strong>"
+msgstr ""
+"<strong>\n"
+"                                                            <span>\n"
+"                                                                المدة (ساعات):\n"
+"                                                            </span>\n"
+"                                                            </strong>"
+
+#. module: helpdesk_support
+#: model_terms:ir.ui.view,arch_db:helpdesk_support.enzhelpdesk_supportform
+msgid ""
+"<strong>\n"
+"                                                            <span>\n"
+"                                                                Employee:\n"
+"                                                            </span>\n"
+"                                                            </strong>"
+msgstr ""
+"<strong>\n"
+"                                                            <span>\n"
+"                                                                الموظف:\n"
+"                                                            </span>\n"
+"                                                            </strong>"
+
+#. module: helpdesk_support
+#: model:ir.actions.act_window,name:helpdesk_support.adminconfig_action
+#: model:ir.model.fields,field_description:helpdesk_support.field_admin_config__admin_id
+#: model:ir.ui.menu,name:helpdesk_support.enzhelpdesk_admin
+#: model_terms:ir.ui.view,arch_db:helpdesk_support.adminconfig_form
+#: model_terms:ir.ui.view,arch_db:helpdesk_support.adminconfig_tree
+#: model_terms:ir.ui.view,arch_db:helpdesk_support.supportconfig_tree
+msgid "Admin"
+msgstr "مشرف"
+
+#. module: helpdesk_support
+#: model:ir.model.fields,field_description:helpdesk_support.field_assign_ticket_work__admin_mail
+#: model:ir.model.fields,field_description:helpdesk_support.field_help_desk_ticket__admin_mail
+#: model:ir.model.fields,field_description:helpdesk_support.field_ticket_support__admin_mail
+msgid "Admin Email"
+msgstr "البريد الإلكتروني للمسؤول"
+
+#. module: helpdesk_support
+#: model:ir.model.fields,field_description:helpdesk_support.field_assign_ticket_work__admin_id
+#: model:ir.model.fields,field_description:helpdesk_support.field_help_desk_ticket__admin_id
+#: model:ir.model.fields,field_description:helpdesk_support.field_ticket_support__admin_id
+msgid "Admin Name"
+msgstr "اسم المسؤول"
+
+#. module: helpdesk_support
+#: model_terms:ir.ui.view,arch_db:helpdesk_support.enzhelpdesk_supportform
+msgid "Assign"
+msgstr "السماح"
+
+#. module: helpdesk_support
+#: model:ir.model.fields,field_description:helpdesk_support.field_ticket_support__assign_to
+msgid "Assign To"
+msgstr "يسند إلى"
+
+#. module: helpdesk_support
+#: model:ir.module.category,description:helpdesk_support.module_category_helpdesksupport
+msgid "Category of Help Desk"
+msgstr "فئة مكتب المساعدة"
+
+#. module: helpdesk_support
+#: model:ir.model.fields,field_description:helpdesk_support.field_assign_ticket_work__company_id
+#: model:ir.model.fields,field_description:helpdesk_support.field_help_desk_ticket__company_id
+#: model:ir.model.fields,field_description:helpdesk_support.field_ticket_support__company_id
+msgid "Company"
+msgstr "شركة"
+
+#. module: helpdesk_support
+#: model:ir.model.fields,field_description:helpdesk_support.field_assign_ticket_work__company_mail
+#: model:ir.model.fields,field_description:helpdesk_support.field_help_desk_ticket__company_mail
+#: model:ir.model.fields,field_description:helpdesk_support.field_ticket_support__company_mail
+msgid "Company Mail"
+msgstr "بريد الشركة"
+
+#. module: helpdesk_support
+#: model:ir.ui.menu,name:helpdesk_support.enzhelpdesk_config
+msgid "Configuration"
+msgstr "إعدادات"
+
+#. module: helpdesk_support
+#: model:ir.model.fields,field_description:helpdesk_support.field_admin_config__create_uid
+#: model:ir.model.fields,field_description:helpdesk_support.field_assign_ticket_work__create_uid
+#: model:ir.model.fields,field_description:helpdesk_support.field_help_desk_ticket__create_uid
+#: model:ir.model.fields,field_description:helpdesk_support.field_module_list__create_uid
+#: model:ir.model.fields,field_description:helpdesk_support.field_support_config__create_uid
+#: model:ir.model.fields,field_description:helpdesk_support.field_templates__create_uid
+#: model:ir.model.fields,field_description:helpdesk_support.field_ticket_support__create_uid
+#: model:ir.model.fields,field_description:helpdesk_support.field_time_line_help__create_uid
+msgid "Created by"
+msgstr "انشأ من قبل"
+
+#. module: helpdesk_support
+#: model:ir.model.fields,field_description:helpdesk_support.field_admin_config__create_date
+#: model:ir.model.fields,field_description:helpdesk_support.field_assign_ticket_work__create_date
+#: model:ir.model.fields,field_description:helpdesk_support.field_help_desk_ticket__create_date
+#: model:ir.model.fields,field_description:helpdesk_support.field_module_list__create_date
+#: model:ir.model.fields,field_description:helpdesk_support.field_support_config__create_date
+#: model:ir.model.fields,field_description:helpdesk_support.field_templates__create_date
+#: model:ir.model.fields,field_description:helpdesk_support.field_ticket_support__create_date
+#: model:ir.model.fields,field_description:helpdesk_support.field_time_line_help__create_date
+msgid "Created on"
+msgstr "تم إنشاؤها على"
+
+#. module: helpdesk_support
+#: model:ir.model.fields,field_description:helpdesk_support.field_assign_ticket_work__customer_id
+#: model:ir.model.fields,field_description:helpdesk_support.field_help_desk_ticket__customer_id
+#: model:ir.model.fields,field_description:helpdesk_support.field_ticket_support__customer_id
+#: model_terms:ir.ui.view,arch_db:helpdesk_support.enzhelpdesk_supportform
+msgid "Customer"
+msgstr "عميل"
+
+#. module: helpdesk_support
+#: model:ir.model.fields,field_description:helpdesk_support.field_ticket_support__customer_mail
+msgid "Customer Mail"
+msgstr "بريد العميل"
+
+#. module: helpdesk_support
+#: model:ir.model.fields,field_description:helpdesk_support.field_time_line_help__date
+msgid "Date"
+msgstr "تاريخ"
+
+#. module: helpdesk_support
+#: model:ir.model.fields,field_description:helpdesk_support.field_help_desk_ticket__dead_line
+#: model:ir.model.fields,field_description:helpdesk_support.field_ticket_support__dead_line
+msgid "Dead Line"
+msgstr "الموعد النهائي"
+
+#. module: helpdesk_support
+#: model:ir.model.fields,field_description:helpdesk_support.field_assign_ticket_work__description
+#: model:ir.model.fields,field_description:helpdesk_support.field_help_desk_ticket__description
+#: model:ir.model.fields,field_description:helpdesk_support.field_ticket_support__description
+#: model:ir.model.fields,field_description:helpdesk_support.field_time_line_help__description
+msgid "Description"
+msgstr "وصف"
+
+#. module: helpdesk_support
+#: model_terms:ir.ui.view,arch_db:helpdesk_support.enzhelpdesk_supportform
+msgid "Details"
+msgstr "تفاصيل"
+
+#. module: helpdesk_support
+#: model:res.groups,name:helpdesk_support.group_helpdesksupport_tech
+msgid "Developer"
+msgstr "مطور"
+
+#. module: helpdesk_support
+#: model:ir.model.fields,field_description:helpdesk_support.field_admin_config__display_name
+#: model:ir.model.fields,field_description:helpdesk_support.field_assign_ticket_work__display_name
+#: model:ir.model.fields,field_description:helpdesk_support.field_help_desk_ticket__display_name
+#: model:ir.model.fields,field_description:helpdesk_support.field_module_list__display_name
+#: model:ir.model.fields,field_description:helpdesk_support.field_support_config__display_name
+#: model:ir.model.fields,field_description:helpdesk_support.field_templates__display_name
+#: model:ir.model.fields,field_description:helpdesk_support.field_ticket_support__display_name
+#: model:ir.model.fields,field_description:helpdesk_support.field_time_line_help__display_name
+msgid "Display Name"
+msgstr "اسم العرض"
+
+#. module: helpdesk_support
+#: model:ir.model.fields,help:helpdesk_support.field_ticket_support__progress
+msgid "Display progress of current task."
+msgstr "عرض تقدم المهمة الحالية."
+
+#. module: helpdesk_support
+#: model:ir.model.fields.selection,name:helpdesk_support.selection__assign_ticket_work__status__draft
+#: model:ir.model.fields.selection,name:helpdesk_support.selection__help_desk_ticket__state__draft
+#: model:ir.model.fields.selection,name:helpdesk_support.selection__ticket_support__status__draft
+msgid "Draft"
+msgstr "المسودات"
+
+#. module: helpdesk_support
+#: model:ir.model.fields,field_description:helpdesk_support.field_ticket_support__duration
+msgid "Duration"
+msgstr "مدة"
+
+#. module: helpdesk_support
+#: model:ir.model.fields,field_description:helpdesk_support.field_time_line_help__unit_amount
+msgid "Duration(Hours(s))"
+msgstr "المدة (ساعات)"
+
+#. module: helpdesk_support
+#: model:ir.model.fields,field_description:helpdesk_support.field_assign_ticket_work__total_duration
+msgid "Duration(in Hours)"
+msgstr "المدة (بالساعات)"
+
+#. module: helpdesk_support
+#: model:ir.model.fields,field_description:helpdesk_support.field_ticket_support__effective_hours
+msgid "Effective Hours"
+msgstr "ساعات فعالة"
+
+#. module: helpdesk_support
+#: model:ir.model.fields,field_description:helpdesk_support.field_ticket_support__effective_lines
+msgid "Effective Lines"
+msgstr "خطوط فعالة"
+
+#. module: helpdesk_support
+#: model:ir.model.fields,field_description:helpdesk_support.field_admin_config__admin_mail
+#: model:ir.model.fields,field_description:helpdesk_support.field_assign_ticket_work__customer_mail
+#: model:ir.model.fields,field_description:helpdesk_support.field_help_desk_ticket__customer_mail
+#: model:ir.model.fields,field_description:helpdesk_support.field_support_config__team_mail
+msgid "Email"
+msgstr "بريد الالكتروني"
+
+#. module: helpdesk_support
+#: model:ir.model.fields,field_description:helpdesk_support.field_assign_ticket_work__emp_deadline
+#: model:ir.model.fields,field_description:helpdesk_support.field_ticket_support__emp_deadline
+msgid "Emp Deadline"
+msgstr "الموعد النهائي للموظف"
+
+#. module: helpdesk_support
+#: model:ir.model.fields,field_description:helpdesk_support.field_assign_ticket_work__emp_duration
+#: model:ir.model.fields,field_description:helpdesk_support.field_ticket_support__emp_duration
+msgid "Emp Duration"
+msgstr "مدة الموظف"
+
+#. module: helpdesk_support
+#: model:ir.model.fields,field_description:helpdesk_support.field_time_line_help__employee_id
+msgid "Employee"
+msgstr "الموظف"
+
+#. module: helpdesk_support
+#: model:ir.model.fields,field_description:helpdesk_support.field_ticket_support__assign_mail
+msgid "Employee Mail"
+msgstr "بريد الموظف"
+
+#. module: helpdesk_support
+#: model:ir.model.fields,field_description:helpdesk_support.field_ticket_support__start_time
+msgid "Employee Start"
+msgstr "بداية الموظف"
+
+#. module: helpdesk_support
+#: model:ir.model.fields,field_description:helpdesk_support.field_ticket_support__stop_time
+msgid "Employee Stop"
+msgstr "توقف الموظف"
+
+#. module: helpdesk_support
+#: model_terms:ir.ui.view,arch_db:helpdesk_support.enzhelpdesk_supportform
+msgid "Employee/Solution"
+msgstr "الموظف / الحل"
+
+#. module: helpdesk_support
+#: model:ir.model.fields.selection,name:helpdesk_support.selection__help_desk_ticket__state__finished
+#: model:ir.model.fields.selection,name:helpdesk_support.selection__ticket_support__status__finished
+#: model_terms:ir.ui.view,arch_db:helpdesk_support.enzhelpdesk_assignwrkform
+#: model_terms:ir.ui.view,arch_db:helpdesk_support.enzhelpdesk_supportform
+msgid "Finished"
+msgstr "انتهى العمل"
+
+#. module: helpdesk_support
+#: model:ir.model.fields.selection,name:helpdesk_support.selection__help_desk_ticket__state__forward_to_developer
+#: model:ir.model.fields.selection,name:helpdesk_support.selection__ticket_support__status__forward_to_developer
+msgid "Forward To Developer"
+msgstr "إلى الأمام للمطور"
+
+#. module: helpdesk_support
+#: model:ir.module.category,name:helpdesk_support.module_category_helpdesksupport
+msgid "Help Desk"
+msgstr "مكتب المساعدة"
+
+#. module: helpdesk_support
+#: model:ir.model.fields,field_description:helpdesk_support.field_admin_config__id
+#: model:ir.model.fields,field_description:helpdesk_support.field_assign_ticket_work__id
+#: model:ir.model.fields,field_description:helpdesk_support.field_help_desk_ticket__id
+#: model:ir.model.fields,field_description:helpdesk_support.field_module_list__id
+#: model:ir.model.fields,field_description:helpdesk_support.field_support_config__id
+#: model:ir.model.fields,field_description:helpdesk_support.field_templates__id
+#: model:ir.model.fields,field_description:helpdesk_support.field_ticket_support__id
+#: model:ir.model.fields,field_description:helpdesk_support.field_time_line_help__id
+msgid "ID"
+msgstr "هوية شخصية"
+
+#. module: helpdesk_support
+#: model_terms:ir.ui.view,arch_db:helpdesk_support.help_support_report_view
+#: model_terms:ir.ui.view,arch_db:helpdesk_support.help_ticket_report_view
+msgid "Image"
+msgstr "صورة"
+
+#. module: helpdesk_support
+#: model:ir.actions.report,name:helpdesk_support.help_desk_support_report
+#: model:ir.actions.report,name:helpdesk_support.help_desk_ticket_report
+msgid "Image Pdf"
+msgstr "بي دي إف صورة"
+
+#. module: helpdesk_support
+#: model:ir.model.fields,field_description:helpdesk_support.field_admin_config____last_update
+#: model:ir.model.fields,field_description:helpdesk_support.field_assign_ticket_work____last_update
+#: model:ir.model.fields,field_description:helpdesk_support.field_help_desk_ticket____last_update
+#: model:ir.model.fields,field_description:helpdesk_support.field_module_list____last_update
+#: model:ir.model.fields,field_description:helpdesk_support.field_support_config____last_update
+#: model:ir.model.fields,field_description:helpdesk_support.field_templates____last_update
+#: model:ir.model.fields,field_description:helpdesk_support.field_ticket_support____last_update
+#: model:ir.model.fields,field_description:helpdesk_support.field_time_line_help____last_update
+msgid "Last Modified on"
+msgstr "تاريخ آخر تعديل"
+
+#. module: helpdesk_support
+#: model:ir.model.fields,field_description:helpdesk_support.field_admin_config__write_uid
+#: model:ir.model.fields,field_description:helpdesk_support.field_assign_ticket_work__write_uid
+#: model:ir.model.fields,field_description:helpdesk_support.field_help_desk_ticket__write_uid
+#: model:ir.model.fields,field_description:helpdesk_support.field_module_list__write_uid
+#: model:ir.model.fields,field_description:helpdesk_support.field_support_config__write_uid
+#: model:ir.model.fields,field_description:helpdesk_support.field_templates__write_uid
+#: model:ir.model.fields,field_description:helpdesk_support.field_ticket_support__write_uid
+#: model:ir.model.fields,field_description:helpdesk_support.field_time_line_help__write_uid
+msgid "Last Updated by"
+msgstr "آخر تحديث بواسطة"
+
+#. module: helpdesk_support
+#: model:ir.model.fields,field_description:helpdesk_support.field_admin_config__write_date
+#: model:ir.model.fields,field_description:helpdesk_support.field_assign_ticket_work__write_date
+#: model:ir.model.fields,field_description:helpdesk_support.field_help_desk_ticket__write_date
+#: model:ir.model.fields,field_description:helpdesk_support.field_module_list__write_date
+#: model:ir.model.fields,field_description:helpdesk_support.field_support_config__write_date
+#: model:ir.model.fields,field_description:helpdesk_support.field_templates__write_date
+#: model:ir.model.fields,field_description:helpdesk_support.field_ticket_support__write_date
+#: model:ir.model.fields,field_description:helpdesk_support.field_time_line_help__write_date
+msgid "Last Updated on"
+msgstr "آخر تحديث في"
+
+#. module: helpdesk_support
+#: model:res.groups,name:helpdesk_support.group_helpdesksupport_manager
+msgid "Manager"
+msgstr "مدير"
+
+#. module: helpdesk_support
+#: model:ir.model.fields,field_description:helpdesk_support.field_assign_ticket_work__module_name
+#: model:ir.model.fields,field_description:helpdesk_support.field_help_desk_ticket__module_name
+#: model:ir.model.fields,field_description:helpdesk_support.field_ticket_support__module_name
+msgid "Module Name"
+msgstr "اسم وحدة"
+
+#. module: helpdesk_support
+#: model:ir.actions.act_window,name:helpdesk_support.moduleconfigaction
+#: model:ir.ui.menu,name:helpdesk_support.enzhelpdesk_modules_conf
+#: model_terms:ir.ui.view,arch_db:helpdesk_support.moduleconfigaction_tree
+msgid "Modules"
+msgstr "الوحدات"
+
+#. module: helpdesk_support
+#: model:ir.model.fields,field_description:helpdesk_support.field_assign_ticket_work__name
+#: model:ir.model.fields,field_description:helpdesk_support.field_help_desk_ticket__name
+#: model:ir.model.fields,field_description:helpdesk_support.field_module_list__name
+#: model:ir.model.fields,field_description:helpdesk_support.field_templates__name
+#: model:ir.model.fields,field_description:helpdesk_support.field_ticket_support__name
+msgid "Name"
+msgstr "اسم"
+
+#. module: helpdesk_support
+#: model_terms:ir.actions.act_window,help:helpdesk_support.adminconfig_action
+msgid "No Admin !"
+msgstr "لا مشرف!"
+
+#. module: helpdesk_support
+#: model_terms:ir.actions.act_window,help:helpdesk_support.moduleconfigaction
+#: model_terms:ir.actions.act_window,help:helpdesk_support.templates_config_action
+msgid "No Modules !"
+msgstr "لا توجد وحدات!"
+
+#. module: helpdesk_support
+#: model_terms:ir.actions.act_window,help:helpdesk_support.supportconfigaction
+msgid "No Support !"
+msgstr "لا دعم !"
+
+#. module: helpdesk_support
+#: model_terms:ir.actions.act_window,help:helpdesk_support.enzhelpdesk_supportaction
+#: model_terms:ir.actions.act_window,help:helpdesk_support.enzhelpdesk_ticketaction
+msgid "No Ticket !"
+msgstr "أي تذكرة!"
+
+#. module: helpdesk_support
+#: model_terms:ir.actions.act_window,help:helpdesk_support.enzhelpdesk_timesheet
+msgid "No Timesheet !"
+msgstr "لا يوجد جدول زمني متاح!"
+
+#. module: helpdesk_support
+#: model_terms:ir.actions.act_window,help:helpdesk_support.enzhelpdesk_assignwrkaction
+msgid "No Works !"
+msgstr "لا يوجد أعمال متاحة!"
+
+#. module: helpdesk_support
+#: model:ir.model.fields,field_description:helpdesk_support.field_ticket_support__password
+msgid "Password"
+msgstr "كلمه السر"
+
+#. module: helpdesk_support
+#: model:ir.model.fields,field_description:helpdesk_support.field_ticket_support__planned_hours
+msgid "Planned Hours"
+msgstr "تقدير الساعات"
+
+#. module: helpdesk_support
+#: model:ir.model.fields.selection,name:helpdesk_support.selection__help_desk_ticket__state__post
+#: model_terms:ir.ui.view,arch_db:helpdesk_support.enzhelpdesk_ticketform
+msgid "Post"
+msgstr "بريد"
+
+#. module: helpdesk_support
+#: model:ir.model.fields,field_description:helpdesk_support.field_ticket_support__progress
+msgid "Progress"
+msgstr "تقدم"
+
+#. module: helpdesk_support
+#: model_terms:ir.ui.view,arch_db:helpdesk_support.help_support_report_view
+#: model_terms:ir.ui.view,arch_db:helpdesk_support.help_ticket_report_view
+msgid "Related Image"
+msgstr "الصور ذات الصلة"
+
+#. module: helpdesk_support
+#: model:ir.model.fields,field_description:helpdesk_support.field_help_desk_ticket__reply
+msgid "Reply"
+msgstr "رد"
+
+#. module: helpdesk_support
+#: model:ir.model.fields,field_description:helpdesk_support.field_assign_ticket_work__image
+#: model:ir.model.fields,field_description:helpdesk_support.field_help_desk_ticket__image
+#: model:ir.model.fields,field_description:helpdesk_support.field_ticket_support__image
+msgid "Screenshot"
+msgstr "لقطة شاشة"
+
+#. module: helpdesk_support
+#: model:ir.model.fields.selection,name:helpdesk_support.selection__help_desk_ticket__state__seen
+#: model:ir.model.fields.selection,name:helpdesk_support.selection__ticket_support__status__seen
+#: model_terms:ir.ui.view,arch_db:helpdesk_support.enzhelpdesk_supportform
+msgid "Seen"
+msgstr "مرئي"
+
+#. module: helpdesk_support
+#: model:ir.model.fields,field_description:helpdesk_support.field_ticket_support__sloution_form_developer
+msgid "Sloution Form Developer"
+msgstr "مطور نموذج الحل"
+
+#. module: helpdesk_support
+#: model:ir.model.fields,field_description:helpdesk_support.field_help_desk_ticket__solution
+#: model:ir.model.fields,field_description:helpdesk_support.field_ticket_support__solution
+#: model_terms:ir.ui.view,arch_db:helpdesk_support.enzhelpdesk_supportform
+msgid "Solution"
+msgstr "المحلول"
+
+#. module: helpdesk_support
+#: model:ir.model.fields,field_description:helpdesk_support.field_assign_ticket_work__solutions
+msgid "Solutions"
+msgstr "المحلول"
+
+#. module: helpdesk_support
+#: model:ir.model.fields.selection,name:helpdesk_support.selection__assign_ticket_work__status__solved
+msgid "Solved"
+msgstr "تم حلها"
+
+#. module: helpdesk_support
+#: model:ir.model.fields.selection,name:helpdesk_support.selection__assign_ticket_work__status__start
+#: model_terms:ir.ui.view,arch_db:helpdesk_support.enzhelpdesk_assignwrkform
+msgid "Start"
+msgstr "يبدأ"
+
+#. module: helpdesk_support
+#: model:ir.model.fields,field_description:helpdesk_support.field_assign_ticket_work__start_time
+msgid "Start Time"
+msgstr "وقت البدء"
+
+#. module: helpdesk_support
+#: model:ir.model.fields,field_description:helpdesk_support.field_help_desk_ticket__state
+msgid "State"
+msgstr "ولاية"
+
+#. module: helpdesk_support
+#: model:ir.model.fields,field_description:helpdesk_support.field_assign_ticket_work__status
+#: model:ir.model.fields,field_description:helpdesk_support.field_ticket_support__status
+msgid "Status"
+msgstr "الحالة"
+
+#. module: helpdesk_support
+#: model:ir.model.fields.selection,name:helpdesk_support.selection__assign_ticket_work__status__stop
+#: model_terms:ir.ui.view,arch_db:helpdesk_support.enzhelpdesk_assignwrkform
+msgid "Stop"
+msgstr "قف"
+
+#. module: helpdesk_support
+#: model:ir.model.fields,field_description:helpdesk_support.field_assign_ticket_work__stop_time
+msgid "Stop Time"
+msgstr "توقف الوقت"
+
+#. module: helpdesk_support
+#: model:ir.actions.act_window,name:helpdesk_support.enzhelpdesk_supportaction
+#: model:ir.actions.act_window,name:helpdesk_support.supportconfigaction
+#: model:ir.ui.menu,name:helpdesk_support.enzhelpdesk_support
+#: model:ir.ui.menu,name:helpdesk_support.enzhelpdesk_support_conf
+#: model:res.groups,name:helpdesk_support.group_helpdesksupport_support
+#: model_terms:ir.ui.view,arch_db:helpdesk_support.enzhelpdesk_supportform
+#: model_terms:ir.ui.view,arch_db:helpdesk_support.enzhelpdesk_supporttree
+#: model_terms:ir.ui.view,arch_db:helpdesk_support.supportconfig_form
+msgid "Support"
+msgstr "الدعم"
+
+#. module: helpdesk_support
+#: model:ir.model.fields,field_description:helpdesk_support.field_assign_ticket_work__team_leader
+#: model:ir.model.fields,field_description:helpdesk_support.field_help_desk_ticket__team_leader
+msgid "Support Leader"
+msgstr "قائد الدعم"
+
+#. module: helpdesk_support
+#: model:ir.model.fields,field_description:helpdesk_support.field_assign_ticket_work__team_mail
+#: model:ir.model.fields,field_description:helpdesk_support.field_help_desk_ticket__team_mail
+msgid "Team Email"
+msgstr "البريد الإلكتروني للفريق"
+
+#. module: helpdesk_support
+#: model:ir.model.fields,field_description:helpdesk_support.field_support_config__team_leader
+msgid "Team Leader"
+msgstr "قائد الفريق"
+
+#. module: helpdesk_support
+#: model:ir.model.fields,field_description:helpdesk_support.field_support_config__name
+msgid "Team Name"
+msgstr "اسم الفريق"
+
+#. module: helpdesk_support
+#: model:ir.actions.act_window,name:helpdesk_support.templates_config_action
+#: model:ir.ui.menu,name:helpdesk_support.enzhelpdesk_templates_conf
+#: model_terms:ir.ui.view,arch_db:helpdesk_support.templates_config_tree
+#: model_terms:ir.ui.view,arch_db:helpdesk_support.templatesconfig_form
+msgid "Templates"
+msgstr "القوالب"
+
+#. module: helpdesk_support
+#: model:mail.template,subject:helpdesk_support.email_template_ticketcus
+msgid "Test Mail"
+msgstr ""
+
+#. module: helpdesk_support
+#: model:ir.model.fields,field_description:helpdesk_support.field_assign_ticket_work__your_password
+msgid "Test Password"
+msgstr "اختبار كلمة المرور"
+
+#. module: helpdesk_support
+#: model:ir.model.fields,field_description:helpdesk_support.field_assign_ticket_work__your_username
+#: model:ir.model.fields,field_description:helpdesk_support.field_ticket_support__test_username
+msgid "Test Username"
+msgstr "اختبار اسم المستخدم"
+
+#. module: helpdesk_support
+#: model:ir.model.fields.selection,name:helpdesk_support.selection__help_desk_ticket__state__testing
+#: model:ir.model.fields.selection,name:helpdesk_support.selection__ticket_support__status__testing
+#: model_terms:ir.ui.view,arch_db:helpdesk_support.enzhelpdesk_supportform
+msgid "Testing"
+msgstr "اختبارات"
+
+#. module: helpdesk_support
+#: model:res.groups,comment:helpdesk_support.group_helpdesksupport_manager
+#: model:res.groups,comment:helpdesk_support.group_helpdesksupport_support
+#: model:res.groups,comment:helpdesk_support.group_helpdesksupport_tech
+#: model:res.groups,comment:helpdesk_support.group_helpdesksupport_user
+msgid "The user will be able to join support channels."
+msgstr "سيتمكن المستخدم من الانضمام إلى قنوات الدعم."
+
+#. module: helpdesk_support
+#: model:ir.model.fields,field_description:helpdesk_support.field_ticket_support__your_password
+msgid "Their Password"
+msgstr "كلمة المرور الخاصة بهم"
+
+#. module: helpdesk_support
+#: model:ir.model.fields,field_description:helpdesk_support.field_ticket_support__your_username
+msgid "Their Username"
+msgstr "اسم المستخدم الخاص بهم"
+
+#. module: helpdesk_support
+#: model:ir.actions.act_window,name:helpdesk_support.enzhelpdesk_ticketaction
+#: model:ir.model.fields,field_description:helpdesk_support.field_assign_ticket_work__ticket_id
+#: model:ir.model.fields,field_description:helpdesk_support.field_ticket_support__ticket_id
+#: model:ir.model.fields,field_description:helpdesk_support.field_time_line_help__ticket_id
+#: model:ir.ui.menu,name:helpdesk_support.enzhelpdesk_ticket
+#: model_terms:ir.ui.view,arch_db:helpdesk_support.enzhelpdesk_ticketform
+#: model_terms:ir.ui.view,arch_db:helpdesk_support.enzhelpdesk_tickettree
+msgid "Ticket"
+msgstr "تذكرة"
+
+#. module: helpdesk_support
+#: model:ir.actions.act_window,name:helpdesk_support.enzhelpdesk_timesheet
+#: model:ir.ui.menu,name:helpdesk_support.enzhelpdesk_timesheetmenu
+#: model_terms:ir.ui.view,arch_db:helpdesk_support.enzhelpdesk_timesheettree
+msgid "Timesheet"
+msgstr "ورقة التوقيت"
+
+#. module: helpdesk_support
+#: model:res.groups,name:helpdesk_support.group_helpdesksupport_user
+msgid "User"
+msgstr "مستخدم"
+
+#. module: helpdesk_support
+#: model:ir.model.fields,field_description:helpdesk_support.field_assign_ticket_work__user_id
+#: model:ir.model.fields,field_description:helpdesk_support.field_help_desk_ticket__user_id
+#: model:ir.model.fields,field_description:helpdesk_support.field_ticket_support__user_id
+msgid "User Id"
+msgstr "معرف المستخدم"
+
+#. module: helpdesk_support
+#: model:ir.actions.act_window,name:helpdesk_support.enzhelpdesk_assignwrkaction
+#: model:ir.ui.menu,name:helpdesk_support.enzhelpdesk_assignwrk
+#: model_terms:ir.ui.view,arch_db:helpdesk_support.enzhelpdesk_assignwrkform
+msgid "Works"
+msgstr "يعمل"
+
+#. module: helpdesk_support
+#: model:ir.model.fields,field_description:helpdesk_support.field_help_desk_ticket__your_password
+msgid "Your Password"
+msgstr "كلمة السر خاصتك"
+
+#. module: helpdesk_support
+#: model:ir.model.fields,field_description:helpdesk_support.field_help_desk_ticket__your_username
+msgid "Your Username"
+msgstr "اسم المستخدم الخاص بك"
+
+#. module: helpdesk_support
+#: model:ir.model,name:helpdesk_support.model_admin_config
+msgid "admin.config"
+msgstr ""
+
+#. module: helpdesk_support
+#: model:ir.model,name:helpdesk_support.model_assign_ticket_work
+msgid "assign.ticket.work"
+msgstr ""
+
+#. module: helpdesk_support
+#: model:ir.ui.menu,name:helpdesk_support.enzhelpdesk_main
+msgid "enzHelp"
+msgstr " مكتب المساعدة"
+
+#. module: helpdesk_support
+#: model:ir.model,name:helpdesk_support.model_help_desk_ticket
+msgid "help.desk.ticket"
+msgstr ""
+
+#. module: helpdesk_support
+#: model:ir.model,name:helpdesk_support.model_module_list
+msgid "module.list"
+msgstr ""
+
+#. module: helpdesk_support
+#: model:ir.model,name:helpdesk_support.model_support_config
+msgid "support.config"
+msgstr ""
+
+#. module: helpdesk_support
+#: model:ir.model,name:helpdesk_support.model_templates
+msgid "templates"
+msgstr "القوالب"
+
+#. module: helpdesk_support
+#: model:ir.model,name:helpdesk_support.model_ticket_support
+msgid "ticket.support"
+msgstr ""
+
+#. module: helpdesk_support
+#: model:ir.model,name:helpdesk_support.model_time_line_help
+msgid "time.line.help"
+msgstr ""

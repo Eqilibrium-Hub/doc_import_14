@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="1">
+        <!--Email template -->
+        <record id="email_template_prearrival" model="mail.template">
+            <field name="name">Pre Arrival Form: Send by email</field>
+            <field name="model_id" ref="port_managment.model_crm_lead"/>
+            <field name="email_from">${object.user_id.email_formatted |safe}</field>
+            <field name="partner_to">${object.master_id.id}</field>
+            <field name="subject">${object.company_id.name} Pre Arrival  (Ref ${object.name or 'n/a'})</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p>
+                        <center>
+                            <h1>Pre Arrival Form</h1>
+                        </center>
+<!--                        <br/>-->
+<!--                        Dear Funding Agency,-->
+<!--                        <br/>-->
+
+                        Dear Master,<br/><br/>
+
+                        Good Day<br/><br/>
+
+                        We take this opportunity to inform you that we, "INTEGRATED LOGISTICS SUPPORT" are the load port<br/>
+                        agent for the subject vessel in Salalah, Oman.<br/><br/>
+
+
+                        Kindly provide the pre arrival information in order to register the vessel, call at load port<br/>
+                        and also find the attached pre -arrival documents and confirm the safe receipt.<br/><br/>
+
+
+                        PRE-ARRIVAL INFO:<br/><br/>
+
+
+                        1) Name of vessel/Voy No:<br/>
+
+                        2) Present ETA (local time) at Salalah (ETA updates to be sent minimum 72/48/24/12 hrs):<br/>
+
+                        3) Vsl code and IMO number:<br/>
+
+                        4) Flag:<br/>
+
+                        5) Port of Registry:<br/>
+
+                        6) Class and Year Built:<br/>
+
+                        7) Call Sign:<br/>
+
+                        8) Is vessel fitted with Thrusters (yes /No)<br/>
+
+                        9) LOA (Mtrs)/Max Arrival Draft/Sailing draft<br/>
+
+                        10) DWT/GRT/NRT:<br/>
+
+                        11) Owners Name and Address:<br/>
+
+                        12) Last Port of call and next port of call after Salalah:<br/>
+
+                        13) master’s Name:<br/>
+
+                        14) Cargo for discharge/Loaded at Salalah (Commodity/Tonnage): (Applicable for cargo ops vsls)<br/>
+
+                        15) Number and SWL of ship cranes: (Applicable for cargo ops vsls)<br/>
+
+                        16) Cargo In transit (Commodity/Tonnage):<br/>
+
+                        17) Dangerous Cargo for discharge/In-Transit (Type/Class):<br/>
+
+
+                        18) Details of Vessel Insurance (P and I):<br/>
+
+                        a) Name: b) Address: c) Tel Number: e) Policy Number: f) Expiry Date:<br/>
+
+                        g) Coverage (Wreck Removal/3rd Party/Oil Pollution) Yes/NO:<br/><br/>
+
+
+                        Note: As per port regulations vessel should have valid P and I coverage for third party liability,<br/>
+                        Oil Pollution And wreck removal. Copy of P and I Club insurance to be submitted to port<br/>
+                        authorities upon vsl arrival.<br/><br/>
+
+
+                        ISPS CODE:<br/>
+
+                        19) ISS Cert. Number, Name of issuing office, Date of Issue, Date of Expiry:<br/>
+
+                        20) Name of Master:<br/>
+
+                        21) Name of Security Officer and Contact details:<br/>
+
+                        22) Ship Security Level:<br/>
+
+                        23) Last 10 ports vsl called details with security level:<br/>
+
+                        24) Any special requirements:<br/><br/>
+
+
+                        DOCUMENTS REQUIRED:<br/>
+
+                        (To be forwarded to vsl agent min 72 Hrs prior to vessel arrival in Port)<br/><br/>
+
+
+                        - Copy of ship registry<br/>
+
+                        - Copy of Tonnage certificate<br/>
+
+                        - Copy Port of registry<br/>
+
+                        - Copy of Crew List<br/>
+
+                        - Port of Call<br/>
+
+                        - Copy of cargo manifest/Bill of Lading/Stowage plan for Salalah cargo<br/>
+
+                        - Maritime Declaration of Health<br/>
+
+                        - Ship Sanitation Control Exemption Certificate/Ship Sanitation Control Certificate<br/>
+
+                        - Crew vaccination list<br/>
+
+                        - Passenger Manifest, if pax on board<br/>
+
+                        - PandI certificate<br/>
+
+                        -Ship crane certificate<br/>
+                        -Wire rope replacement Record<br/>
+
+                        -Lifting gear appliances and items of loose gear.<br/><br/>
+
+
+                        Note: Updated Maritime Declaration of Health should be forwarded 24 hrs prior to vessel arrival<br/>
+                        in Port.
+
+                    </p>
+                </div>
+            </field>
+<!--            <field name="report_template" ref="pda_customer_report"/>-->
+<!--            <field name="report_name">-->
+<!--                PDA_${(object.name or '').replace('/','_')}${object.state == 'draft' and '_draft' or ''}-->
+<!--            </field>-->
+<!--            <field name="lang">${object.partner_id.lang}</field>-->
+<!--            <field name="user_signature" eval="False"/>-->
+            <field name="auto_delete" eval="True"/>
+        </record>
+    </data>
+</odoo>

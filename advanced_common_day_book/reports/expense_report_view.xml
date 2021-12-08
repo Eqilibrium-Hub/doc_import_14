@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+        <template id="common_layout_3">
+    <t t-call="web.html_container">
+<t t-if="not o" t-set="o" t-value="doc"/>
+<t t-if="not company">
+<!--  Multicompany  -->
+<t t-if="company_id">
+<t t-set="company" t-value="company_id"/>
+</t>
+<t t-elif="o and 'company_id' in o">
+<t t-set="company" t-value="o.company_id.sudo()"/>
+</t>
+<t t-else="else">
+<t t-set="company" t-value="res_company"/>
+</t>
+</t>
+<div class="header" t-att-style="report_header_style">
+<!--            <div class="row">-->
+<!--<div class="col-6">-->
+<!--    <h6>حكومة المملكة العربية السعودية<br/>GOVERNMENT OF SAUDI ARABIA</h6>-->
+<!--    </div>-->
+
+
+<!--        <div class="col-6" style="text-align:right;">-->
+<!--                   <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height:100px;align=left;" alt="Logo"/>-->
+
+<!--            <h6>دائرة الاراضي<br/>Land Department</h6>-->
+
+
+<!--        </div>-->
+<!---->
+<!--    </div>-->
+
+    <div class="row">
+<div class="col-6">
+       <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height:100px;align:left;" alt="Logo"/>
+    </div>
+
+
+        <div class="col-6" style="text-align:right;">
+            <h6><t t-esc="company.partner_id.name"/> </h6>
+            <h6><t t-esc="company.street"/> </h6>
+            <h6><t t-esc="company.street2"/> </h6>
+            <h6><t t-esc="company.city"/> </h6>
+            <h6><t t-esc="company.state_id.name"/> </h6>
+            <h6><t t-esc="company.zip"/> </h6>
+
+
+        </div>
+<!---->
+    </div>
+</div>
+<div class="col-9 text-right" style="margin-top:22px;" t-field="company.report_header" name="moto">
+<div t-field="company.partner_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'/>
+</div>
+<div class="article" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+<t t-raw="0"/>
+</div>
+<div class="footer o_background_footer">
+<div>
+<div t-field="company.report_footer"/>
+<div t-if="report_type == 'pdf'" class="text-muted">
+    <hr style="text-color:orange; width:100%;"></hr>
+     <div class="row">
+        <div class="col-6" style="text-align:right;">
+                        Page:
+                <span class="page"/>
+                         /
+                 <span class="topage"/>
+        </div>
+        <div class="col-6" style="text-align:right;">
+            <span style="color:gray;"> Powered by Enzapps</span>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+    </t>
+    </template>
+ <template id="expense_report_en_view_1">
+    		<t t-call="web.html_container">
+    	    	<t t-foreach="docs" t-as="o">
+            <t t-call="advanced_common_day_book.common_layout_3">
+                <div class="page">
+                    <h2><center><b>Expense Report</b></center></h2>
+                    <t t-if="o.type == 'Day Book'">
+                    <table style="width:100%">
+                        <tr>
+                            <td colspan="3"><b>Date:</b><t t-esc="o.date"/></td>
+                            <td colspan="1"><br/></td>
+                            <td colspan="3"><b>Type:</b><t t-esc="o.type"/> </td>
+
+                        </tr>
+                        <tr>
+                             <t t-if="o.transaction_type_expense==True">
+                            <td colspan="3"><b>Transaction Type:</b>Expense</td>
+                            </t>
+                            <td colspan="3"><br/></td>
+                        </tr>
+                         <tr style="border:1px solid black">
+                            <td colspan="1" style="border:1px solid black"><center><b>Date</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>Description</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>Source</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>Customer/Employee</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>Invoice Amount</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>Debit</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>Credit</b></center></td>
+
+                        </tr>
+                        <t t-set="i" t-value="1"/>
+                        <t t-foreach="o.report_expense_lines" t-as="m">
+<!--                        <t t-foreach="o.print_individual_contract()" t-as="m">-->
+<!--                            <t test=='Liked'">-->
+                        <tr>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="m.date" /></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="m.description" /></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="m.source"/> </center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="m.customer"/> </center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="m.invoice_amount"/> </center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="m.debit"/></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="m.credit"/> </center></td>
+
+                        </tr>
+
+
+                                                    </t>
+                        <t t-set="i" t-value="i+1"/>
+                        <tr>
+                                <td colspan="5" style="text-align:right"><b>Total</b></td>
+                                <td colspan="1"><center><t t-esc="sum(o.report_expense_lines.mapped('debit'))"/> </center></td>
+                                <td colspan="1"><center><t t-esc="sum(o.report_expense_lines.mapped('credit'))"/> </center></td>
+                            </tr>
+                    </table>
+                    </t>
+                    <t t-if="o.type == 'Date Wise'">
+                    <table style="width:100%">
+                        <tr>
+                            <td colspan="3"><b>From Date:</b><t t-esc="o.from_date"/></td>
+                            <td colspan="1"><br/></td>
+                            <td colspan="3"><b>To Date:</b><t t-esc="o.to_date"/> </td>
+
+                        </tr>
+                        <tr>
+                            <td colspan="3"><b>Type:</b><t t-esc="o.type"/> </td>
+
+                            <td colspan="1"><br/></td>
+                             <t t-if="o.transaction_type_expense==True">
+                            <td colspan="3"><b>Transaction Type:</b>Expense</td>
+                            </t>
+                        </tr>
+                         <tr style="border:1px solid black">
+                            <td colspan="1" style="border:1px solid black"><center><b>Date</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>Description</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>Source</b></center></td>
+                              <td colspan="1" style="border:1px solid black"><center><b>Customer/Employee</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>Invoice Amount</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>Debit</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>Credit</b></center></td>
+
+                        </tr>
+                        <t t-set="i" t-value="1"/>
+                        <t t-foreach="o.report_expense_lines" t-as="m">
+<!--                        <t t-foreach="o.print_individual_contract()" t-as="m">-->
+<!--                            <t test=='Liked'">-->
+                        <tr>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="m.date" /></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="m.description" /></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="m.source"/> </center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="m.customer"/> </center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="m.invoice_amount"/> </center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="m.debit"/></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="m.credit"/> </center></td>
+
+                        </tr>
+
+
+                                                    </t>
+                        <t t-set="i" t-value="i+1"/>
+                        <tr>
+                                <td colspan="5" style="text-align:right"><b>Total</b></td>
+                                <td colspan="1"><center><t t-esc="sum(o.report_expense_lines.mapped('debit'))"/> </center></td>
+                                <td colspan="1"><center><t t-esc="sum(o.report_expense_lines.mapped('credit'))"/> </center></td>
+                            </tr>
+                    </table>
+                    </t>
+
+
+                </div>
+            </t>
+                </t>
+            </t>
+ </template>
+ <template id="expense_report_en_ar_view_1">
+    		<t t-call="web.html_container">
+    	    	<t t-foreach="docs" t-as="o">
+            <t t-call="advanced_common_day_book.common_layout_3">
+                <div class="page">
+                    <h2><center><b>تقرير المصاريف<br/>Expense Report</b></center></h2>
+                    <t t-if="o.type == 'Day Book'">
+                    <table style="width:100%">
+                        <tr>
+                            <td colspan="2"><b>Date:</b><t t-esc="o.date"/></td>
+                            <td colspan="1"><b>:تاريخ</b></td>
+                            <td colspan="1"><br/></td>
+                            <td colspan="2"><b>Type:</b><t t-esc="o.type"/> </td>
+                            <td colspan="1"><b>:يكتب</b> </td>
+
+                        </tr>
+                        <tr>
+                             <t t-if="o.transaction_type_expense==True">
+                            <td colspan="2"><b>Transaction Type:</b>Expense</td>
+                                <td colspan="1"><b> :نوع المعاملة</b></td>
+                            </t>
+                            <td colspan="3"><br/></td>
+
+                        </tr>
+                         <tr style="border:1px solid black">
+                            <td colspan="1" style="border:1px solid black"><center><b>تاريخ<br/>Date</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>وصف<br/>Description</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>مصدر<br/>Source</b></center></td>
+                              <td colspan="1" style="border:1px solid black"><center><b>العميل / الموظف<br/>Customer/Employee</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>قيمة الفاتورة<br/>Invoice Amount</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>دين<br/>Debit</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>الإئتمان<br/>Credit</b></center></td>
+
+                        </tr>
+                        <t t-set="i" t-value="1"/>
+                        <t t-foreach="o.report_expense_lines" t-as="m">
+<!--                        <t t-foreach="o.print_individual_contract()" t-as="m">-->
+<!--                            <t test=='Liked'">-->
+                        <tr>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="m.date" /></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="m.description" /></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="m.source"/> </center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="m.customer"/> </center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="m.invoice_amount"/> </center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="m.debit"/></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="m.credit"/> </center></td>
+
+                        </tr>
+
+
+                                                    </t>
+                        <t t-set="i" t-value="i+1"/>
+                        <tr>
+                                <td colspan="5" style="text-align:right"><b>مجموع/Total</b></td>
+                                <td colspan="1"><center><t t-esc="sum(o.report_expense_lines.mapped('debit'))"/> </center></td>
+                                <td colspan="1"><center><t t-esc="sum(o.report_expense_lines.mapped('credit'))"/> </center></td>
+                            </tr>
+                    </table>
+                    </t>
+                    <t t-if="o.type == 'Date Wise'">
+                    <table style="width:100%">
+                        <tr>
+                            <td colspan="2"><b>From Date:</b><t t-esc="o.from_date"/></td>
+                            <td colspan="1"><b>:من التاريخ</b></td>
+                            <td colspan="1"><br/></td>
+                            <td colspan="2"><b>To Date:</b><t t-esc="o.to_date"/> </td>
+                            <td colspan="1"><b>:إلي تاريخ</b> </td>
+
+                        </tr>
+                        <tr>
+                            <td colspan="2"><b>Type:</b><t t-esc="o.type"/> </td>
+                            <td colspan="1"><b>:يكتب</b></td>
+
+                            <td colspan="1"><br/></td>
+                             <t t-if="o.transaction_type_expense==True">
+                            <td colspan="2"><b>Transaction Type:</b>Expense</td>
+                            <td colspan="1"><b>:نوع المعاملة</b></td>
+                            </t>
+                        </tr>
+                         <tr style="border:1px solid black">
+                            <td colspan="1" style="border:1px solid black"><center><b>تاريخ<br/>Date</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>وصف<br/>Description</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>مصدر<br/>Source</b></center></td>
+                              <td colspan="1" style="border:1px solid black"><center><b>العميل / الموظف<br/>Customer/Employee</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>قيمة الفاتورة<br/>Invoice Amount</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>دين<br/>Debit</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>الإئتمان<br/>Credit</b></center></td>
+
+                        </tr>
+                        <t t-set="i" t-value="1"/>
+                        <t t-foreach="o.report_expense_lines" t-as="m">
+<!--                        <t t-foreach="o.print_individual_contract()" t-as="m">-->
+<!--                            <t test=='Liked'">-->
+                        <tr>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="m.date" /></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="m.description" /></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="m.source"/> </center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="m.customer"/> </center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="m.invoice_amount"/> </center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="m.debit"/></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="m.credit"/> </center></td>
+
+                        </tr>
+
+
+                                                    </t>
+                        <t t-set="i" t-value="i+1"/>
+                        <tr>
+                                <td colspan="5" style="text-align:right"><b>مجموع/Total</b></td>
+                                <td colspan="1"><center><t t-esc="sum(o.report_expense_lines.mapped('debit'))"/> </center></td>
+                                <td colspan="1"><center><t t-esc="sum(o.report_expense_lines.mapped('credit'))"/> </center></td>
+                            </tr>
+                    </table>
+                    </t>
+
+
+                </div>
+            </t>
+                </t>
+            </t>
+ </template>
+ <template id="expense_report_ar_view_1">
+    		<t t-call="web.html_container">
+    	    	<t t-foreach="docs" t-as="o">
+            <t t-call="advanced_common_day_book.common_layout_3">
+                <div class="page">
+                    <h2><center><b>تقرير المصاريف</b></center></h2>
+                    <t t-if="o.type == 'Day Book'">
+                    <table style="width:100%">
+                        <tr>
+<!--                            <td colspan="1"><b>Date:</b><t t-esc="o.date"/></td>-->
+                            <td colspan="3"><b>تاريخ:</b><t t-esc="o.date"/></td>
+<!--                            <td colspan="1"><b>:تاريخ</b></td>-->
+                            <td colspan="1"><br/></td>
+<!--                            <td colspan="1"><b>Type:</b><t t-esc="o.type"/> </td>-->
+                            <td colspan="3"><b>يكتب:</b><t t-esc="o.type"/> </td>
+<!--                            <td colspan="1"><b>:يكتب</b> </td>-->
+
+                        </tr>
+                        <tr>
+                             <t t-if="o.transaction_type_expense==True">
+<!--                            <td colspan="2"><b>Transaction Type:</b>Expense</td>-->
+                            <td colspan="3"><b>نوع المعاملة:</b>Expense</td>
+                            <td colspan="3"><br/></td>
+                            </t>
+                        </tr>
+                         <tr style="border:1px solid black">
+                            <td colspan="1" style="border:1px solid black"><center><b>تاريخ</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>وصف</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>مصدر</b></center></td>
+                              <td colspan="1" style="border:1px solid black"><center><b>العميل / الموظف</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>قيمة الفاتورة</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>دين</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>الإئتمان</b></center></td>
+
+                        </tr>
+                        <t t-set="i" t-value="1"/>
+                        <t t-foreach="o.report_expense_lines" t-as="m">
+<!--                        <t t-foreach="o.print_individual_contract()" t-as="m">-->
+<!--                            <t test=='Liked'">-->
+                        <tr>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="m.date" /></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="m.description" /></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="m.source"/> </center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="m.customer"/> </center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="m.invoice_amount"/> </center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="m.debit"/></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="m.credit"/> </center></td>
+
+                        </tr>
+
+
+                                                    </t>
+                        <t t-set="i" t-value="i+1"/>
+                        <tr>
+                                <td colspan="5" style="text-align:right"><b>مجموع</b></td>
+                                <td colspan="1"><center><t t-esc="sum(o.report_expense_lines.mapped('debit'))"/> </center></td>
+                                <td colspan="1"><center><t t-esc="sum(o.report_expense_lines.mapped('credit'))"/> </center></td>
+                            </tr>
+                    </table>
+                    </t>
+                    <t t-if="o.type == 'Date Wise'">
+                    <table style="width:100%">
+                        <tr>
+<!--                            <td colspan="1"><b>From Date:</b><t t-esc="o.from_date"/></td>-->
+                            <td colspan="3"><b>من التاريخ:</b><t t-esc="o.from_date"/></td>
+<!--                            <td colspan="1"><b>:من التاريخ</b></td>-->
+                            <td colspan="1"><br/></td>
+<!--                            <td colspan="1"><b>To Date:</b><t t-esc="o.to_date"/> </td>-->
+                            <td colspan="3"><b>إلي تاريخ:</b><t t-esc="o.to_date"/> </td>
+<!--                            <td colspan="1"><b>:إلي تاريخ</b> </td>-->
+
+                        </tr>
+                        <tr>
+<!--                            <td colspan="1"><b>Type:</b><t t-esc="o.type"/> </td>-->
+                            <td colspan="3"><b>يكتب:</b><t t-esc="o.type"/> </td>
+<!--                            <td colspan="1"><b>:يكتب</b></td>-->
+
+                            <td colspan="1"><br/></td>
+                          <t t-if="o.transaction_type_expense==True">
+<!--                            <td colspan="2"><b>Transaction Type:</b>Expense</td>-->
+                            <td colspan="3"><b>نوع المعاملة:</b>Expense</td>
+                            </t>
+                        </tr>
+                         <tr style="border:1px solid black">
+                            <td colspan="1" style="border:1px solid black"><center><b>تاريخ</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>وصف</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>مصدر</b></center></td>
+                              <td colspan="1" style="border:1px solid black"><center><b>العميل / الموظف</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>قيمة الفاتورة</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>دين</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>الإئتمان</b></center></td>
+
+                        </tr>
+                        <t t-set="i" t-value="1"/>
+                        <t t-foreach="o.report_expense_lines" t-as="m">
+<!--                        <t t-foreach="o.print_individual_contract()" t-as="m">-->
+<!--                            <t test=='Liked'">-->
+                        <tr>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="m.date" /></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="m.description" /></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="m.source"/> </center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="m.customer"/> </center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="m.invoice_amount"/> </center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="m.debit"/></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="m.credit"/> </center></td>
+
+                        </tr>
+
+
+                                                    </t>
+                        <t t-set="i" t-value="i+1"/>
+                        <tr>
+                                <td colspan="5" style="text-align:right"><b>مجموع</b></td>
+                                <td colspan="1"><center><t t-esc="sum(o.report_expense_lines.mapped('debit'))"/> </center></td>
+                                <td colspan="1"><center><t t-esc="sum(o.report_expense_lines.mapped('credit'))"/> </center></td>
+                            </tr>
+                    </table>
+                    </t>
+
+
+                </div>
+            </t>
+                </t>
+            </t>
+ </template>
+
+</odoo>

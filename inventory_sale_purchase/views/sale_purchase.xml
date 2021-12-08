@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="inventory_purchase_sale_tree" model="ir.ui.view">
+        <field name="name">inventory.purchase.sale.tree</field>
+        <field name="model">inventory.purchase.sale</field>
+        <field name="arch" type="xml">
+            <tree create="0" editable="bottom">
+<!--                <field name="name" required="1"/>-->
+                <field name="id" string="S.No"  readonly="1"/>
+                <field name="product_id" readonly="1"/>
+                <field name="onhand_qty"/>
+                <field name="purchase_qty"  readonly="1"/>
+                <field name="sale_qty"  readonly="1"/>
+                <field name="current_qty"  readonly="1"/>
+                <button type="object" name="action_show_history" class="btn btn-primary"/>
+            </tree>
+        </field>
+    </record>
+    <record id="actions_inventory_purchase_sale" model="ir.actions.act_window">
+        <field name="name">Inventory Sale Purchase</field>
+        <field name="res_model">inventory.purchase.sale</field>
+        <field name="view_mode">tree</field>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create a new .
+            </p>
+        </field>
+    </record>
+
+    <menuitem name="Inventory Sale Purchase"
+              id="menu_inv_po_so" sequence="4"
+              parent="stock.menu_warehouse_report"
+              action="actions_inventory_purchase_sale"/>
+    <record id="inventory_po_so_partner" model="ir.ui.view">
+        <field name="name">inventory.po.so.partnertree</field>
+        <field name="model">inventory.po.so.partner</field>
+        <field name="arch" type="xml">
+            <tree create="1" editable="bottom">
+<!--                <field name="name" required="1"/>-->
+                <field name="create_date"/>
+                <field name="partner_ref"/>
+                <field name="partner_id"/>
+                <field name="purchase_qty"/>
+                <field name="sale_qty"/>
+                <field name="current_qty"/>
+<!--                                <button name="payment_confirm" string="Payment" class="oe_highlight" type="object"/>-->
+
+            </tree>
+        </field>
+    </record>
+    <record id="actions_inventory_po_so_partner" model="ir.actions.act_window">
+        <field name="name">Inventory Sale Purchase Complete</field>
+        <field name="res_model">inventory.po.so.partner</field>
+        <field name="view_mode">tree</field>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create a new .
+            </p>
+        </field>
+    </record>
+
+<!--    <menuitem name="Inventory Sale Purchase Complete"-->
+<!--              id="menu_inv_so_rep" sequence="5"-->
+<!--              parent="stock.menu_warehouse_report"-->
+<!--              action="actions_inventory_po_so_partner"/>-->
+
+
+</odoo>

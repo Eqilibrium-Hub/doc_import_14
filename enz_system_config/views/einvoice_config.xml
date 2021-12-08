@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="einvoice_default_tree" model="ir.ui.view">
+        <field name="name">Einvoice Config</field>
+        <field name="model">einvoice.config</field>
+        <field name="arch" type="xml">
+            <tree string="Einvoice Config">
+                <field name="schema_id"/>
+                <field name="type_of_customer"/>
+                <field name="vat_category"/>
+                <field name="invoice_print"/>
+                <field name="invoice_email"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="einvoice_default_form" model="ir.ui.view">
+        <field name="name">Einvoice Config</field>
+        <field name="model">einvoice.config</field>
+        <field name="arch" type="xml">
+            <form string="Einvoice Config">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="type_of_customer" widget="radio" options="{'horizontal': true}"/>
+                            <field name="schema_id"/>
+                            <field name="vat_category"/>
+                        </group>
+                        <group>
+                            <field name="invoice_print"/>
+                            <field name="invoice_email"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="einvoice_default_action" model="ir.actions.act_window">
+        <field name="name">Einvoice Default Configuration</field>
+        <field name="res_model">einvoice.config</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No Default Einvoice Configuration Created!
+            </p>
+        </field>
+    </record>
+    <menuitem name="Einvoice Configuration" id="einvoiceconfig_main" parent="account.menu_finance_configuration"/>
+    <menuitem name="Einvoice" id="einvoiceconfig_main_sub" parent="einvoiceconfig_main"
+              action="einvoice_default_action"/>
+
+</odoo>

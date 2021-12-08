@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_inventory_purchase_sale,inventory.purchase.sale,model_inventory_purchase_sale,,1,1,1,1
+access_inventory_po_so_partner,inventory.po.so.partner,model_inventory_po_so_partner,,1,1,1,1

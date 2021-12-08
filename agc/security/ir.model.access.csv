@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_galv_delivery_form,galv.delivery.form.group_user,model_galv_delivery_form,base.group_user,1,1,1,1
+access_galv_delivery_lines,galv.delivery.lines.group_user,model_galv_delivery_lines,base.group_user,1,1,1,1
+access_description_configuration,description.configuration.group_user,model_description_configuration,base.group_user,1,1,1,1

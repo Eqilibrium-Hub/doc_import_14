@@ -1,0 +1,13 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_workshop_services,workshop.services.group_user,model_workshop_services,base.group_user,1,1,1,1
+access_workshop_complaints,workshop.complaints.main.group_user,model_workshop_complaints,base.group_user,1,1,1,1
+access_workshop_solutions,workshop.solutions.main.group_user,model_workshop_solutions,base.group_user,1,1,1,1f
+access_vehicle_brand,vehicle.brand.main.group_user,model_vehicle_brand,base.group_user,1,1,1,1
+access_vehicle_config,vehicle.config.main.group_user,model_vehicle_config,base.group_user,1,1,1,1
+access_job_order,job.order.group_user,model_job_order,base.group_user,1,1,1,1
+access_complaint_lines,complaint.lines.group_user,model_complaint_lines,base.group_user,1,1,1,1
+access_spare_parts,spare.parts.group_user,model_spare_parts,base.group_user,1,1,1,1
+access_vehicle_services,vehicle.services.group_user,model_vehicle_services,base.group_user,1,1,1,1
+
+
+
